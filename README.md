@@ -8,5 +8,5 @@
 * AddDictionary.php 用于添加字典<br/>
 * zidian.sql 为字典，建一个叫'yzm'的数据库导入即可<br/>
 
-[正确率测试地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")
+[正确率测试地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/><br/>
 [kuri-su.cc](http://kuri-su.cc "kuri-su.cc")
