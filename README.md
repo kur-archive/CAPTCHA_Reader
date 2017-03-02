@@ -7,8 +7,8 @@
 * AddDictionary.php 用于添加字典<br/>
 * zidian.sql 为字典，建一个叫'yzm'的数据库导入即可<br/>
 
-[正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/>
+[正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/><br/>
 [正确率批量测试 地址](http://kuri-su.cc/PIN/AccuracyTest.php "kuri-su.cc")<br/>
-<font color=#00ffff>设置了加载二十个，大概等待时间在1min左右，而且可能会因为请求不到验证码而中断</font>
+<font color=red>批量测试设置了一次加载二十个方正验证码，大概等待时间在1min左右，而且可能会因为请求不到验证码而中断</font>
 <br/><br/>
 [kuri-su.cc](http://kuri-su.cc "kuri-su.cc")
