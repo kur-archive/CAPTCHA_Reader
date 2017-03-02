@@ -9,6 +9,6 @@
 
 [正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/>
 [正确率批量测试 地址](http://kuri-su.cc/PIN/AccuracyTest.php "kuri-su.cc")<br/>
-<span style="color=red">设置了加载二十个，大概等待时间在1min左右，而且可能会因为请求不到验证码而中断</span>
+<font color=#00ffff>设置了加载二十个，大概等待时间在1min左右，而且可能会因为请求不到验证码而中断</font>
 <br/><br/>
 [kuri-su.cc](http://kuri-su.cc "kuri-su.cc")
