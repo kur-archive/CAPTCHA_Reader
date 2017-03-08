@@ -1,11 +1,11 @@
 # PIN-Identify-by-fangzheng
 ##方正教务系统验证码识别
 ###目前字典大致为2200条左右，识别率基本站稳85%,可以确保请求三次之中一定有一次是识别正确的，内网环境下单次完成时间在1.5s-2s，外网环境下完成时间可能会在2.5-3s之间，
-* PIN Identify by fangzheng.php 为主文件<br/>
-* PIN Identify lib.php 为其函数库<br/>
-* downloadImg.php 用于download验证码<br/>
-* AddDictionary.php 用于添加字典<br/>
-* zidian.sql 为字典，建一个叫'yzm'的数据库导入即可<br/>
+* <b>PIN Identify by fangzheng.php</b> 为主文件<br/>
+* <b>PIN Identify lib.php</b> 为其函数库<br/>
+* <b>downloadImg.php</b> 用于download验证码<br/>
+* <b>AddDictionary.php</b> 用于添加字典<br/>
+* <b>zidian.sql</b> 为字典，建一个叫'yzm'的数据库导入即可<br/>
 
 [正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/><br/>
 [正确率批量测试 地址](http://kuri-su.cc/PIN/AccuracyTest.php "kuri-su.cc")<br/>
@@ -17,11 +17,11 @@
 
 ##There are 2,300 records in the current dictionary，Recognition rate of about 85%，You can make sure that the request is sure to be correct once，The single recognition run time may be between 2.5-3s。
 
-* PIN Identify by fangzheng.php is main file<br/>
-* PIN Identify lib.php is function lib<br/>
-* downloadImg.php Used to download the verification code<br/>
-* AddDictionary.php Used to add a dictionary<br/>
-* zidian.sql Is a dictionary，Build a database called 'yzm' and imported<br/>
+* <b>PIN Identify by fangzheng.php</b> is main file<br/>
+* <b>PIN Identify lib.php</b> is function lib<br/>
+* <b>downloadImg.php</b> Used to download the verification code<br/>
+* <b>AddDictionary.php</b> Used to add a dictionary<br/>
+* <b>zidian.sql</b> Is a dictionary，Build a database called 'yzm' and imported<br/>
 
 [to Accuracy test](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/><br/>
 [to Batch test accuracy](http://kuri-su.cc/PIN/AccuracyTest.php "kuri-su.cc")<br/>
