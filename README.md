@@ -24,7 +24,7 @@
 
 <hr/>
 
-##There are 2,300 records in the current dictionary，Recognition rate of about 85%，You can make sure that the request is sure to be correct once，The single recognition run time may be between 2.5-3s。
+## There are 2,300 records in the current dictionary，Recognition rate of about 85%，You can make sure that the request is sure to be correct once，The single recognition run time may be between 2.5-3s。
 
 * <b>PIN Identify by fangzheng.php</b> is main file<br/>
 * <b>PIN Identify lib.php</b> is function lib<br/>
