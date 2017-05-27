@@ -16,6 +16,8 @@
 <br/><br/>
 [kuri-su.cc](http://kuri-su.cc "kuri-su.cc")
 <br/>测试页面出现错误的情况已经修复
+
+不嫌弃的话给个star吧wwww
 <hr/>
 
 #####  <font color=#5dadff>PS：目前认为运算效率的瓶颈在 similar_text()  这个核心函数上，函数的作用在于对比两个字符串的相似程度，但是其算法时间复杂度T(n) = O(n^3) ，所以准备用T(n) = O(m*n)动态规划实现一个相类似的函数去代替该函数，以提高性能，时间未定。。。</font>
