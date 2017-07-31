@@ -12,7 +12,7 @@
 * <b>AddDictionary.php</b> 用于添加字典<br/>
 * <b>zidian.sql</b> 为字典，建一个叫'yzm'的数据库导入即可<br/>
 
-[正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/><br/>
+[正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/>好像因为总是请求验证码被教务系统限制了233333<br/><br/>
 [正确率批量测试 地址](http://kuri-su.cc/PIN/AccuracyTest.php "kuri-su.cc")<br/>
 <font color=red>批量测试设置了一次加载五个方正验证码，大概等待时间在17s左右，而且可能会因为请求不到验证码而中断</font>
 <br/><br/>
