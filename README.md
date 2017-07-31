@@ -24,6 +24,8 @@ point:如果因为获取验证码的教务系统响应缓慢或者无法响应�
 
 #####  <font color=#5dadff>PS：目前认为运算效率的瓶颈在 similar_text()  这个核心函数上，函数的作用在于对比两个字符串的相似程度，但是其算法时间复杂度T(n) = O(n^3) ，所以准备用T(n) = O(m*n)动态规划实现一个相类似的函数去代替该函数，以提高性能，时间未定。。。</font>
 
+#####  <font color=#5dadff>PSS：然后试着用php写了个动态规划，发现完全跑不出来，毕竟下面跑的C，然后现在考虑用C++写个拓展看看，直接封装一个函数，下面跑的O(m*n)的C++应该会快很多</font>
+
 <hr/>
 
 ## There are 2,300 records in the current dictionary，Recognition rate of about 85%，You can make sure that the request is sure to be correct once，The single recognition run time may be between 2.5-3s。
