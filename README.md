@@ -11,7 +11,7 @@
 * <b>downloadImg.php</b> 用于download验证码<br/>
 * <b>AddDictionary.php</b> 用于添加字典<br/>
 * <b>zidian.sql</b> 为字典，建一个叫'yzm'的数据库导入即可<br/>
-
+(暂停使用)
 [正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/><br/>
 (暂停使用)
 [正确率批量测试 地址](http://kuri-su.cc/PIN/AccuracyTest.php "kuri-su.cc")<br/>
