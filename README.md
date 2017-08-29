@@ -11,10 +11,10 @@
 * <b>downloadImg.php</b> 用于download验证码<br/>
 * <b>AddDictionary.php</b> 用于添加字典<br/>
 * <b>zidian.sql</b> 为字典，建一个叫'yzm'的数据库导入即可<br/>
-(暂停使用)
-[正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/><br/>
-(暂停使用)
-[正确率批量测试 地址](http://kuri-su.cc/PIN/AccuracyTest.php "kuri-su.cc")<br/>
+
+[正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/>(已恢复，图片无显示)<br/>
+
+[正确率批量测试 地址](http://kuri-su.cc/PIN/AccuracyTest.php "kuri-su.cc")(已恢复，图片无显示)<br/>
 <font color=red>批量测试设置了一次加载五个方正验证码，大概等待时间在17s左右，而且可能会因为请求不到验证码而中断</font>
 <br/><br/>
 [kuri-su.cc](http://kuri-su.cc "kuri-su.cc")
