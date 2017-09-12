@@ -1,7 +1,7 @@
 
 
-# PIN-Identify-by-fangzheng
-## 方正教务系统验证码识别
+# PIN-Identify-by-zhengfang
+## 正方教务系统验证码识别
 	
 >point:如果因为获取验证码的教务系统响应缓慢或者无法响应，正确率测试的地址会因为无法获取到验证码图片而产生504错误/响应过长，可以考虑把脚本下载到本地将目标url换成本校的教务系统验证码url再做测试
 
@@ -33,7 +33,7 @@
 
 ## There are 2,300 records in the current dictionary，Recognition rate of about 85%，You can make sure that the request is sure to be correct once，The single recognition run time may be between 2.5-3s。
 
-* <b>PIN Identify by fangzheng.php</b> is main file<br/>
+* <b>PIN Identify by zhengfang.php</b> is main file<br/>
 * <b>PIN Identify lib.php</b> is function lib<br/>
 * <b>downloadImg.php</b> Used to download the verification code<br/>
 * <b>AddDictionary.php</b> Used to add a dictionary<br/>
