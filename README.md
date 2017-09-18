@@ -1,7 +1,7 @@
 
 
 # PIN-Identify-by-zhengfang
-## 正方教务系统验证码识别
+### 正方教务系统验证码识别
 	
 >point:如果因为获取验证码的教务系统响应缓慢或者无法响应，正确率测试的地址会因为无法获取到验证码图片而产生504错误/响应过长，可以考虑把脚本下载到本地将目标url换成本校的教务系统验证码url再做测试
 
@@ -11,6 +11,8 @@
 * <b>downloadImg.php</b> 用于download验证码<br/>
 * <b>AddDictionary.php</b> 用于添加字典<br/>
 * <b>zidian.sql</b> 为字典，建一个叫'yzm'的数据库导入即可<br/>
+
+# Examples
 
 (已恢复)[正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/><br/>
 
@@ -23,9 +25,9 @@
 不嫌弃的话给个star吧wwww
 <hr/>
 
-#####  <font color=#5dadff>PS：目前认为运算效率的瓶颈在 similar_text()  这个核心函数上，函数的作用在于对比两个字符串的相似程度，但是其算法时间复杂度T(n) = O(n^3) ，所以准备用T(n) = O(m*n)动态规划实现一个相类似的函数去代替该函数，以提高性能，时间未定。。。</font>
+>point:  <font color=#5dadff>PS：目前认为运算效率的瓶颈在 similar_text()  这个核心函数上，函数的作用在于对比两个字符串的相似程度，但是其算法时间复杂度T(n) = O(n^3) ，所以准备用T(n) = O(m*n)动态规划实现一个相类似的函数去代替该函数，以提高性能，时间未定。。。</font>
 
-#####  <font color=#5dadff>PSS：然后试着用php写了个动态规划，发现完全跑不出来时间太长了，然后现在考虑用C++写个拓展看看，直接封装一个函数，跑的O(m*n)的C++应该会快很多</font>
+>point:  <font color=#5dadff>PSS：然后试着用php写了个动态规划，发现完全跑不出来时间太长了，然后现在考虑用C++写个拓展看看，直接封装一个函数，跑的O(m*n)的C++应该会快很多</font>
 
 ##### 准备重写封装成库，这半年前的代码自己看着都觉得难受了XD
 
