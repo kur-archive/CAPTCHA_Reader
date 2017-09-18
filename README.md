@@ -17,7 +17,7 @@
 [正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/><br/>
 
 [正确率批量测试 地址](http://kuri-su.cc/PIN/AccuracyTest.php "kuri-su.cc")<br/>
-<font color=red>批量测试设置了一次加载五个方正验证码，大概等待时间在12s左右，</font>
+<font color=red>批量测试设置了一次加载五个方正验证码，大概等待时间在13s左右，</font>
 <br/><br/>
 [kuri-su.cc](http://kuri-su.cc "kuri-su.cc")
 <br/>测试页面出现错误的情况已经修复
