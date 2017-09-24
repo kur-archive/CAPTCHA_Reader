@@ -1,18 +1,16 @@
+## PIN-Identify-by-zhengfang
 
+`安装和使用手册整理中`
 
-# PIN-Identify-by-zhengfang
-### 正方教务系统验证码识别
-	
->point:如果因为获取验证码的教务系统响应缓慢或者无法响应，正确率测试的地址会因为无法获取到验证码图片而产生504错误/响应过长，可以考虑把脚本下载到本地将目标url换成本校的教务系统验证码url再做测试
+##### 目前字典大致为2200条左右，识别率基本站稳85%,可以确保请求三次之中一定有一次是识别正确的，内网环境下单次完成时间在1.5s-2s，外网环境下完成时间可能会在2.5-3s之间，
+* <small><b>PIN Identify by fangzheng.php</b> 为主文件<br/></small>
+* <small><b>PIN Identify lib.php</b> 为其函数库<br/></small>
+* <small><b>downloadImg.php</b> 用于download验证码<br/></small>
+* <small><b>AddDictionary.php</b> 用于添加字典<br/></small>
+* <small><b>zidian.sql</b> 为字典，建一个叫'yzm'的数据库导入即可<br/></small>
 
-### 目前字典大致为2200条左右，识别率基本站稳85%,可以确保请求三次之中一定有一次是识别正确的，内网环境下单次完成时间在1.5s-2s，外网环境下完成时间可能会在2.5-3s之间，
-* <b>PIN Identify by fangzheng.php</b> 为主文件<br/>
-* <b>PIN Identify lib.php</b> 为其函数库<br/>
-* <b>downloadImg.php</b> 用于download验证码<br/>
-* <b>AddDictionary.php</b> 用于添加字典<br/>
-* <b>zidian.sql</b> 为字典，建一个叫'yzm'的数据库导入即可<br/>
+## Examples
 
-# Examples
 
 [正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/><br/>
 
@@ -24,6 +22,8 @@
 
 不嫌弃的话给个star吧wwww
 <hr/>
+
+>point:如果因为获取验证码的教务系统响应缓慢或者无法响应，正确率测试的地址会因为无法获取到验证码图片而产生504错误/响应过长，可以考虑把脚本下载到本地将目标url换成本校的教务系统验证码url再做测试
 
 >point:  <font color=#5dadff>PS：目前认为运算效率的瓶颈在 similar_text()  这个核心函数上，函数的作用在于对比两个字符串的相似程度，但是其算法时间复杂度T(n) = O(n^3) ，所以准备用T(n) = O(m*n)动态规划实现一个相类似的函数去代替该函数，以提高性能，时间未定。。。</font>
 
