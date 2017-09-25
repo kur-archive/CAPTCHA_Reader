@@ -1,6 +1,7 @@
 ## PIN-Identify-by-zhengfang
 
 `安装和使用手册整理中`<br/>
+`代码重构中`<br/>
 
 ##### 目前字典大致为2200条左右，识别率基本站稳85%,可以确保请求三次之中一定有一次是识别正确的，内网环境下单次完成时间在1.5s-2s，外网环境下完成时间可能会在2.5-3s之间，
 * <small><b>PIN Identify by fangzheng.php</b> 为主文件<br/></small>
