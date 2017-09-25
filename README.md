@@ -17,11 +17,9 @@
 [正确率批量测试 地址](http://kuri-su.cc/PIN/AccuracyTest.php "kuri-su.cc")<br/>
 <font color=red>批量测试设置了一次加载五个方正验证码，大概等待时间在13s左右，</font>
 <br/><br/>
-[kuri-su.cc](http://kuri-su.cc "kuri-su.cc")
-<br/>测试页面出现错误的情况已经修复
 
 不嫌弃的话给个star吧wwww
-<hr/>
+<br/><hr/>
 
 >point:如果因为获取验证码的教务系统响应缓慢或者无法响应，正确率测试的地址会因为无法获取到验证码图片而产生504错误/响应过长，可以考虑把脚本下载到本地将目标url换成本校的教务系统验证码url再做测试
 

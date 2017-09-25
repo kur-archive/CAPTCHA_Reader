@@ -32,12 +32,15 @@
  */
 $start_time = microtime(true);//运行时间开始计时
 
-include('AccTest_Change_function.php');
+include('PIN Identify lib.php');
 $yz = 10;//切割判断阈值
 $all = array();
 
 echo '<div>';
-$url = 'http://61.142.33.204/CheckCode.aspx';//获取验证码的地址//公网，内网可以换成内网地址
+//获取验证码的地址
+//这个是某校的公网IP地址，如果使用内网可以换成内网地址
+$url = 'http://61.142.33.204/CheckCode.aspx';
+
 $save_to = time() . '.png';
 //    $save_to = './img2/' . $n . '.png';
 $content = file_get_contents($url);
