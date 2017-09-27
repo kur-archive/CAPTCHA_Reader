@@ -28,11 +28,11 @@
 
 >point:  <font color=#5dadff>PSS：然后试着用php写了个动态规划，发现完全跑不出来时间太长了，然后现在考虑用C++写个拓展看看，直接封装一个函数，跑的O(m*n)的C++应该会快很多</font>
 
-##### 准备重写封装成库，这半年前的代码自己看着都觉得难受了XD
+
 
 <hr/>
 
-## There are 2,300 records in the current dictionary，Recognition rate of about 85%，You can make sure that the request is sure to be correct once，The single recognition run time may be between 2.5-3s。
+##### There are 2,300 records in the current dictionary，Recognition rate of about 85%，You can make sure that the request is sure to be correct once，The single recognition run time may be between 2.5-3s。
 
 * <b>PIN Identify by zhengfang.php</b> is main file<br/>
 * <b>PIN Identify lib.php</b> is function lib<br/>
