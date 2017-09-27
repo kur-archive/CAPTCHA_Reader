@@ -1,4 +1,4 @@
-## PIN-Identify-by-zhengfang
+## CAPTCHA_Reader_by_zhengfang
 
 `安装和使用步骤整理中`<br/>
 `代码重构中`<br/>
