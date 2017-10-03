@@ -1,4 +1,7 @@
 ## CAPTCHA_Reader_by_zhengfang
+<small>针对正方教务系统验证码 识别</small>
+ 
+[EN]()
 
 
 `安装和使用步骤整理中`<br/>
@@ -15,14 +18,24 @@
 ## Examples
 
     
-[正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/><br/>
+[正确率测试 地址](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/>
 
 [正确率批量测试 地址](http://kuri-su.cc/PIN/AccuracyTest.php "kuri-su.cc")<br/>
-<font color=red>批量测试设置了一次加载五个方正验证码，大概等待时间在13s左右，</font>
-<br/><br/>
+> 批量测试设置了一次加载五个方正验证码，大概等待时间在13s左右
 
-不嫌弃的话给个star吧wwww
-<br/><hr/>
+<br/>
+
+## 更新计划
+* 重构代码，改为面向对象风格，松耦合，方便更换各块的策略
+* 将字典储存转为JSON储存，一次性读入内存，去掉数据库读取的时间
+* 使用swoole多线程识别
+* 以PHP拓展的方式重写核心函数，降低核心函数的时间复杂度
+
+* 增加多个字典和策略
+* 增加对青果验证码的支持
+
+
+<hr/>
 
 >point:如果因为获取验证码的教务系统响应缓慢或者无法响应，正确率测试的地址会因为无法获取到验证码图片而产生504错误/响应过长，可以考虑把脚本下载到本地将目标url换成本校的教务系统验证码url再做测试
 
@@ -31,19 +44,3 @@
 >point:  <font color=#5dadff>PSS：然后试着用php写了个动态规划，发现完全跑不出来时间太长了，然后现在考虑用C++写个拓展看看，直接封装一个函数，跑的O(m*n)的C++应该会快很多</font>
 
 
-
-<hr/>
-
-##### There are 2,300 records in the current dictionary，Recognition rate of about 85%，You can make sure that the request is sure to be correct once，The single recognition run time may be between 2.5-3s。
-
-* <b>PIN Identify by zhengfang.php</b> is main file<br/>
-* <b>PIN Identify lib.php</b> is function lib<br/>
-* <b>downloadImg.php</b> Used to download the verification code<br/>
-* <b>AddDictionary.php</b> Used to add a dictionary<br/>
-* <b>zidian.sql</b> Is a dictionary，Build a database called 'yzm' and imported<br/>
-
-[to Accuracy test](http://kuri-su.cc/PIN/Identify_online.php "kuri-su.cc")<br/><br/>
-[to Batch test accuracy](http://kuri-su.cc/PIN/AccuracyTest.php "kuri-su.cc")<br/>
-<font color='red'>Batch test set a load of five Founder verification code, probably waiting for about 17s time, and may not be required because the request code is interrupted</font>
-<br/><br/>
-[kuri-su.cc](http://kuri-su.cc "kuri-su.cc")
