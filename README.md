@@ -1,7 +1,7 @@
 ## CAPTCHA_Reader_by_zhengfang
 <small>针对正方教务系统验证码 识别</small>
  
-[EN]()
+[EN](https://github.com/Kuri-su/CAPTCHA_Reader_by_zhengfang/blob/master/README-en.md "EN" )
 
 
 `安装和使用步骤整理中`<br/>

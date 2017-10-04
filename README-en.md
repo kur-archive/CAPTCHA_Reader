@@ -1,5 +1,5 @@
 ## CAPTCHA_Reader_by_zhengfang
-[zh_CN]()
+[zh_CN](https://github.com/Kuri-su/CAPTCHA_Reader_by_zhengfang "zh_CN" )
 
 `安装和使用步骤整理中`<br/>
 `代码重构中`<br/>
