@@ -4,7 +4,7 @@
 [EN](https://github.com/Kuri-su/CAPTCHA_Reader_by_zhengfang/blob/master/README-en.md "EN" )
 
 
-#代码整理中
+# 代码整理中
 
 > 该分支正在维护中，已转为面向对象风格
 
