@@ -4,9 +4,7 @@
 [EN](https://github.com/Kuri-su/CAPTCHA_Reader_by_zhengfang/blob/master/README-en.md "EN" )
 
 
-`安装和使用步骤整理中`<br/>
-`代码重构中`<br/>
-`原理与更新计划添加中`<br/>
+#代码整理中
 
 > 该分支正在维护中，已转为面向对象风格
 
