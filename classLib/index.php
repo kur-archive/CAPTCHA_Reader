@@ -5,3 +5,13 @@
  * Date: 2017/11/01
  * Time: 23:29
  */
+$start_time = microtime(true);//运行时间开始计时
+
+require 'vendor/autoload.php';
+use CAPTCHA_Reader\IndexController;
+
+$index = new IndexController();
+var_dump( $index->getResult() );
+
+$end_time = microtime(true);//计时停止
+echo '执行时间为：' . ($end_time - $start_time) . ' s' . '<br/>';

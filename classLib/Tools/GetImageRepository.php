@@ -8,7 +8,7 @@
 
 namespace CAPTCHA_Reader\Tools;
 
-class GetImage
+class GetImageRepository
 {
 //两种模式，
 //一种是给定链接(未给定则寻找默认位置)，去下载图像，返回图像信息和图像资源

@@ -16,7 +16,7 @@ interface CuttingInterface
      * @param $time
      * @return mixed
      */
-    public function getCutBeforeColumns( $width , $height , $time );
+    public function getCutBeforeColumns( $imageArr , $width , $height , $time );
 
     /**
      * @param $width
@@ -24,7 +24,7 @@ interface CuttingInterface
      * @param $time
      * @return mixed
      */
-    public function getCutAfterColumns( $width , $height , $time );
+    public function getCutAfterColumns( $imageArr , $width , $height , $time );
 
     /**
      * @param $width
@@ -32,7 +32,7 @@ interface CuttingInterface
      * @param $time
      * @return mixed
      */
-    public function getCutBeforeRow( $height , $time );
+    public function getCutBeforeRow( $imageArr , $coordinate , $height , $time );
 
     /**
      * @param $width
@@ -40,7 +40,7 @@ interface CuttingInterface
      * @param $time
      * @return mixed
      */
-    public function getCutAfterRow( $height , $time );
+    public function getCutAfterRow( $imageArr , $coordinate , $height , $time );
 
     /**
      * @return mixed
