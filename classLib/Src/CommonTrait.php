@@ -2,78 +2,57 @@
 /**
  * Created by PhpStorm.
  * User: kurisu
- * Date: 2017/11/01
- * Time: 23:29
+ * Date: 2017/11/19
+ * Time: 0:54
  */
 
-namespace CAPTCHA_Reader;
+namespace CAPTCHA_Reader\Tools;
 
-use CAPTCHA_Reader\Cutting\Cutting;
-use CAPTCHA_Reader\GetImageInfo\GetImageInfo;
-use CAPTCHA_Reader\Identify\Identify;
-use CAPTCHA_Reader\Pretreatment\Pretreatment;
 
-class IndexController
+trait CommonTrait
 {
-    private $config;
-    private $getImageProvider;
-    private $pretreatmentProvider;
-    private $cuttingProvider;
-    private $identifyProvider;
-
-    //不应该在这里传path，应该在下面getResult方法中传path
-    public function __construct( $path = '' )
-    {
-        //TODO wait 建立各个服务提供者的父类
-        //完成各种类的初始化
-        $this->config = require_once(dirname( __DIR__ ) . '../Config/app.php');
-
-        $this->getImageProvider     = new GetImageInfo( $this->config , $path );
-        $this->pretreatmentProvider = new Pretreatment();
-        $this->cuttingProvider      = new Cutting( $this->config );
-        $this->identifyProvider     = new Identify( $this->config );
-    }
-
     /**
-     * @return string
+     * 调试用，show处理好的数组
      */
-    //TODO 在这里传path
-    public function getResult($path)
-    : string
+    public static function showResArr($imageArr)
     {
-        $imageArr       = $this->getImageProvider->getResult($path);
-        $imageInfo      = $imageArr['imageInfo'];
-        $imageBinaryArr = $imageArr['imageBinaryArr'];
-        $noiseCancelArr = $this->pretreatmentProvider->getResultArr( $this->config , $imageInfo , $imageBinaryArr );
-        $charArr        = $this->cuttingProvider->getResultArr( $noiseCancelArr , $imageInfo );
-        $result         = $this->identifyProvider->getResult( $charArr );
 
-        return $result;
+        echo "\n";
+        foreach($imageArr as $resY)
+        {
+            foreach($resY as $resX)
+            {
+                $resX ? $output = '◆' : $output = '◇';
+                echo $output;
+            }
+            echo "\n";
+
+        }
+        echo "\n";
     }
 
     /**
      * web调试用，show处理好的数组
      */
-    public function showResArrWeb( $imageArr )
+    public static function showResArrWeb($imageArr)
     {
         echo "<div style='line-height: 10px;'>";
         echo "<br/>";
         foreach($imageArr as $resY)
         {
-            foreach($resY as $key => $resX)
+            foreach($resY as $key=>$resX)
             {
                 $resX ? $output = '◆' : $output = '◇';
                 if (in_array( $key , [16 , 29 , 40 , 54] ))
                 {
-                    echo '<span style="color: red">' . $output . '</span>';
-                }
-                else
-                {
+                    echo '<span style="color: red">'.$output.'</span>';
+                }else{
                     echo $output;
                 }
 
             }
             echo "<br/>";
+
         }
         echo "<br/>";
         echo "</div>";
@@ -86,7 +65,7 @@ class IndexController
      * @param $letter4
      * 展示切割后的结果和二值化后的数组
      */
-    function show( $letter1 , $letter2 , $letter3 , $letter4 )
+    public static function show( $letter1 , $letter2 , $letter3 , $letter4 )
     {
 
         echo '<div style="float: left;line-height: 10px;margin-left: 20px;">';
@@ -166,5 +145,16 @@ class IndexController
         echo '<br/>';
     }
 
-
+    public static function twoDimArrayToStr( $array )
+    {
+        $str = '';
+        foreach($array as $key => $value)
+        {
+            foreach($value as  $value_)
+            {
+                $str .= $value_;
+            }
+        }
+        return $str;
+    }
 }

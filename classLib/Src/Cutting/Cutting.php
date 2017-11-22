@@ -11,6 +11,7 @@ namespace CAPTCHA_Reader\Cutting;
 class Cutting implements CuttingInterface
 {
     use CuttingTrait;
+    static $a;
 
     protected $charArr = [
         'char1' => [] ,
@@ -30,28 +31,40 @@ class Cutting implements CuttingInterface
         'y4' => '' , 'y4_' => '' ,
     ];
 
-    protected $captchaStringNum ;
+    protected $config;
+    protected $captchaStringNum;
 
-    public function __construct( array $imageArr , array $imageInfo,array $config)
+    public function __construct( array $config  )
     {
+        $this->config           = $config;
         $this->captchaStringNum = $config['captchaStringNum'];
+    }
+
+    /**
+     * @param array $noiseCancelArr
+     * @return array|mixed
+     */
+    public function getResultArr( array $noiseCancelArr ,array $imageInfo)
+    {
         for($i = 1; $i <= $this->captchaStringNum; $i++)
         {
             $a                    = 'x' . $i;
             $b                    = 'x' . $i . '_';
-            $this->coordinate[$a] = $this->getCutBeforeColumns( $imageArr , $imageInfo['width'] , $imageInfo['height'] , $i );
-            $this->coordinate[$b] = $this->getCutAfterColumns( $imageArr , $imageInfo['width'] , $imageInfo['height'] , $i );
+            $this->coordinate[$a] = $this->getCutBeforeColumns( $noiseCancelArr , $imageInfo['width'] , $imageInfo['height'] , $i );
+            $this->coordinate[$b] = $this->getCutAfterColumns( $noiseCancelArr , $imageInfo['width'] , $imageInfo['height'] , $i );
         }
 
         for($i = 1; $i <= $this->captchaStringNum; $i++)
         {
             $a                    = 'y' . $i;
             $b                    = 'y' . $i . '_';
-            $this->coordinate[$a] = $this->getCutBeforeRow( $imageArr , $this->coordinate , $imageInfo['height'] , $i );
-            $this->coordinate[$b] = $this->getCutAfterRow( $imageArr , $this->coordinate , $imageInfo['height'] , $i );
+            $this->coordinate[$a] = $this->getCutBeforeRow( $noiseCancelArr , $this->coordinate , $imageInfo['height'] , $i );
+            $this->coordinate[$b] = $this->getCutAfterRow( $noiseCancelArr , $this->coordinate , $imageInfo['height'] , $i );
         }
-        $this->charArr = $this->Cut( $imageArr , $this->charArr , $this->coordinate , $this->captchaStringNum );
 
+        $this->charArr = $this->Cut( $noiseCancelArr , $this->charArr , $this->coordinate , $this->captchaStringNum );
+
+        return $this->charArr;
     }
 
     public function getCutBeforeColumns( $imageArr , $width , $height , $time )
@@ -191,7 +204,7 @@ class Cutting implements CuttingInterface
             {
                 $rowSum += (int)$imageArr[$y][$x];
             }
-            if ($rowSum > 1)
+            if ($rowSum > 0)
             {
                 return $y;
             }
@@ -221,12 +234,6 @@ class Cutting implements CuttingInterface
     public function getCoordinate()
     {
         return $this->coordinate;
-    }
-
-
-    public function getResultArr()
-    {
-        return $this->charArr;
     }
 
 

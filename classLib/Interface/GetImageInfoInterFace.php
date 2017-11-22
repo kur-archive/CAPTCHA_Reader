@@ -12,9 +12,10 @@ namespace CAPTCHA_Reader\GetImageInfo;
 interface GetImageInfoInterFace
 {
 
-    public function getImageInfo();
+//    public function getImageInfo();
+//
+//    public function getImage();
 
-    public function getImage();
-
-    public function __destruct();
+    public function getResult();
+//    public function __destruct();
 }

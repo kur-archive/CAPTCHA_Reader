@@ -11,16 +11,13 @@ namespace CAPTCHA_Reader\Tools;
 use CAPTCHA_Reader\Cutting\Cutting;
 use CAPTCHA_Reader\GetImageInfo\GetImageInfo;
 use CAPTCHA_Reader\Identify\Identify;
-use CAPTCHA_Reader\Identify\IdentifyTrait;
 use CAPTCHA_Reader\Pretreatment\Pretreatment;
 
 class AddSamplesRepository
 {
-    use IdentifyTrait;
-    private $imageInfo;
-    private $imageArr;
+    use CommonTrait;
+    private $config;
     private $charArr;
-    private $result;
 
     public function __construct( $mode )
     {
@@ -30,24 +27,27 @@ class AddSamplesRepository
 
             $config = require_once(dirname( __DIR__ ) . '../Config/app.php');
 
-            $getImageInfo    = new GetImageInfo( $config );
-            $this->imageInfo = $getImageInfo->getImageInfo();
-            $image           = $getImageInfo->getImage();
-            unset( $getImageInfo );
+            $getImageProvider     = new GetImageInfo( $this->config );
+            $pretreatmentProvider = new Pretreatment();
+            $cuttingProvider      = new Cutting( $this->config );
+            $identifyProvider     = new Identify( $this->config );
 
-            $pretreatment   = new Pretreatment( $this->imageInfo , $image );
-            $this->imageArr = $pretreatment->getResultArr();
+            $imageArr       = $getImageProvider->getResult();
+            $imageInfo      = $imageArr['imageInfo'];
+            $imageBinaryArr = $imageArr['imageBinaryArr'];
+            $noiseCancelArr = $pretreatmentProvider->getResultArr( $this->config , $imageInfo , $imageBinaryArr );
+            $charArr        = $cuttingProvider->getResultArr( $noiseCancelArr , $imageInfo );
+            $this->charArr = $charArr;
+            CommonTrait::show(
+                $charArr['char1'] ,
+                $charArr['char2'] ,
+                $charArr['char3'] ,
+                $charArr['char4'] );
 
-//            $this->showResArrWeb( $this->imageArr );
+            $result         = $identifyProvider->getResult( $charArr );
 
-            $cutting       = new Cutting( $this->imageArr , $this->imageInfo , $config );
-            $this->charArr = $cutting->getResultArr();
-            $coordinate    = $cutting->getCoordinate();
-//            var_dump( $coordinate );
-            $this->show( $this->charArr['char1'] , $this->charArr['char2'] , $this->charArr['char3'] , $this->charArr['char4'] );
+            var_dump( $_GET['length'] ?? '' );
 
-            $identify     = new Identify( $this->charArr , $config , dirname( __DIR__ ) . '../Src/Identify/dictionary/zhengFang_fixedCut.json' );
-            $this->result = $identify->getResult();
             echo "<br/>";
             echo "<br/>";
             echo "<br/>";
@@ -56,7 +56,7 @@ class AddSamplesRepository
             echo "<br/>";
             echo "<br/>";
 
-            var_dump( $this->result );
+            var_dump( $result );
         }
     }
 
@@ -68,8 +68,7 @@ class AddSamplesRepository
             'char3' => $this->twoDimArrayToStr( $this->charArr['char3'] ) ,
             'char4' => $this->twoDimArrayToStr( $this->charArr['char4'] ) ,
         ];
-
-        $content = "
+        $content    = "
             <form action='#' method='post' '>
                 <input type='text' class='charInput' name='char1'/>
                 <input type='text' class='charInput' name='char2'/>
@@ -88,11 +87,11 @@ class AddSamplesRepository
     {
 //        var_dump( $arr );
 //        exit();
-        $result = [];
+        $result     = [];
         $dictionary = json_decode( file_get_contents( dirname( __DIR__ ) . '../Src/Identify/dictionary/zhengFang_fixedCut.json' ) );
         for($i = 1; $i <= 4; $i++)
         {
-            if (empty( $arr['char' . $i] ))
+            if ($arr['char' . $i] == '')
             {
                 continue;
             }
@@ -100,13 +99,13 @@ class AddSamplesRepository
                 'char' => $arr['char' . $i] ,
                 'str'  => $arr['char' . $i . 'str'] ,
             ];
-            $result[] = [
+            $result[]     = [
                 'char' => $arr['char' . $i] ,
                 'str'  => $arr['char' . $i . 'str'] ,
             ];
         }
         file_put_contents( dirname( __DIR__ ) . '../Src/Identify/dictionary/zhengFang_fixedCut.json' , json_encode( $dictionary ) );
-        header( 'Location: http://code.cc/DEMO/CAPTCHA_Idenify/new/d2/addSamples?result=' . json_encode($result ));
+        header( 'Location: http://code.cc/DEMO/CAPTCHA_Idenify/new/d2/addSamples?result=' . json_encode( $result ) . '&length=' . count( $dictionary ) );
     }
 
     /**
@@ -137,91 +136,5 @@ class AddSamplesRepository
         echo "</div>";
     }
 
-    /**
-     * @param $letter1
-     * @param $letter2
-     * @param $letter3
-     * @param $letter4
-     * 展示切割后的结果和二值化后的数组
-     */
-    function show( $letter1 , $letter2 , $letter3 , $letter4 )
-    {
-
-        echo '<div style="float: left;line-height: 10px;margin-left: 20px;">';
-        for($y = 0; isset( $letter1[$y][0] ); ++$y)
-        {
-            for($x = 0; isset( $letter1[$y][$x] ); ++$x)
-            {
-                if ($letter1[$y][$x] == 1)
-                {
-                    echo '◆';
-                }
-                else
-                {
-                    echo '◇';
-                }
-            }
-            echo '<br/>';
-        }
-        echo '</div>';
-
-        echo '<div style="float: left;line-height: 10px;margin-left: 20px;">';
-        echo '<br/>';
-        for($y = 0; isset( $letter2[$y][0] ); ++$y)
-        {
-            for($x = 0; isset( $letter2[$y][$x] ); ++$x)
-            {
-                if ($letter2[$y][$x] == 1)
-                {
-                    echo '◆';
-                }
-                else
-                {
-                    echo '◇';
-                }
-            }
-            echo '<br/>';
-        }
-        echo '</div>';
-
-        echo '<div style="float: left;line-height: 10px;margin-left: 20px;">';
-        echo '<br/>';
-        for($y = 0; isset( $letter3[$y][0] ); ++$y)
-        {
-            for($x = 0; isset( $letter3[$y][$x] ); ++$x)
-            {
-                if ($letter3[$y][$x] == 1)
-                {
-                    echo '◆';
-                }
-                else
-                {
-                    echo '◇';
-                }
-            }
-            echo '<br/>';
-        }
-        echo '</div>';
-
-        echo '<div style="float: left;line-height: 10px;margin-left: 20px;">';
-        echo '<br/>';
-        for($y = 0; isset( $letter4[$y][0] ); ++$y)
-        {
-            for($x = 0; isset( $letter4[$y][$x] ); ++$x)
-            {
-                if ($letter4[$y][$x] == 1)
-                {
-                    echo '◆';
-                }
-                else
-                {
-                    echo '◇';
-                }
-            }
-            echo '<br/>';
-        }
-        echo '</div>';
-        echo '<br/>';
-    }
 
 }

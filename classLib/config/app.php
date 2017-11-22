@@ -16,7 +16,7 @@ return [
     |
     |
     */
-    'provider'     => [
+    'provider'        => [
         "PretreatmentProvider" => 'Pretreatment' ,
         "CuttingProvider"      => 'Cutting' ,
         "IdentifyProvider"     => 'Identify' ,
@@ -29,22 +29,25 @@ return [
     |
     | local , online
     */
-    'getImageMode' => 'online' ,
+    'VerifyImageMode' => 'online' ,
 
     /*
     |--------------------------------------------------------------------------
     | 获取验证码的目录和url
     |--------------------------------------------------------------------------
     |
+    | 如果是local模式，会随机去目录中读取图片，目标是(0 ~ number).png.
+    |
     */
-    'getImagePath' => [
+    'ImagePath'       => [
         'local'  => [
             'dir'    => 'D:\code\DEMO\CAPTCHA_Idenify\new\imgs\\' ,
             'number' => 1000 ,
         ] ,
         'online' => [
-            'url' => 'http://61.142.33.204/CheckCode.aspx' ,
-            'save_path' => 'D:\code\DEMO\CAPTCHA_Idenify\new\imgs2\\' ,
+            'url'             => 'http://61.142.33.204/CheckCode.aspx' ,
+            'savePath'        => 'D:\code\DEMO\CAPTCHA_Idenify\new\imgs2\\' ,
+            'deleteImageFile' => true ,
         ]
     ] ,
 
@@ -55,7 +58,7 @@ return [
     |
     */
 
-    'dictionary' => 'dictionary/zhengFang_fixedCut.json' ,
+    'dictionary'       => 'dictionary/zhengFang_fixedCut.json' ,
 //    'dictionary' => '/dictionary/model2.json' ,
 
 
@@ -67,5 +70,16 @@ return [
     */
     'captchaStringNum' => 4 ,
 
+    /*
+    |--------------------------------------------------------------------------
+    | testSamplesDir
+    |--------------------------------------------------------------------------
+    | 测试样本放置的dir
+    */
+
+    'testSamples' => [
+        'dir'    => 'D:\code\DEMO\CAPTCHA_Idenify\new\imgs_test\\' ,
+        'number' => 200
+    ]
 ];
 

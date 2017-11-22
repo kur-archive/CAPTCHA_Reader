@@ -12,5 +12,5 @@ interface IdentifyInterface
     /**
      * @return mixed
      */
-    public function getResult();
+    public function getResult(array $charArr);
 }

@@ -13,13 +13,6 @@ interface PretreatmentInterface
 
     /**
      * @param $imageInfo
-     * @param $image
-     * @return mixed
-     */
-    public function binarization( $width , $height , $image );
-
-    /**
-     * @param $imageInfo
      * @param $binarizationArr
      * @return mixed
      */
@@ -28,5 +21,5 @@ interface PretreatmentInterface
     /**
      * @return mixed
      */
-    public function getResultArr();
+    public function getResultArr( array $config ,array $imageInfo,array $imageBinaryArr);
 }

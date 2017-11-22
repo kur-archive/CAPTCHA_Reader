@@ -45,5 +45,5 @@ interface CuttingInterface
     /**
      * @return mixed
      */
-    public function getResultArr();
+    public function getResultArr(array $noiseCancelArr,array $imageInfo);
 }

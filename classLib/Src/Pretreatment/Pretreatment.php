@@ -8,51 +8,29 @@
 
 namespace CAPTCHA_Reader\Pretreatment;
 
+use CAPTCHA_Reader\Tools\CommonTrait;
+
 class Pretreatment implements PretreatmentInterface
 {
-    use PretreatmentTrait;
+    use PretreatmentTrait,CommonTrait;
 
-    protected $imageInfo;
-    protected $results;
-    protected $imageArr;
 
-    public function __construct( array $imageInfo , $image )
+    public function __construct()
     {
-        $this->imageInfo = $imageInfo;
-        $this->imageArr  = $this->binarization( $this->imageInfo['width'] , $this->imageInfo['height'] , $image );
-
-        $this->imageArr  = $this->noiseCancel( $this->imageInfo['width'] , $this->imageInfo['height'] , $this->imageArr );
     }
 
     /**
-     * @param $width
-     * @param $height
-     * @param $image
-     * @return array
-     * 二值化
+     * @param array $config
+     * @param array $imageInfo
+     * @param array $imageBinaryArr
+     * @return mixed
      */
-    public function binarization( $width , $height , $image )
+    public function getResultArr(array $config ,array $imageInfo,array $imageBinaryArr)
     {
-        $imageArr = [];
-        for($y = 0; $y < $height; ++$y)
-        {
-            for($x = 0; $x < $width; ++$x)
-            {
-                $rgb      = imagecolorat( $image , $x , $y );
-                $rgbArray = imagecolorsforindex( $image , $rgb );
-                if ($rgbArray['red'] < 110 && $rgbArray['green'] < 110 && $rgbArray['blue'] > 100)
-                {
-                    $imageArr[$y][$x] = '1';
-                }
-                else
-                {
-                    $imageArr[$y][$x] = '0';
-                }
-            }
-        }
-        imagedestroy( $image );
-        return $imageArr;
+        $noiseCancelArr = $this->noiseCancel( $imageInfo['width'] , $imageInfo['height'] , $imageBinaryArr );
+        return $noiseCancelArr;
     }
+
 
     /**
      * @param $width
@@ -125,9 +103,5 @@ class Pretreatment implements PretreatmentInterface
 
     }
 
-    public function getResultArr()
-    {
-        return $this->imageArr;
-    }
 
 }

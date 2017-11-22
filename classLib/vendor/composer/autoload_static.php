@@ -24,8 +24,9 @@ class ComposerStaticInitfeeecf6dfd69cf119975f138f8a98c20
         'CAPTCHA_Reader\\Cutting\\Cutting' => __DIR__ . '/../..' . '/Src/Cutting/Cutting.php',
         'CAPTCHA_Reader\\Cutting\\CuttingInterface' => __DIR__ . '/../..' . '/Interface/CuttingInterface.php',
         'CAPTCHA_Reader\\Cutting\\CuttingTrait' => __DIR__ . '/../..' . '/Src/Cutting/CuttingTrait.php',
-        'CAPTCHA_Reader\\GetImageInfo\\GetImageInfo' => __DIR__ . '/../..' . '/Src/GetImageInfo.php',
+        'CAPTCHA_Reader\\GetImageInfo\\GetImageInfo' => __DIR__ . '/../..' . '/Src/GetImageInfo/GetImageInfo.php',
         'CAPTCHA_Reader\\GetImageInfo\\GetImageInfoInterFace' => __DIR__ . '/../..' . '/Interface/GetImageInfoInterFace.php',
+        'CAPTCHA_Reader\\GetImageInfo\\GetImageInfoTrait' => __DIR__ . '/../..' . '/Src/GetImageInfo/GetImageInfoTrait.php',
         'CAPTCHA_Reader\\Identify\\Identify' => __DIR__ . '/../..' . '/Src/Identify/Identify.php',
         'CAPTCHA_Reader\\Identify\\IdentifyInterface' => __DIR__ . '/../..' . '/Interface/IdentifyInterface.php',
         'CAPTCHA_Reader\\Identify\\IdentifyTrait' => __DIR__ . '/../..' . '/Src/Identify/IdentifyTrait.php',
@@ -35,6 +36,7 @@ class ComposerStaticInitfeeecf6dfd69cf119975f138f8a98c20
         'CAPTCHA_Reader\\Pretreatment\\PretreatmentTrait' => __DIR__ . '/../..' . '/Src/Pretreatment/PretreatmentTrait.php',
         'CAPTCHA_Reader\\Tools\\AddSamplesRepository' => __DIR__ . '/../..' . '/Tools/AddSamplesRepository.php',
         'CAPTCHA_Reader\\Tools\\CancelNoiseHelper' => __DIR__ . '/../..' . '/Tools/CancelNoiseHelperRepository.php',
+        'CAPTCHA_Reader\\Tools\\CommonTrait' => __DIR__ . '/../..' . '/Src/CommonTrait.php',
         'CAPTCHA_Reader\\Tools\\GetImageRepository' => __DIR__ . '/../..' . '/Tools/GetImageRepository.php',
         'CAPTCHA_Reader\\Tools\\MultipleTestsRepository' => __DIR__ . '/../..' . '/Tools/MultipleTestsRepository.php',
     );

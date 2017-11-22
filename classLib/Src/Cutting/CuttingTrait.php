@@ -25,9 +25,4 @@ trait CuttingTrait
 
         return $charArr;
     }
-
-
-
-
-
 }

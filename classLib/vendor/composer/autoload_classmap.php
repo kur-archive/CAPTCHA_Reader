@@ -9,8 +9,9 @@ return array(
     'CAPTCHA_Reader\\Cutting\\Cutting' => $baseDir . '/Src/Cutting/Cutting.php',
     'CAPTCHA_Reader\\Cutting\\CuttingInterface' => $baseDir . '/Interface/CuttingInterface.php',
     'CAPTCHA_Reader\\Cutting\\CuttingTrait' => $baseDir . '/Src/Cutting/CuttingTrait.php',
-    'CAPTCHA_Reader\\GetImageInfo\\GetImageInfo' => $baseDir . '/Src/GetImageInfo.php',
+    'CAPTCHA_Reader\\GetImageInfo\\GetImageInfo' => $baseDir . '/Src/GetImageInfo/GetImageInfo.php',
     'CAPTCHA_Reader\\GetImageInfo\\GetImageInfoInterFace' => $baseDir . '/Interface/GetImageInfoInterFace.php',
+    'CAPTCHA_Reader\\GetImageInfo\\GetImageInfoTrait' => $baseDir . '/Src/GetImageInfo/GetImageInfoTrait.php',
     'CAPTCHA_Reader\\Identify\\Identify' => $baseDir . '/Src/Identify/Identify.php',
     'CAPTCHA_Reader\\Identify\\IdentifyInterface' => $baseDir . '/Interface/IdentifyInterface.php',
     'CAPTCHA_Reader\\Identify\\IdentifyTrait' => $baseDir . '/Src/Identify/IdentifyTrait.php',
@@ -20,6 +21,7 @@ return array(
     'CAPTCHA_Reader\\Pretreatment\\PretreatmentTrait' => $baseDir . '/Src/Pretreatment/PretreatmentTrait.php',
     'CAPTCHA_Reader\\Tools\\AddSamplesRepository' => $baseDir . '/Tools/AddSamplesRepository.php',
     'CAPTCHA_Reader\\Tools\\CancelNoiseHelper' => $baseDir . '/Tools/CancelNoiseHelperRepository.php',
+    'CAPTCHA_Reader\\Tools\\CommonTrait' => $baseDir . '/Src/CommonTrait.php',
     'CAPTCHA_Reader\\Tools\\GetImageRepository' => $baseDir . '/Tools/GetImageRepository.php',
     'CAPTCHA_Reader\\Tools\\MultipleTestsRepository' => $baseDir . '/Tools/MultipleTestsRepository.php',
 );

@@ -12,11 +12,20 @@ namespace CAPTCHA_Reader\Identify;
 class Identify implements IdentifyInterface
 {
     use IdentifyTrait;
+    protected $config;
+    protected $dictionaryPath;
+    protected $dictionary;
     protected $result;
 
-    public function __construct( array $charArr , $config,$dictionaryPath='' )
+    public function __construct( $config , $dictionaryPath = '' )
     {
+        $this->config         = $config;
+        $this->dictionaryPath = $dictionaryPath;
+        $this->dictionary     = $this->getDictionary( $this->config , $this->dictionaryPath );
+    }
 
+    public function getResult( array $charArr )
+    {
         $charStrArr = [
             'char1' => $this->twoDimArrayToStr( $charArr['char1'] ) ,
             'char2' => $this->twoDimArrayToStr( $charArr['char2'] ) ,
@@ -24,14 +33,30 @@ class Identify implements IdentifyInterface
             'char4' => $this->twoDimArrayToStr( $charArr['char4'] ) ,
         ];
 
-        empty( $dictionaryPath )
-            ? $dictionary = json_decode( file_get_contents( __DIR__ . $config['dictionary'] ) )
-            : $dictionary = json_decode( file_get_contents( $dictionaryPath ) );
-        for($i = 1; $i <= $config['captchaStringNum']; $i++)
+        for($i = 1; $i <= $this->config['captchaStringNum']; $i++)
         {
-            $char           = $this->getHighestSimilarity( $charStrArr['char' . $i] , $dictionary );
+            $char           = $this->getHighestSimilarity( $charStrArr['char' . $i] , $this->dictionary );
             $this->result[] = $char;
         }
+
+        $result = '';
+        foreach($this->result as $value)
+        {
+            $result .= $value['char'];
+        }
+        return $result;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDictionary( array $config , $dictionaryPath )
+    : array
+    {
+        $dictionary = empty( $dictionaryPath )
+            ? $dictionary = json_decode( file_get_contents( __DIR__ . $config['dictionary'] ) )
+            : $dictionary = json_decode( file_get_contents( $dictionaryPath ) );
+        return $dictionary;
     }
 
     public function getHighestSimilarity( $charstr , $dictionary )
@@ -43,7 +68,6 @@ class Identify implements IdentifyInterface
         ];
         foreach($dictionary as $key => $model)
         {
-//            $percent = levenshtein( $model->str , $charstr );
             similar_text( $model->str , $charstr , $percent );
             if ($percent > $char['percent'])
             {
@@ -59,14 +83,5 @@ class Identify implements IdentifyInterface
         return $char;
     }
 
-    public function getResult()
-    {
-        $result = '';
-        foreach($this->result as $value)
-        {
-            $result .= $value['char'];
-        }
 
-        return $this->result;
-    }
 }
