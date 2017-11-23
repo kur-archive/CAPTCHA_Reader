@@ -8,14 +8,18 @@
 
 namespace CAPTCHA_Reader\GetImageInfo;
 
+use CAPTCHA_Reader\Tools\CommonTrait;
+
 trait GetImageInfoTrait
 {
+    use CommonTrait;
+
     /**
      * @param $path
      */
     public function setImageInfoLocal( $path , $localImgNumber )
     {
-        $_info           = getimagesize( $path ) . rand( 0 , $localImgNumber ) . '.png';
+        $_info           = getimagesize( $path );
         $info            = array(
             'width'  => $_info[0] ,
             'height' => $_info[1] ,
@@ -33,13 +37,14 @@ trait GetImageInfoTrait
      * @param $path
      * @param $savePath
      */
-    public function setImageInfoOnline( $path , $savePath )
+    public function setImageInfoOnline( $path , $savePath , $config , $mode )
     {
         $save_to = $savePath . time() . '.png';
+
         $content = file_get_contents( $path );
         file_put_contents( $save_to , $content );
-        $_info = getimagesize( $content );
-//        echo "<img style='height:150px;' src=". str_replace('D:\code\\','http://code.cc/',$save_to).">";
+        $_info = getimagesize( $save_to );
+        echo "<img style='height:150px;' src=" . str_replace( 'D:\code\\' , 'http://code.cc/' , $save_to ) . ">";
         $info            = array(
             'width'  => $_info[0] ,
             'height' => $_info[1] ,
@@ -50,6 +55,10 @@ trait GetImageInfoTrait
         $fun             = "imagecreatefrom{$info['type']}";//根据上面获取的格式判定应该使用哪种'imagecreatefrom***'函数
         $image           = $fun( $save_to );
 
+//        if ($config['ImagePath']['online']['deleteImageFile'] && $mode == 'online')
+//        {
+//            unlink( $save_to );
+//        }
         return $image;
     }
 

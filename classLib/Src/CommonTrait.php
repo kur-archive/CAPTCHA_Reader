@@ -155,6 +155,14 @@ trait CommonTrait
                 $str .= $value_;
             }
         }
+
         return $str;
+    }
+
+    public static function ve(...$var)
+    {
+        var_dump( $var );
+        exit();
+
     }
 }

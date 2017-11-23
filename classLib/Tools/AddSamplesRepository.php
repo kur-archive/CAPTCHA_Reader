@@ -25,7 +25,7 @@ class AddSamplesRepository
         {
             echo "<head><style>.charInput{height:50px;width: 50px;border-radius: 5px;border: 1px solid #333;text-align: center;font-size: 200%} .addSamples{height:50px;width: 100px;background: #333;border: none;color: #fff;border-radius: 5px;}</style></head>";
 
-            $config = require_once(dirname( __DIR__ ) . '../Config/app.php');
+            $this->config = require_once(dirname( __DIR__ ) . '../Config/app.php');
 
             $getImageProvider     = new GetImageInfo( $this->config );
             $pretreatmentProvider = new Pretreatment();
@@ -37,14 +37,14 @@ class AddSamplesRepository
             $imageBinaryArr = $imageArr['imageBinaryArr'];
             $noiseCancelArr = $pretreatmentProvider->getResultArr( $this->config , $imageInfo , $imageBinaryArr );
             $charArr        = $cuttingProvider->getResultArr( $noiseCancelArr , $imageInfo );
-            $this->charArr = $charArr;
+            $this->charArr  = $charArr;
             CommonTrait::show(
                 $charArr['char1'] ,
                 $charArr['char2'] ,
                 $charArr['char3'] ,
                 $charArr['char4'] );
 
-            $result         = $identifyProvider->getResult( $charArr );
+            $result = $identifyProvider->getResult( $charArr , true );
 
             var_dump( $_GET['length'] ?? '' );
 

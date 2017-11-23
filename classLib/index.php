@@ -13,7 +13,7 @@ use CAPTCHA_Reader\IndexController;
 
 
 $index = new IndexController();
-$index->getResult();
-
+$result=$index->getResult();
+var_dump( $result );
 $end_time = microtime( true );//计时停止
 echo '执行时间为：' . ($end_time - $start_time) . ' s' . '<br/>';

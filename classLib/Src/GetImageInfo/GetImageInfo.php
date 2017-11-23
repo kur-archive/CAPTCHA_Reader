@@ -14,7 +14,7 @@ class GetImageInfo implements GetImageInfoInterFace
 
     private $config;
     private $mode;
-    private $url;
+    private $path;
     private $localImgNumber;
     private $savePath;
     private $deleteImageFile;
@@ -32,7 +32,6 @@ class GetImageInfo implements GetImageInfoInterFace
         $this->config          = $config;
         $this->mode            = $this->getImageMode( $this->config );
         $this->localImgNumber  = $this->getLocalImgNumber( $this->config );
-        $this->url             = $url;
         $this->savePath        = $this->getSavePath( $this->config );
         $this->deleteImageFile = $this->getDeleteImageFile( $this->config );
     }
@@ -41,18 +40,15 @@ class GetImageInfo implements GetImageInfoInterFace
      * @return array
      */
     //TODO 用这里的path，构造函数里的要改
-    public function getResult($path)
+    public function getResult( $path = '' )
     {
-        $this->fetchImagePath = $this->getFetchImagePath( $this->config , $this->url );
-        $image                = $this->setImageInfo( $this->fetchImagePath , $this->savePath , $this->mode , $this->localImgNumber );
-        $imageBinaryArr       = $this->binarization( $this->config['width'] , $this->config['height'] , $image );
+        $this->path           = $path;
+        $this->fetchImagePath = $this->getFetchImagePath( $this->config , $this->path );
+        $image                = $this->setImageInfo( $this->fetchImagePath , $this->savePath , $this->mode , $this->localImgNumber , $this->config );
+        $imageBinaryArr       = $this->binarization( $this->imageInfo['width'] , $this->imageInfo['height'] , $image );
 
         imagedestroy( $image );
         unset( $image );
-        if ($this->config['ImagePath']['online']['deleteImageFile'])
-        {
-            unlink( $this->savePath );
-        }
 
         return [
             'imageInfo'      => $this->imageInfo ,
@@ -130,23 +126,12 @@ class GetImageInfo implements GetImageInfoInterFace
      */
     protected function getFetchImagePath( array $config , $url )
     {
-        return $this->mode == 'local'
-            ? $config['ImagePath']['local']['dir']
-            : $this->getUrl( $config , $url );
-    }
+        return $this->mode == 'online'
+            ? $this->getUrl( $config , $url )
+            : (empty( $url )
+                ? $config['ImagePath']['local']['dir']
+                : $url);
 
-    /**
-     * @param $path
-     * @param $savePath
-     * @param $mode
-     * @return mixed
-     */
-    protected function setImageInfo( $path , $savePath , $mode , $localImgNumber )
-    {
-        $image = $mode == 'local'
-            ? $this->setImageInfoLocal( $path , $localImgNumber )
-            : $this->setImageInfoOnline( $path , $savePath );
-        return $image;
     }
 
     /**
@@ -160,6 +145,21 @@ class GetImageInfo implements GetImageInfoInterFace
             ? $config['ImagePath']['online']['url']
             : $url;
     }
+
+    /**
+     * @param $path
+     * @param $savePath
+     * @param $mode
+     * @return mixed
+     */
+    protected function setImageInfo( $path , $savePath , $mode , $localImgNumber , $config )
+    {
+        $image = $mode == 'local'
+            ? $this->setImageInfoLocal( $path , $localImgNumber )
+            : $this->setImageInfoOnline( $path , $savePath , $config , $mode );
+        return $image;
+    }
+
 
     /**
      * @return mixed

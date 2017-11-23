@@ -12,9 +12,11 @@ use CAPTCHA_Reader\Cutting\Cutting;
 use CAPTCHA_Reader\GetImageInfo\GetImageInfo;
 use CAPTCHA_Reader\Identify\Identify;
 use CAPTCHA_Reader\Pretreatment\Pretreatment;
+use CAPTCHA_Reader\Tools\CommonTrait;
 
 class IndexController
 {
+    use CommonTrait;
     private $config;
     private $getImageProvider;
     private $pretreatmentProvider;
@@ -22,13 +24,14 @@ class IndexController
     private $identifyProvider;
 
     //不应该在这里传path，应该在下面getResult方法中传path
-    public function __construct( $path = '' )
+    public function __construct( $mode = '' )
     {
         //TODO wait 建立各个服务提供者的父类
         //完成各种类的初始化
-        $this->config = require_once(dirname( __DIR__ ) . '../Config/app.php');
+        $this->config = require(dirname( __DIR__ ) . '../Config/app.php');
 
-        $this->getImageProvider     = new GetImageInfo( $this->config , $path );
+        !in_array( $mode , ['local' , 'online'] ) ? : $this->config['VerifyImageMode'] = $mode;
+        $this->getImageProvider     = new GetImageInfo( $this->config );
         $this->pretreatmentProvider = new Pretreatment();
         $this->cuttingProvider      = new Cutting( $this->config );
         $this->identifyProvider     = new Identify( $this->config );
@@ -38,10 +41,10 @@ class IndexController
      * @return string
      */
     //TODO 在这里传path
-    public function getResult($path)
+    public function getResult( $path = '' )
     : string
     {
-        $imageArr       = $this->getImageProvider->getResult($path);
+        $imageArr       = $this->getImageProvider->getResult( $path );
         $imageInfo      = $imageArr['imageInfo'];
         $imageBinaryArr = $imageArr['imageBinaryArr'];
         $noiseCancelArr = $this->pretreatmentProvider->getResultArr( $this->config , $imageInfo , $imageBinaryArr );

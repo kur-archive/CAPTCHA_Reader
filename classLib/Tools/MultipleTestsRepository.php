@@ -13,6 +13,7 @@ use CAPTCHA_Reader\IndexController;
 
 class MultipleTestsRepository
 {
+    use CommonTrait;
     protected $samplesDir;
     protected $samplesArr;
     protected $indexController;
@@ -20,16 +21,21 @@ class MultipleTestsRepository
     protected $details;
     protected $testSamplesNumber;
 
-    public function __construct( $dir )
+    protected $resultClassify;
+
+
+    public function __construct( $dir = '' )
     {
         $config                  = require_once(dirname( __DIR__ ) . '../Config/app.php');
         $this->samplesDir        = $this->getSimpleDir( $config , $dir );
         $this->samplesArr        = $this->getSamplesArr( $this->samplesDir );
-        $this->indexController   = new IndexController();
-        $this->statistics        = [
-            'count' => 0 ,
-            'true'  => 0 ,
-            'false' => 0 ,
+        $this->indexController   = new IndexController( 'local' );
+        $this->resultClassify    = [
+            'count'     => 0 ,
+            'true'      => 0 ,
+            'false'     => 0 ,
+            'charTrue'  => 0 ,
+            'charFalse' => 0 ,
         ];
         $this->details           = [];
         $this->testSamplesNumber = $config['testSamples']['number'];
@@ -40,44 +46,74 @@ class MultipleTestsRepository
         foreach($this->samplesArr as $sample)
         {
             $path   = $this->samplesDir . $sample . '.png';
-            $result = $this->indexController->getResult($path);
+            $result = $this->indexController->getResult( $path );
+            $this->resultClassify( $sample , $result );
         }
 
-        foreach($samplesArr as $sample)
-        {
-            //直接一个函数验证给回结果
-            $result = $indexObject->getResult( $dir . '/' . $sample . '.png' );
-            $sample == $result ? $statistics['true'] += 1 : $statistics['false'] += 1;
-            $statistics['count'] += 1;
-            $details[]           = [
-                'path'   => $dir . '/' . $sample . '.png' ,
-                'sample' => $sample ,
-                'result' => $result ,
-                'true'   => $sample == $result ,
-            ];
-        }
-
-        return compact( 'statistics' , 'details' );
-
+        return [$this->resultClassify , $this->details];
     }
 
     /**
-     * @return IndexController
+     * @param string $samplesDir
+     * @return array
      */
     public function getSamplesArr( $samplesDir )
     {
-        $samplesArr = [];
-        //TODO 去dir下面寻找全部的文件，得到数组，返回
-
-        return $samplesArr;
+        return $this->dirTraverse( $samplesDir );
     }
 
-    //TODO 对结果分类
-    public function resultClassify(...$result)
+    /**
+     * @param string $str1
+     * @param string $str2
+     */
+    public function resultClassify( $str1 , $str2 )
     {
-        //这里对结果分类，写到全局变量中
+        ++$this->resultClassify['count'];
+        $str1 == $str2 ? ++$this->resultClassify['true'] : ++$this->resultClassify['false'];
+
+        $str1[0] == $str2[0] ? ++$this->resultClassify['charTrue'] : ++$this->resultClassify['charFalse'];
+        $str1[1] == $str2[1] ? ++$this->resultClassify['charTrue'] : ++$this->resultClassify['charFalse'];
+        $str1[2] == $str2[2] ? ++$this->resultClassify['charTrue'] : ++$this->resultClassify['charFalse'];
+        $str1[3] == $str2[3] ? ++$this->resultClassify['charTrue'] : ++$this->resultClassify['charFalse'];
+
+        $this->details[] = [
+            'sample'      => $str1 ,
+            'result'      => $str2 ,
+            'tureOrFalse' => $str1 == $str2 ,
+        ];
     }
 
+    /**
+     * @param string $directory
+     */
+    function dirTraverse( $directory , $simplesArr = [] )
+    {
+        $dir = dir( $directory );
+        while ($file = $dir->read())
+        {
+            if ((is_dir( $directory . $file )) && ($file != ".") && ($file != ".."))
+            {
+                var_dump( $file );
+                $simplesArr = $this->dirTraverse( $directory . $file , $simplesArr );
+            }
+            else
+            {
+                if ($file === '.' || $file === '..')
+                {
+                    continue;
+                }
+                array_push( $simplesArr , explode( '.' , $file )[0] );
+            }
+        }
+        $dir->close();
+        return $simplesArr;
+    }
+
+    /**
+     * @param $config
+     * @param $dir
+     * @return mixed
+     */
     public function getSimpleDir( $config , $dir )
     {
         return empty( $dir ) ? $config['testSamples']['dir'] : $dir;

@@ -24,9 +24,10 @@ class Identify implements IdentifyInterface
         $this->dictionary     = $this->getDictionary( $this->config , $this->dictionaryPath );
     }
 
-    public function getResult( array $charArr )
+    public function getResult( array $charArr , $resultDetail = false )
     {
-        $charStrArr = [
+        $this->result = [];
+        $charStrArr   = [
             'char1' => $this->twoDimArrayToStr( $charArr['char1'] ) ,
             'char2' => $this->twoDimArrayToStr( $charArr['char2'] ) ,
             'char3' => $this->twoDimArrayToStr( $charArr['char3'] ) ,
@@ -44,7 +45,14 @@ class Identify implements IdentifyInterface
         {
             $result .= $value['char'];
         }
-        return $result;
+        if ($resultDetail)
+        {
+            return $this->result;
+        }
+        else
+        {
+            return $result;
+        }
     }
 
     /**

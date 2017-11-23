@@ -58,7 +58,7 @@ return [
     |
     */
 
-    'dictionary'       => 'dictionary/zhengFang_fixedCut.json' ,
+    'dictionary'       => '/dictionary/zhengFang_fixedCut.json' ,
 //    'dictionary' => '/dictionary/model2.json' ,
 
 

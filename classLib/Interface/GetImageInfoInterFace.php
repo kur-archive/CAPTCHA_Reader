@@ -16,6 +16,6 @@ interface GetImageInfoInterFace
 //
 //    public function getImage();
 
-    public function getResult();
+    public function getResult($path='');
 //    public function __destruct();
 }
