@@ -18,8 +18,9 @@
 <br/>
 
 ## 更新计划
-
-* 使用swoole多线程识别
+* :fast_forward:字典正在训练中(ing):fast_forward:
+* :fast_forward:使用swoole多线程识别(ing):fast_forward:
+* 更有效率的字典训练方法
 * 为各个策略增加抽象父类
 * 打包为composer包，方便其他项目引用
 * 使代码更加oop，更加可复用
