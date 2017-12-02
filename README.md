@@ -28,7 +28,7 @@
 ## 更新计划
 * 重构代码，改为面向对象风格，松耦合，方便更换各块的策略(已经基本完成,查看[OOP分支](https://github.com/Kuri-su/CAPTCHA_Reader_by_zhengfang/tree/oop))
 * 将字典储存转为JSON储存，一次性读入内存，去掉数据库读取的时间(已经在OOP分支完成)
-* 使用swoole多线程识别
+* 使用 pthreads 多线程识别
 * 以PHP拓展的方式重写核心函数，降低核心函数的时间复杂度
 
 * 增加多个字典和策略
