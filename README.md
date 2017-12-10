@@ -26,8 +26,8 @@
 <br/>
 
 ## 更新计划
-* :heavy_check_mark:重构代码，改为面向对象风格，松耦合，方便更换各块的策略(已经基本完成,查看[OOP分支](https://github.com/Kuri-su/CAPTCHA_Reader_by_zhengfang/tree/oop)):heavy_check_mark:
-* :heavy_check_mark:将字典储存转为JSON储存，一次性读入内存，去掉数据库读取的时间(已经在OOP分支完成):heavy_check_mark:
+* :heavy_check_mark:重构代码，改为面向对象风格，松耦合，方便更换各块的策略(已经基本完成,查看 [OOP分支](https://github.com/Kuri-su/CAPTCHA_Reader_by_zhengfang/tree/oop)):heavy_check_mark:
+* :heavy_check_mark:将字典储存转为JSON储存，一次性读入内存，去掉数据库读取的时间(已经在 [OOP分支](https://github.com/Kuri-su/CAPTCHA_Reader_by_zhengfang/tree/oop)完成):heavy_check_mark:
 * :fast_forward:字典正在训练中(ing):fast_forward:
 * :fast_forward:使用 pthreads 多线程识别(ing):fast_forward:
 * :fast_forward:更有效率的字典训练方法:fast_forward:
