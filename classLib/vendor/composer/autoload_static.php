@@ -6,7 +6,17 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitfeeecf6dfd69cf119975f138f8a98c20
 {
+    public static $files = array (
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\VarDumper\\' => 28,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -14,6 +24,14 @@ class ComposerStaticInitfeeecf6dfd69cf119975f138f8a98c20
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Component\\VarDumper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-dumper',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -21,24 +39,26 @@ class ComposerStaticInitfeeecf6dfd69cf119975f138f8a98c20
     );
 
     public static $classMap = array (
-        'CAPTCHA_Reader\\Cutting\\Cutting' => __DIR__ . '/../..' . '/Src/Cutting/Cutting.php',
-        'CAPTCHA_Reader\\Cutting\\CuttingInterface' => __DIR__ . '/../..' . '/Interface/CuttingInterface.php',
-        'CAPTCHA_Reader\\Cutting\\CuttingTrait' => __DIR__ . '/../..' . '/Src/Cutting/CuttingTrait.php',
-        'CAPTCHA_Reader\\GetImageInfo\\GetImageInfo' => __DIR__ . '/../..' . '/Src/GetImageInfo/GetImageInfo.php',
-        'CAPTCHA_Reader\\GetImageInfo\\GetImageInfoInterFace' => __DIR__ . '/../..' . '/Interface/GetImageInfoInterFace.php',
-        'CAPTCHA_Reader\\GetImageInfo\\GetImageInfoTrait' => __DIR__ . '/../..' . '/Src/GetImageInfo/GetImageInfoTrait.php',
-        'CAPTCHA_Reader\\Identify\\Identify' => __DIR__ . '/../..' . '/Src/Identify/Identify.php',
-        'CAPTCHA_Reader\\Identify\\IdentifyInterface' => __DIR__ . '/../..' . '/Interface/IdentifyInterface.php',
-        'CAPTCHA_Reader\\Identify\\IdentifyTrait' => __DIR__ . '/../..' . '/Src/Identify/IdentifyTrait.php',
-        'CAPTCHA_Reader\\IndexController' => __DIR__ . '/../..' . '/Src/IndexController.php',
-        'CAPTCHA_Reader\\Pretreatment\\Pretreatment' => __DIR__ . '/../..' . '/Src/Pretreatment/Pretreatment.php',
-        'CAPTCHA_Reader\\Pretreatment\\PretreatmentInterface' => __DIR__ . '/../..' . '/Interface/PretreatmentInterface.php',
-        'CAPTCHA_Reader\\Pretreatment\\PretreatmentTrait' => __DIR__ . '/../..' . '/Src/Pretreatment/PretreatmentTrait.php',
-        'CAPTCHA_Reader\\Tools\\AddSamplesRepository' => __DIR__ . '/../..' . '/Tools/AddSamplesRepository.php',
-        'CAPTCHA_Reader\\Tools\\CancelNoiseHelper' => __DIR__ . '/../..' . '/Tools/CancelNoiseHelperRepository.php',
-        'CAPTCHA_Reader\\Tools\\CommonTrait' => __DIR__ . '/../..' . '/Src/CommonTrait.php',
-        'CAPTCHA_Reader\\Tools\\GetImageRepository' => __DIR__ . '/../..' . '/Tools/GetImageRepository.php',
-        'CAPTCHA_Reader\\Tools\\MultipleTestsRepository' => __DIR__ . '/../..' . '/Tools/MultipleTestsRepository.php',
+        'CAPTCHA_Reader\\CommonTrait' => __DIR__ . '/../..' . '/Src/Distinguish/CommonTrait.php',
+        'CAPTCHA_Reader\\Distinguish\\Cutting\\CuttingController' => __DIR__ . '/../..' . '/Src/Distinguish/Cutting/CuttingController.php',
+        'CAPTCHA_Reader\\Distinguish\\Cutting\\CuttingTrait' => __DIR__ . '/../..' . '/Src/Distinguish/Cutting/CuttingTrait.php',
+        'CAPTCHA_Reader\\Distinguish\\Cutting\\CuttingZhengFang' => __DIR__ . '/../..' . '/Src/Distinguish/Cutting/CuttingChilds/CuttingZhengFang.php',
+        'CAPTCHA_Reader\\Distinguish\\GetImageInfo\\GetImageInfoController' => __DIR__ . '/../..' . '/Src/Distinguish/GetImageInfo/GetImageInfoController.php',
+        'CAPTCHA_Reader\\Distinguish\\GetImageInfo\\GetImageInfoTrait' => __DIR__ . '/../..' . '/Src/Distinguish/GetImageInfo/GetImageInfoTrait.php',
+        'CAPTCHA_Reader\\Distinguish\\GetImageInfo\\GetImageInfoZhengFang' => __DIR__ . '/../..' . '/Src/Distinguish/GetImageInfo/GetImageInfoChilds/GetImageInfoZhengFang.php',
+        'CAPTCHA_Reader\\Distinguish\\Identify\\IdentifyController' => __DIR__ . '/../..' . '/Src/Distinguish/Identify/IdentifyController.php',
+        'CAPTCHA_Reader\\Distinguish\\Identify\\IdentifyTrait' => __DIR__ . '/../..' . '/Src/Distinguish/Identify/IdentifyTrait.php',
+        'CAPTCHA_Reader\\Distinguish\\Identify\\IdentifyZhengFang' => __DIR__ . '/../..' . '/Src/Distinguish/Identify/IdentifyChilds/IdentifyZhengFang.php',
+        'CAPTCHA_Reader\\Distinguish\\Pretreatment\\PretreatmentController' => __DIR__ . '/../..' . '/Src/Distinguish/Pretreatment/PretreatmentController.php',
+        'CAPTCHA_Reader\\Distinguish\\Pretreatment\\PretreatmentTrait' => __DIR__ . '/../..' . '/Src/Distinguish/Pretreatment/PretreatmentTrait.php',
+        'CAPTCHA_Reader\\Distinguish\\Pretreatment\\PretreatmentZhengFang' => __DIR__ . '/../..' . '/Src/Distinguish/Pretreatment/PretreatmentChilds/PretreatmentZhengFang.php',
+        'CAPTCHA_Reader\\IndexController' => __DIR__ . '/../..' . '/Src/Distinguish/IndexController.php',
+        'CAPTCHA_Reader\\Tools\\CancelNoiseHelper' => __DIR__ . '/../..' . '/Tools/Repository/CancelNoiseHelperRepository.php',
+        'CAPTCHA_Reader\\Tools\\GetImageRepository' => __DIR__ . '/../..' . '/Tools/Repository/GetImageRepository.php',
+        'CAPTCHA_Reader\\Training\\AddSamples\\AddSamplesController' => __DIR__ . '/../..' . '/Src/Training/AddSamplesController.php',
+        'CAPTCHA_Reader\\Training\\AddSamples\\AutomaticStudy' => __DIR__ . '/../..' . '/Src/Training/AddSamplesChilds/AutomaticStudy.php',
+        'CAPTCHA_Reader\\Training\\MultipleTestsController' => __DIR__ . '/../..' . '/Src/Training/MultipleTestsController.php',
+        'CAPTCHA_Reader\\Training\\MultipleTests\\MultipleTests' => __DIR__ . '/../..' . '/Src/Training/MultipleTestsChilds/MultipleTests.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

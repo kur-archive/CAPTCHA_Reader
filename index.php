@@ -11,8 +11,7 @@ use CAPTCHA_Reader\IndexController;
 $start_time = microtime( true );//运行时间开始计时
 
 $index = new IndexController();
-exit();
-$result=$index->getResult();
+$result=$index->getResult('D:\code\DEMO\CAPTCHA_Idenify\tianyi\41.png');
 var_dump( $result );
 
 $end_time = microtime( true );//计时停止
