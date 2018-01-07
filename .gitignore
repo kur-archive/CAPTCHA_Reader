@@ -1,6 +1,6 @@
 .gitignore
 .idea
-sample/StudySamples/*
-sample/TestSamples/*
+#sample/StudySamples/*
+#sample/TestSamples/*
 composer.lock
 vendor/
