@@ -3,5 +3,5 @@
 sample/StudySamples/*
 sample/TestSamples/*
 composer.lock
-tmp/
+sample/StudySamples/tmp/
 vendor/
