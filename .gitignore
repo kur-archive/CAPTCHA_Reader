@@ -1,2 +1,7 @@
 .gitignore
 .idea
+sample/StudySamples/*
+sample/TestSamples/*
+composer.lock
+tmp/
+vendor/
