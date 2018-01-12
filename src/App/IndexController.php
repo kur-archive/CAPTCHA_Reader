@@ -8,7 +8,10 @@
 
 namespace CAPTCHAReader\src\App;
 
+use CAPTCHAReader\src\CommonTrait;
+
 class IndexController
 {
+    use CommonTrait;
 
 }
