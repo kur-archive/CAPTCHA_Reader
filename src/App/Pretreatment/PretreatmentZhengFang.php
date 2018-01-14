@@ -9,7 +9,10 @@
 namespace CAPTCHAReader\src\App\Pretreatment;
 
 
-class PretreatmentZhengFang
+use CAPTCHAReader\src\App\Abstracts\Load;
+
+class PretreatmentZhengFang extends Load
 {
+
 
 }

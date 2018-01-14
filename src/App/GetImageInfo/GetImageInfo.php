@@ -24,9 +24,8 @@ class GetImageInfo extends Load
         //初始化
         $this->resultContainer = $resultContainer;
         $this->conf            = $this->resultContainer->getConf();
-
-        $mode      = $this->resultContainer->getMode();
-        $imagePath = $this->resultContainer->getImagePath();
+        $mode                  = $this->resultContainer->getMode();
+        $imagePath             = $this->resultContainer->getImagePath();
 
         //获取 图片和图片信息
         if ($mode == 'online') {
@@ -34,6 +33,7 @@ class GetImageInfo extends Load
         }
         $imageAndInfo = $this->getImageAndInfo( $imagePath );
 
+        //将结果存入容器
         $this->resultContainer->setImageInfo( $imageAndInfo['info'] );
         $this->resultContainer->setImage( $imageAndInfo['image'] );
 
@@ -41,7 +41,7 @@ class GetImageInfo extends Load
         $this->resultContainer = $this->nextStep->run( $this->resultContainer );
         //--------------------------------------------
 
-        return $resultContainer;
+        return $this->resultContainer;
     }
 
 
