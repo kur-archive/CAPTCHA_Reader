@@ -31,7 +31,6 @@ return [
             \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
             \CAPTCHAReader\src\App\Identify\IdentifyZhengFangRow::class ,
         ] ,
-
     ] ,
 
 ];

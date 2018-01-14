@@ -8,28 +8,35 @@
 
 namespace CAPTCHAReader\src\App;
 
-use CAPTCHAReader\src\CommonTrait;
+use CAPTCHAReader\src\App\Abstracts\Load;
+use CAPTCHAReader\src\App\Abstracts\Restriction;
+use CAPTCHAReader\src\Traits\CommonTrait;
 
 class IndexController
 {
     use CommonTrait;
 
-    public function entrance( $imagePath = null ){
+    /**
+     * @param $imagePath
+     * @param $mode string  local|online
+     * @return string
+     *
+     */
+    public function entrance( $imagePath , $mode ){
         try {
-            //异常检测
-            if (empty( $imagePath )) {
-                throw new \Exception( 'please enter path' );
-            }
-
-            //获取配置
-            $conf       = $this->getConfig( 'app' );
-            $useGroup   = $conf['useGroup'];
-            $components = $conf['componentGroup'][$useGroup];
-
-            $decorator       = $this->instantiationDecorator( $components );
-
+            self::dd( $this->getConfig( 'sample' ) );
+            //获取 配置
+            $conf = $this->getConfig( 'app' );
+            //获取 装饰器
+            $decorator = $this->getDecorator( $conf );
+            //设置 结果容器
             $resultContainer = new ResultContainer();
+            $resultContainer->setConf( $conf );
+            $resultContainer->setImagePath( $imagePath );
+            $resultContainer->setMode( $mode );
+
             $resultContainer = $decorator->run( $resultContainer );
+
             self::dd( $resultContainer );
 
         } catch (\Exception $exception) {
@@ -37,6 +44,22 @@ class IndexController
         }
     }
 
+    /**
+     * @param $config
+     * @return null
+     */
+    public function getDecorator( $conf ){
+        $useGroup   = $conf['useGroup'];
+        $components = $conf['componentGroup'][$useGroup];
+
+        $decorator = $this->instantiationDecorator( $components );
+        return $decorator;
+    }
+
+    /**
+     * @param $components
+     * @return Restriction
+     */
     public function instantiationDecorator( $components ){
         $components = array_reverse( $components );
         $tmp        = null;
@@ -50,7 +73,6 @@ class IndexController
         }
 
         return $tmp;
-
     }
 }
 

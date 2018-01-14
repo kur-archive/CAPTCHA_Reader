@@ -6,17 +6,16 @@
  * Time: 3:02
  */
 
-namespace CAPTCHAReader\src;
+namespace CAPTCHAReader\src\Traits;
 
 
 trait CommonTrait
 {
     public function getConfig( $configType = 'app' ){
-        switch ($configType) {
-            case 'app':
-                $configType = require_once( __DIR__ . '/../Config/' . $configType . '.php' );
-                return $configType;
-        }
+
+        $configType = require_once(__DIR__ . '/../Config/' . $configType . '.php');
+        return $configType;
+
 
     }
 
