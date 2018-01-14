@@ -9,7 +9,14 @@
 namespace CAPTCHAReader\src\App\Identify;
 
 
-class IdentifyZhengFangRowCol
+use CAPTCHAReader\src\App\Abstracts\Load;
+use CAPTCHAReader\src\App\ResultContainer;
+
+class IdentifyZhengFangRowCol extends Load
 {
+    function run( ResultContainer $resultContainer ){
+        // TODO: Implement run() method.
+        //TODO　计算横向和竖向的相似度，取得平均值
+    }
 
 }

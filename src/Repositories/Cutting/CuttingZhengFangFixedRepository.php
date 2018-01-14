@@ -11,5 +11,16 @@ namespace CAPTCHAReader\src\Repository\Cutting;
 
 class CuttingZhengFangFixedRepository
 {
+    public function getXCoordinate($width,$height,$noiseCancelArr){
+
+    }
+
+    public function getYCoordinate($xArr,$height,$noiseCancelArr){
+
+    }
+
+    public function cut($noiseCancelArr,$coordinate){
+
+    }
 
 }

@@ -12,16 +12,16 @@ namespace CAPTCHAReader\src\Traits;
 use CAPTCHAReader\src\Repository\Cutting\CuttingZhengFangFixedRepository;
 use CAPTCHAReader\src\Repository\Cutting\CuttingZhengFangMoveRepository;
 
-trait CuttingZhengFangTrait
+trait CuttingTrait
 {
     use CommonTrait;
 
-    public function getRepository($label){
+    public function getRepository(string $label){
         switch ($label) {
             case "ZhengFangFixed":
-                return CuttingZhengFangFixedRepository::class;
+                return new CuttingZhengFangFixedRepository();
             case "ZhengFangMove":
-                return CuttingZhengFangMoveRepository::class;
+                return new CuttingZhengFangMoveRepository();
         }
     }
 

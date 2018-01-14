@@ -48,6 +48,7 @@ class PretreatmentZhengFang extends Load
         //去掉散点
         $noiseCancelArr = $this->pretreatmentRepository->SimpleNoiseCancel( $imageInfo['width'] , $imageInfo['height'] , $imageBinaryArr );
 
+        $this->resultContainer->unsetImage();
         $this->resultContainer->setImageBinaryArr( $imageBinaryArr );
         $this->resultContainer->setImageBinaryArr( $noiseCancelArr );
         //------------------------------------------------------------------

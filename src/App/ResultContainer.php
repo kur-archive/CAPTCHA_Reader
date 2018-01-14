@@ -21,6 +21,9 @@ class ResultContainer
     public $imageBinaryArr;
     public $noiseCancelArr;
 
+    private $coordinate;
+    private $pixelCollection;
+
 
     /**
      * @return mixed
@@ -125,6 +128,33 @@ class ResultContainer
         $this->noiseCancelArr = $noiseCancelArr;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCoordinate(){
+        return $this->coordinate;
+    }
+
+    /**
+     * @param mixed $coordinate
+     */
+    public function setCoordinate( $coordinate ){
+        $this->coordinate = $coordinate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPixelCollection(){
+        return $this->pixelCollection;
+    }
+
+    /**
+     * @param mixed $pixelCollection
+     */
+    public function setPixelCollection( $pixelCollection ){
+        $this->pixelCollection = $pixelCollection;
+    }
 
 
 
