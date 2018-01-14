@@ -24,7 +24,6 @@ class IndexController
      */
     public function entrance( $imagePath , $mode ){
         try {
-            self::dd( $this->getConfig( 'sample' ) );
             //获取 配置
             $conf = $this->getConfig( 'app' );
             //获取 装饰器
@@ -62,17 +61,18 @@ class IndexController
      */
     public function instantiationDecorator( $components ){
         $components = array_reverse( $components );
-        $tmp        = null;
+//        self::dd( $components );
+        $decorator       = null;
 
         foreach($components as $component){
-            if (empty( $tmp )) {
-                $tmp = new $component();
+            if (empty( $decorator )) {
+                $decorator = new $component();
             } else {
-                $tmp = new $component( $tmp );
+                $decorator = new $component( $decorator );
             }
         }
 
-        return $tmp;
+        return $decorator;
     }
 }
 

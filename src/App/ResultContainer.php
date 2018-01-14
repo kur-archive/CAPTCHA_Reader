@@ -18,6 +18,9 @@ class ResultContainer
     private $imageInfo;
     private $image;
 
+    public $imageBinaryArr;
+    public $noiseCancelArr;
+
 
     /**
      * @return mixed
@@ -93,6 +96,36 @@ class ResultContainer
         imagedestroy( $this->image );
         unset( $this->image );
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImageBinaryArr(){
+        return $this->imageBinaryArr;
+    }
+
+    /**
+     * @param mixed $imageBinaryArr
+     */
+    public function setImageBinaryArr( $imageBinaryArr ){
+        $this->imageBinaryArr = $imageBinaryArr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNoiseCancelArr(){
+        return $this->noiseCancelArr;
+    }
+
+    /**
+     * @param mixed $noiseCancelArr
+     */
+    public function setNoiseCancelArr( $noiseCancelArr ){
+        $this->noiseCancelArr = $noiseCancelArr;
+    }
+
+
 
 
 }

@@ -9,7 +9,14 @@
 namespace CAPTCHAReader\src\App\Identify;
 
 
-class IdentifyZhengFangRow
+use CAPTCHAReader\src\App\Abstracts\Restriction;
+use CAPTCHAReader\src\App\ResultContainer;
+
+class IdentifyZhengFangRow extends Restriction
 {
+    function run( ResultContainer $resultContainer ){
+        // TODO: Implement run() method.
+    }
+
 
 }
