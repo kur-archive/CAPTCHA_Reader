@@ -7,13 +7,31 @@
  */
 
 return [
-    //使用的组
-    'useGroup' => '' ,
-    //允许用户执行组合一套组件类
-    //e.g.
+    /*
+    |--------------------------------------------------------------------------
+    | useGroup
+    |--------------------------------------------------------------------------
+    |
+    | 当前使用的模组名
+    |
+    */
+    'useGroup'       => 'ZhengFangNormal' ,
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | componentGroup
+    |--------------------------------------------------------------------------
+    | 设定的组件模组
+    */
     'componentGroup' => [
-        'ZhengFangPart1' => ['GetImageInfoLocal' , 'CuttingZhengFangFixed' , 'ProtreatmentZhengFang' ,
-                             'IdentifyZhengFangRow' ,]
+        'ZhengFangNormal' => [
+            \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
+            \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class ,
+            \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
+            \CAPTCHAReader\src\App\Identify\IdentifyZhengFangRow::class ,
+        ] ,
+
     ] ,
 
 ];
