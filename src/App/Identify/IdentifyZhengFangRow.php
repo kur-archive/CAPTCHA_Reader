@@ -11,12 +11,26 @@ namespace CAPTCHAReader\src\App\Identify;
 
 use CAPTCHAReader\src\App\Abstracts\Restriction;
 use CAPTCHAReader\src\App\ResultContainer;
+use CAPTCHAReader\src\Traits\IdentifyTrait;
 
 class IdentifyZhengFangRow extends Restriction
 {
-    function run( ResultContainer $resultContainer ){
-        // TODO: Implement run() method.
+    use IdentifyTrait;
+
+    private $conf;
+    private $resultContainer;
+
+    private $identifyRepository;
+
+    public function __construct(){
+        $this->identifyRepository = $this->getRepository( 'ZhengFangRow' );
     }
 
+    function run( ResultContainer $resultContainer ){
+        $this->resultContainer = $resultContainer;
+        $this->conf            = $this->resultContainer->getConf();
 
+
+
+    }
 }

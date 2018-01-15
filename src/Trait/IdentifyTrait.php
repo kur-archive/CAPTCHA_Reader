@@ -27,6 +27,23 @@ trait IdentifyTrait
             case 'ZhengFangRow':
                 return new IdentifyZhengFangRowRepository();
         }
+    }
+
+    public function twoD2oneDArrayRow( array $twoDArray ){
+        $str = '';
+        foreach($twoDArray as $row){
+            foreach($row as $value){
+                $str .= $value;
+            }
+        }
+        return $str;
+    }
+
+    public function twoD2oneDArrayCol( array $twoDArray ){
+        $str       = '';
+        $colNumber = count( $twoDArray );
+        $rowNumber = count( $twoDArray[0] );
+
 
     }
 
