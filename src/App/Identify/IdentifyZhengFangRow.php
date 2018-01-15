@@ -21,6 +21,7 @@ class IdentifyZhengFangRow extends Restriction
     private $resultContainer;
 
     private $identifyRepository;
+    private $dictionary;
 
     public function __construct(){
         $this->identifyRepository = $this->getRepository( 'ZhengFangRow' );
@@ -29,6 +30,11 @@ class IdentifyZhengFangRow extends Restriction
     function run( ResultContainer $resultContainer ){
         $this->resultContainer = $resultContainer;
         $this->conf            = $this->resultContainer->getConf();
+        $this->dictionary = $this->getDictionary( $this->conf['componentGroup'][$this->conf['useGroup']] );
+
+
+
+        self::dd( $this->conf );
 
 
 

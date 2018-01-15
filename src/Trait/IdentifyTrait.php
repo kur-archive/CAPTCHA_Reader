@@ -16,6 +16,8 @@ use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangRowRepository;
 
 trait IdentifyTrait
 {
+    use CommonTrait;
+
     public function getRepository( $label ){
         switch ($label) {
             case 'ZhengFangRowColLevenshtein':
@@ -29,6 +31,16 @@ trait IdentifyTrait
         }
     }
 
+    public function getDictionary( array $componentGroup ){
+        $dictionaryName = $componentGroup['dictionary'];
+        $dictionary     = json_decode( file_get_contents( __DIR__ . '/../Dictionary/' . $dictionaryName ) );
+        return $dictionary;
+    }
+
+    /**
+     * @param array $twoDArray
+     * @return string
+     */
     public function twoD2oneDArrayRow( array $twoDArray ){
         $str = '';
         foreach($twoDArray as $row){
@@ -39,12 +51,21 @@ trait IdentifyTrait
         return $str;
     }
 
+    /**
+     * @param array $twoDArray
+     * @return string
+     */
     public function twoD2oneDArrayCol( array $twoDArray ){
         $str       = '';
-        $colNumber = count( $twoDArray );
-        $rowNumber = count( $twoDArray[0] );
+        $rowNumber = count( $twoDArray );
+        $colNumber = count( $twoDArray[0] );
 
-
+        for($x = 0; $x < $colNumber; ++$x){
+            for($y = 0; $y < $rowNumber; ++$y){
+                $str .= $twoDArray[$y][$x];
+            }
+        }
+        return $str;
     }
 
 

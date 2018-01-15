@@ -26,10 +26,13 @@ return [
     */
     'componentGroup' => [
         'ZhengFangNormal' => [
-            \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
-            \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class ,
-            \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
-            \CAPTCHAReader\src\App\Identify\IdentifyZhengFangRow::class ,
+            'components'  => [
+                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class ,
+                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
+                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangRow::class ,
+            ] ,
+            'dictionary' => 'ZhengFangNormal.json' ,
         ] ,
     ] ,
 

@@ -51,7 +51,7 @@ class IndexController
         $useGroup   = $conf['useGroup'];
         $components = $conf['componentGroup'][$useGroup];
 
-        $decorator = $this->instantiationDecorator( $components );
+        $decorator = $this->instantiationDecorator( $components['components'] );
         return $decorator;
     }
 

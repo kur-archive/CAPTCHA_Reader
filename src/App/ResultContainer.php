@@ -25,6 +25,9 @@ class ResultContainer
     private $charPixedCollection;
 
 
+    private $resultStr;
+
+
     /**
      * @return mixed
      */
