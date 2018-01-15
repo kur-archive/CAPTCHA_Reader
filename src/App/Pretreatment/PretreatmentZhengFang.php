@@ -50,7 +50,7 @@ class PretreatmentZhengFang extends Load
 
         $this->resultContainer->unsetImage();
         $this->resultContainer->setImageBinaryArr( $imageBinaryArr );
-        $this->resultContainer->setImageBinaryArr( $noiseCancelArr );
+        $this->resultContainer->setNoiseCancelArr( $noiseCancelArr );
         //------------------------------------------------------------------
         $this->resultContainer=$this->nextStep->run($this->resultContainer);
         //------------------------------------------------------------------

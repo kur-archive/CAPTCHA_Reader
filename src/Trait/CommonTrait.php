@@ -26,4 +26,32 @@ trait CommonTrait
         exit();
     }
 
+    /**
+     * 调试用，show处理好的数组
+     */
+    public  function showResArr( $imageArr ){
+        echo '  ';
+        for($i = 0; $i < 72; ++$i){
+            echo $i;
+            if (strlen( $i ) == 1) {
+                echo ' ';
+            }
+        }
+        echo "\n";
+        foreach($imageArr as$key=> $resY){
+            echo $key;
+            if (strlen( $key ) == 1) {
+                echo ' ';
+            }
+            foreach($resY as $resX){
+                $resX ? $output = 'l ' : $output = '_ ';
+                echo $output;
+            }
+            echo "\n";
+
+        }
+        echo "\n";
+    }
+
+
 }

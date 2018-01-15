@@ -34,21 +34,32 @@ class CuttingZhengFangFixed extends Load
     function run( ResultContainer $resultContainer ){
         $this->resultContainer = $resultContainer;
         $this->conf            = $this->resultContainer->getConf();
+        $this->imageInfo       = $this->resultContainer->getImageInfo();
         $this->noiseCancelArr  = $this->resultContainer->getNoiseCancelArr();
+
+//        $this->showResArr( $this->noiseCancelArr );
 
         $width  = $this->imageInfo['width'];
         $height = $this->imageInfo['height'];
 
         //获取坐标
-        $xArr = $this->cuttingRepository->getXCoordinate( $width , $height , $this->noiseCancelArr );
-        $yArr = $this->cuttingRepository->getYCoordinate( $xArr , $height , $this->noiseCancelArr );
+        $xAllArr = $this->cuttingRepository->getXCoordinate( $width , $height , $this->noiseCancelArr );
+        $yAllArr = $this->cuttingRepository->getYCoordinate( $xAllArr , $height , $this->noiseCancelArr );
+
+//        dump( $xAllArr , $yAllArr );
 
         //切割
-        $pixelCollection = $this->cuttingRepository->cut( $this->noiseCancelArr , compact( 'xArr' , 'yArr' ) );
+        $pixelCollection = $this->cuttingRepository->cut( $this->noiseCancelArr , compact( 'xAllArr' , 'yAllArr' )   );
+        $charPixedCollection = [];
+        foreach($pixelCollection as $charPixel){
+            $charPixedCollection[] = $charPixel['pixel'];
+        }
+
+//        $this->showChar( $charPixedCollection);
 
         //放入容器
-        $this->resultContainer->setCoordinate( compact( $xArr , $yArr ) );
-        $this->resultContainer->setPixelCollection( $pixelCollection );
+        $this->resultContainer->setCoordinate( compact( $xAllArr , $yAllArr ) );
+        $this->resultContainer->setCharPixedCollection( $charPixedCollection );
         //----------------------------------------------------------------------------
         $this->resultContainer = $this->nextStep->run( $this->resultContainer );
         //----------------------------------------------------------------------------

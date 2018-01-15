@@ -11,5 +11,6 @@ namespace CAPTCHAReader\training\Log;
 
 class Log
 {
+    //写日志的类
 
 }

@@ -22,7 +22,7 @@ class ResultContainer
     public $noiseCancelArr;
 
     private $coordinate;
-    private $pixelCollection;
+    private $charPixedCollection;
 
 
     /**
@@ -145,17 +145,16 @@ class ResultContainer
     /**
      * @return mixed
      */
-    public function getPixelCollection(){
-        return $this->pixelCollection;
+    public function getCharPixedCollection(){
+        return $this->charPixedCollection;
     }
 
     /**
-     * @param mixed $pixelCollection
+     * @param mixed $charPixedCollection
      */
-    public function setPixelCollection( $pixelCollection ){
-        $this->pixelCollection = $pixelCollection;
+    public function setCharPixedCollection( $charPixedCollection ){
+        $this->charPixedCollection = $charPixedCollection;
     }
-
 
 
 }
