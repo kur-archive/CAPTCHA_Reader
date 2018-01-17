@@ -23,20 +23,42 @@ class IdentifyZhengFangRow extends Restriction
     private $identifyRepository;
     private $dictionary;
 
+    private $charPixedCollection;
+
     public function __construct(){
         $this->identifyRepository = $this->getRepository( 'ZhengFangRow' );
     }
 
     function run( ResultContainer $resultContainer ){
-        $this->resultContainer = $resultContainer;
-        $this->conf            = $this->resultContainer->getConf();
-        $this->dictionary = $this->getDictionary( $this->conf['componentGroup'][$this->conf['useGroup']] );
+        $this->resultContainer     = $resultContainer;
+        $this->conf                = $this->resultContainer->getConf();
+        $this->charPixedCollection = $this->resultContainer->getCharPixedCollection();
+        $this->dictionary          = $this->getDictionary( $this->conf['componentGroup'][$this->conf['useGroup']] );
 
+        if (!count( $this->dictionary )) {
+            $this->resultContainer->setResultStr( null );
+            return $this->resultContainer;
+        }
 
+        //将 数组 转为 字符串
+        foreach($this->charPixedCollection as $charPixed){
+            $oneDCharStrArr[] = $this->twoD2oneDArrayRow( $charPixed );
+        }
 
-        self::dd( $this->conf );
+        $this->resultContainer->setOneDCharStrArr( $oneDCharStrArr );
 
+        //在 字典中 寻找 相似度 最高的 样本
+        $result = '';
+        foreach($oneDCharStrArr as $oneDChar){
+            if ($this->conf['noteDetailJudgeProcess']) {
+                $result .= $this->identifyRepository->getHighestSimilarityResultNoteDetail( $oneDChar , $this->dictionary , $this->resultContainer );
+            } else {
+                $result .= $this->identifyRepository->getHighestSimilarityResult( $oneDChar , $this->dictionary );
+            }
+        }
 
+        $this->resultContainer->setResultStr( $result );
 
+        return $this->resultContainer;
     }
 }

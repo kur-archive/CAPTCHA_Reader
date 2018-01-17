@@ -18,6 +18,8 @@ trait IdentifyTrait
 {
     use CommonTrait;
 
+    //use CuttingTrait;
+
     public function getRepository( $label ){
         switch ($label) {
             case 'ZhengFangRowColLevenshtein':
@@ -33,7 +35,7 @@ trait IdentifyTrait
 
     public function getDictionary( array $componentGroup ){
         $dictionaryName = $componentGroup['dictionary'];
-        $dictionary     = json_decode( file_get_contents( __DIR__ . '/../Dictionary/' . $dictionaryName ) );
+        $dictionary     = json_decode( file_get_contents( __DIR__ . '/../Dictionary/' . $dictionaryName ) , true );
         return $dictionary;
     }
 

@@ -15,8 +15,8 @@ return [
     | 当前使用的模组名
     |
     */
-    'useGroup'       => 'ZhengFangNormal' ,
 
+    'useGroup' => 'ZhengFangNormal' ,
 
     /*
     |--------------------------------------------------------------------------
@@ -24,16 +24,28 @@ return [
     |--------------------------------------------------------------------------
     | 设定的组件模组
     */
+
     'componentGroup' => [
         'ZhengFangNormal' => [
-            'components'  => [
+            'components' => [
                 \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
                 \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class ,
-                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
+                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangMove::class ,
                 \CAPTCHAReader\src\App\Identify\IdentifyZhengFangRow::class ,
             ] ,
             'dictionary' => 'ZhengFangNormal.json' ,
         ] ,
     ] ,
+
+    /*
+    |--------------------------------------------------------------------------
+    | note detail judge process
+    |--------------------------------------------------------------------------
+    |
+    | 是否记录比较过程
+    |
+    */
+
+    'noteDetailJudgeProcess' => true ,
 
 ];

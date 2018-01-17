@@ -12,7 +12,6 @@ namespace CAPTCHAReader\src\App\Cutting;
 use CAPTCHAReader\src\App\Abstracts\Load;
 use CAPTCHAReader\src\App\Abstracts\Restriction;
 use CAPTCHAReader\src\App\ResultContainer;
-use CAPTCHAReader\src\Repository\Cutting\CuttingZhengFangFixedRepository;
 use CAPTCHAReader\src\Traits\CuttingTrait;
 
 class CuttingZhengFangFixed extends Load
@@ -46,7 +45,7 @@ class CuttingZhengFangFixed extends Load
         $xAllArr = $this->cuttingRepository->getXCoordinate( $width , $height , $this->noiseCancelArr );
         $yAllArr = $this->cuttingRepository->getYCoordinate( $xAllArr , $height , $this->noiseCancelArr );
 
-//        dump( $xAllArr , $yAllArr );
+        //        dump( $xAllArr , $yAllArr );
 
         //切割
         $pixelCollection = $this->cuttingRepository->cut( $this->noiseCancelArr , compact( 'xAllArr' , 'yAllArr' )   );
@@ -56,9 +55,9 @@ class CuttingZhengFangFixed extends Load
         }
 
 //        $this->showChar( $charPixedCollection);
-
+        self::dd( compact( 'xAllArr' , 'yAllArr' ) );
         //放入容器
-        $this->resultContainer->setCoordinate( compact( $xAllArr , $yAllArr ) );
+        $this->resultContainer->setCoordinate( compact( 'xAllArr' , 'yAllArr' ) );
         $this->resultContainer->setCharPixedCollection( $charPixedCollection );
         //----------------------------------------------------------------------------
         $this->resultContainer = $this->nextStep->run( $this->resultContainer );

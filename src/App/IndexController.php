@@ -33,10 +33,9 @@ class IndexController
             $resultContainer->setConf( $conf );
             $resultContainer->setImagePath( $imagePath );
             $resultContainer->setMode( $mode );
-
             $resultContainer = $decorator->run( $resultContainer );
 
-            self::dd( $resultContainer );
+            self::dd( $resultContainer->getResultStr() );
 
         } catch (\Exception $exception) {
             return $exception->getMessage();

@@ -9,7 +9,60 @@
 namespace CAPTCHAReader\src\Repository\Identify;
 
 
+use CAPTCHAReader\src\App\ResultContainer;
+
 class IdentifyZhengFangRowRepository
 {
+    public function getHighestSimilarityResultNoteDetail( $oneDChar , $dictionary , ResultContainer $resultContainer ){
+        $nowBest = [
+            'score' => 0 ,
+            'char'  => null ,
+        ];
+        foreach($dictionary as $key => $sample){
+            similar_text( $oneDChar , $sample['rowStr'] , $percent );
+            $flag = 0;
+            if ($percent > $nowBest['score']) {
+                $nowBest['score'] = $percent;
+                $nowBest['char']  = $sample['char'];
+                $flag             = 1;
+            }
+            $judge = [
+                'percent'      => $percent ,
+                'char'         => $sample['char'] ,
+                'sampleRowStr' => $sample['rowStr'] ,
+                'oneDChar'     => $oneDChar ,
+                'upScore'      => $flag ? true : false ,
+            ];
+            $resultContainer->setJudgeDetails( $key , $judge );
+
+            if ($nowBest['score'] > 96) {
+                break;
+            }
+        }
+        $resultContainer->setResultArr( $nowBest );
+
+        return $nowBest['char'];
+    }
+
+    public function getHighestSimilarityResult( $oneDChar , $dictionary ){
+        $nowBest = [
+            'score' => 0 ,
+            'char'  => null ,
+        ];
+        foreach($dictionary as $key => $sample){
+            similar_text( $oneDChar , $sample['rowStr'] , $percent );
+            if ($percent > $nowBest['score']) {
+                $nowBest['score'] = $percent;
+                $nowBest['char']  = $sample['char'];
+            }
+
+            if ($nowBest['score'] > 96) {
+                break;
+            }
+        }
+
+        return $nowBest['char'];
+    }
+
 
 }

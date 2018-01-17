@@ -24,7 +24,10 @@ class ResultContainer
     private $coordinate;
     private $charPixedCollection;
 
+    private $oneDCharStrArr;
+    private $judgeDetails;
 
+    private $resultArr;
     private $resultStr;
 
 
@@ -159,5 +162,61 @@ class ResultContainer
         $this->charPixedCollection = $charPixedCollection;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getOneDCharStrArr(){
+        return $this->oneDCharStrArr;
+    }
+
+    /**
+     * @param mixed $oneDCharStrArr
+     */
+    public function setOneDCharStrArr( $oneDCharStrArr ){
+        $this->oneDCharStrArr = $oneDCharStrArr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJudgeDetails(){
+        return $this->judgeDetails;
+    }
+
+    /**
+     * @param mixed $judgeDetails
+     */
+    public function setJudgeDetails( $key,$judgeDetails ){
+        $this->judgeDetails[$key] = $judgeDetails;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResultArr(){
+        return $this->resultArr;
+    }
+
+    /**
+     * @param mixed $resultArr
+     */
+    public function setResultArr( $resultStrArr ){
+        $this->resultArr[] = $resultStrArr;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getResultStr(){
+        return $this->resultStr;
+    }
+
+    /**
+     * @param mixed $resultStr
+     */
+    public function setResultStr( $resultStr ){
+        $this->resultStr = $resultStr;
+    }
 
 }
