@@ -21,7 +21,6 @@
 * :fast_forward:字典正在训练中(ing):fast_forward:
 * :fast_forward:使用 pthreads 多线程识别(ing):fast_forward:
 * :fast_forward:更有效率的字典训练方法:fast_forward:
-* :heavy_check_mark:为各个策略增加抽象父类:heavy_check_mark:
 * 打包为composer包，方便其他项目引用
 * :fast_forward:使代码更加oop，更加可复用:fast_forward:
 * 以PHP拓展的方式重写核心函数，降低核心函数的时间复杂度
