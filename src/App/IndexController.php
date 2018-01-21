@@ -35,7 +35,8 @@ class IndexController
             $resultContainer->setMode( $mode );
             $resultContainer = $decorator->run( $resultContainer );
 
-            self::dd( $resultContainer->getResultStr() );
+            dump($resultContainer->getResultStr());
+            //            self::dd( $resultContainer->getResultStr() );
 
         } catch (\Exception $exception) {
             return $exception->getMessage();

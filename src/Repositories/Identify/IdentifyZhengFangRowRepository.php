@@ -35,9 +35,9 @@ class IdentifyZhengFangRowRepository
             ];
             $resultContainer->setJudgeDetails( $key , $judge );
 
-            if ($nowBest['score'] > 96) {
-                break;
-            }
+//            if ($nowBest['score'] > 96) {
+//                break;
+//            }
         }
         $resultContainer->setResultArr( $nowBest );
 
@@ -56,9 +56,9 @@ class IdentifyZhengFangRowRepository
                 $nowBest['char']  = $sample['char'];
             }
 
-            if ($nowBest['score'] > 96) {
-                break;
-            }
+//            if ($nowBest['score'] > 96) {
+//                break;
+//            }
         }
 
         return $nowBest['char'];

@@ -12,7 +12,7 @@ namespace CAPTCHAReader\src\App\Identify;
 use CAPTCHAReader\src\App\Abstracts\Load;
 use CAPTCHAReader\src\App\ResultContainer;
 
-class IdentifyZhengFangRowLevenshtein extends Load
+class IdentifyZhengFangColLevenshtein extends Load
 {
     function run( ResultContainer $resultContainer ){
         // TODO: Implement run() method.

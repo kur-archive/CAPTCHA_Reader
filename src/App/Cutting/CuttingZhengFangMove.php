@@ -378,6 +378,8 @@ class CuttingZhengFangMove extends Load
         $xAllArr = [$start_x1 , $end_x1 , $start_x2 , $end_x2 , $start_x3 , $end_x3 , $start_x4 , $end_x4];
         $yAllArr = [$start_y1 , $end_y1 , $start_y2 , $end_y2 , $start_y3 , $end_y3 , $start_y4 , $end_y4];
 
+        $this->showChar(compact('letter1', 'letter2', 'letter3', 'letter4'));
+
         $this->resultContainer->setCoordinate( compact( 'xAllArr' , 'yAllArr' ) );
         $this->resultContainer->setCharPixedCollection( compact( 'letter1' , 'letter2' , 'letter3' , 'letter4' ) );
         //----------------------------------------------------------------------------

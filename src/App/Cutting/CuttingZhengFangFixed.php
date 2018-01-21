@@ -54,8 +54,8 @@ class CuttingZhengFangFixed extends Load
             $charPixedCollection[] = $charPixel['pixel'];
         }
 
-//        $this->showChar( $charPixedCollection);
-        self::dd( compact( 'xAllArr' , 'yAllArr' ) );
+        $this->showChar( $charPixedCollection);
+
         //放入容器
         $this->resultContainer->setCoordinate( compact( 'xAllArr' , 'yAllArr' ) );
         $this->resultContainer->setCharPixedCollection( $charPixedCollection );

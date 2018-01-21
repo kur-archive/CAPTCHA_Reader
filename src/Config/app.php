@@ -31,7 +31,7 @@ return [
                 \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
                 \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class ,
                 \CAPTCHAReader\src\App\Cutting\CuttingZhengFangMove::class ,
-                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangRow::class ,
+                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangCol::class ,
             ] ,
             'dictionary' => 'ZhengFangNormal.json' ,
         ] ,
