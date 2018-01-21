@@ -11,8 +11,14 @@ namespace CAPTCHAReader\src\Repository\Identify;
 
 use CAPTCHAReader\src\App\ResultContainer;
 
-class IdentifyZhengFangRowRepository
+class IdentifyZhengFangColRepository
 {
+    /**
+     * @param $oneDChar
+     * @param $dictionary
+     * @param ResultContainer $resultContainer
+     * @return mixed
+     */
     public function getHighestSimilarityResultNoteDetail( $oneDChar , $dictionary , ResultContainer $resultContainer ){
         $nowBest = [
             'score' => 0 ,
@@ -35,15 +41,20 @@ class IdentifyZhengFangRowRepository
             ];
             $resultContainer->setJudgeDetails( $key , $judge );
 
-//            if ($nowBest['score'] > 96) {
-//                break;
-//            }
+            if ($nowBest['score'] > 97) {
+                break;
+            }
         }
         $resultContainer->setResultArr( $nowBest );
 
         return $nowBest['char'];
     }
 
+    /**
+     * @param $oneDChar
+     * @param $dictionary
+     * @return mixed
+     */
     public function getHighestSimilarityResult( $oneDChar , $dictionary ){
         $nowBest = [
             'score' => 0 ,
@@ -56,9 +67,9 @@ class IdentifyZhengFangRowRepository
                 $nowBest['char']  = $sample['char'];
             }
 
-//            if ($nowBest['score'] > 96) {
-//                break;
-//            }
+            if ($nowBest['score'] > 96) {
+                break;
+            }
         }
 
         return $nowBest['char'];

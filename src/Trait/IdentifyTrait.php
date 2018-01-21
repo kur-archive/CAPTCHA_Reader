@@ -11,8 +11,8 @@ namespace CAPTCHAReader\src\Traits;
 
 use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangRowColLevenshteinRepository;
 use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangRowColRepository;
-use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangRowLevenshteinRepository;
-use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangRowRepository;
+use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangColLevenshteinRepository;
+use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangColRepository;
 
 trait IdentifyTrait
 {
@@ -26,10 +26,10 @@ trait IdentifyTrait
                 return new IdentifyZhengFangRowColLevenshteinRepository();
             case 'ZhengFangRowCol':
                 return new IdentifyZhengFangRowColRepository();
-            case 'ZhengFangRowLevenshtein':
-                return new IdentifyZhengFangRowLevenshteinRepository();
-            case 'ZhengFangRow':
-                return new IdentifyZhengFangRowRepository();
+            case 'ZhengFangColLevenshtein':
+                return new IdentifyZhengFangColLevenshteinRepository();
+            case 'ZhengFangCol':
+                return new IdentifyZhengFangColRepository();
         }
     }
 

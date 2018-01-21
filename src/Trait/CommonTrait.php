@@ -53,19 +53,7 @@ trait CommonTrait
         echo "\n";
     }
 
-    /**
-     * @param array $myArray
-     * @return array
-     */
-    function custom_shuffle($myArray = []) {
-        $copy = [];
-        while (count($myArray)) {
-            $element = array_rand($myArray);
-            $copy[$element] = $myArray[$element];
-            unset($myArray[$element]);
-        }
-        return $copy;
-    }
+
 
 
 }

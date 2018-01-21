@@ -40,9 +40,7 @@ class GetImageInfo extends Load
         //--------------------------------------------
         $this->resultContainer = $this->nextStep->run( $this->resultContainer );
         //--------------------------------------------
-
         return $this->resultContainer;
     }
-
 
 }

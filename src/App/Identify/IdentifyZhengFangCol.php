@@ -37,7 +37,8 @@ class IdentifyZhengFangCol extends Restriction
         $this->charPixedCollection = $this->resultContainer->getCharPixedCollection();
 
         $this->dictionary = $this->getDictionary($this->conf['componentGroup'][$this->conf['useGroup']]);
-        //异常处理
+
+        //空字典处理
         if (!count($this->dictionary)) {
             $this->resultContainer->setResultStr(null);
             return $this->resultContainer;

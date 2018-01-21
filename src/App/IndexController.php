@@ -16,24 +16,31 @@ class IndexController
 {
     use CommonTrait;
 
+    private $conf;
+
+    public function __construct()
+    {
+        //获取 配置
+        $this->conf = $this->getConfig('app');
+    }
+
     /**
      * @param $imagePath
      * @param $mode string  local|online
      * @return string
      *
      */
-    public function entrance( $imagePath , $mode ){
+    public function entrance($imagePath, $mode)
+    {
         try {
-            //获取 配置
-            $conf = $this->getConfig( 'app' );
             //获取 装饰器
-            $decorator = $this->getDecorator( $conf );
+            $decorator = $this->getDecorator($this->conf);
             //设置 结果容器
             $resultContainer = new ResultContainer();
-            $resultContainer->setConf( $conf );
-            $resultContainer->setImagePath( $imagePath );
-            $resultContainer->setMode( $mode );
-            $resultContainer = $decorator->run( $resultContainer );
+            $resultContainer->setConf($this->conf);
+            $resultContainer->setImagePath($imagePath);
+            $resultContainer->setMode($mode);
+            $resultContainer = $decorator->run($resultContainer);
 
             dump($resultContainer->getResultStr());
             //            self::dd( $resultContainer->getResultStr() );
@@ -47,11 +54,12 @@ class IndexController
      * @param $config
      * @return null
      */
-    public function getDecorator( $conf ){
-        $useGroup   = $conf['useGroup'];
+    public function getDecorator($conf)
+    {
+        $useGroup = $conf['useGroup'];
         $components = $conf['componentGroup'][$useGroup];
 
-        $decorator = $this->instantiationDecorator( $components['components'] );
+        $decorator = $this->instantiationDecorator($components['components']);
         return $decorator;
     }
 
@@ -59,20 +67,37 @@ class IndexController
      * @param $components
      * @return Restriction
      */
-    public function instantiationDecorator( $components ){
-        $components = array_reverse( $components );
+    public function instantiationDecorator($components)
+    {
+        $components = array_reverse($components);
 //        self::dd( $components );
-        $decorator       = null;
+        $decorator = null;
 
-        foreach($components as $component){
-            if (empty( $decorator )) {
+        foreach ($components as $component) {
+            if (empty($decorator)) {
                 $decorator = new $component();
             } else {
-                $decorator = new $component( $decorator );
+                $decorator = new $component($decorator);
             }
         }
 
         return $decorator;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getConf()
+    {
+        return $this->conf;
+    }
+
+    /**
+     * @param mixed|string $conf
+     */
+    public function setConf($conf)
+    {
+        $this->conf = $conf;
     }
 }
 
