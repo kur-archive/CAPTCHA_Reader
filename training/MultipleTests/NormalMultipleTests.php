@@ -17,7 +17,16 @@ class NormalMultipleTests implements TestsInterface
 {
     use CommonTrait;
 
-    //测试可以使用全组测试和指定某组进行测试
+    /**
+     * @param $groupName
+     * @param IndexController $indexController
+     * @param null $trainingId
+     * @param null $area
+     * @return array
+     * @throws \Exception
+     *
+     * 测试可以使用全组测试和指定某组进行测试
+     */
     public function run($groupName, IndexController $indexController, $trainingId = null, $area = null)
     {
         $sampleListArr = $this->getTestSampleList($groupName, $area);

@@ -14,9 +14,7 @@ class Test
     {
         $a=new AddSamplesAuto();
         $a->run();
-
     }
-
 }
 
 $t = new Test();

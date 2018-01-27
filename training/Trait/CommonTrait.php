@@ -9,12 +9,11 @@
 namespace CAPTCHAReader\training\Traits;
 
 use CAPTCHAReader\src\App\IndexController;
-use \CAPTCHAReader\src\Traits\CommonTrait as SrcCommon;
-use CAPTCHAReader\src\Traits\IdentifyTrait;
+use CAPTCHAReader\src\Traits\CommonTrait as SrcCommon;
 
 trait CommonTrait
 {
-    use SrcCommon, IdentifyTrait;
+    use SrcCommon;
 
     /**
      * @param $groupName
@@ -32,6 +31,12 @@ trait CommonTrait
         return $sampleList;
     }
 
+    /**
+     * @param $groupName
+     * @param null $area
+     * @return array
+     * @throws \Exception
+     */
     public function getTestSampleList($groupName, $area = null)
     {
         $trainingConf = $this->getConfig('training');
@@ -76,6 +81,10 @@ trait CommonTrait
 
     }
 
+    /**
+     * @param $dirPath
+     * @return array
+     */
     public function getTestSet($dirPath)
     {
         $fileList = [];
@@ -139,6 +148,23 @@ trait CommonTrait
         return $str;
     }
 
+    /**
+     * @param $dictionaryName
+     * @return array|mixed
+     */
+    public function getDictionary(  $dictionaryName ){
+        if (!is_file(__DIR__ . '/../../src/Dictionary/' . $dictionaryName)) {
+            return [];
+        }
+        $dictionary     = json_decode( file_get_contents( __DIR__ . '/../../src/Dictionary/' . $dictionaryName ) , true );
+        return $dictionary;
+    }
+
+    /**
+     * @param $char
+     * @param $rowStr
+     * @param IndexController $indexController
+     */
     public function addSampleToDictionary($char, $rowStr, IndexController $indexController)
     {
         $conf = $indexController->getConf();
@@ -152,6 +178,10 @@ trait CommonTrait
         file_put_contents(__DIR__ . '/../../src/Dictionary/' . $dictionaryName, json_encode($dictionary));
     }
 
+    /**
+     * @param IndexController $indexController
+     * @return int
+     */
     public function getDictionarySampleCount(IndexController $indexController)
     {
         $conf = $indexController->getConf();

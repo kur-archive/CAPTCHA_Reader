@@ -56,6 +56,9 @@ class AddSamplesAuto
         $this->multipleTests = new NormalMultipleTests();
     }
 
+    /**
+     *
+     */
     public function run()
     {
         //循环每类
@@ -98,24 +101,29 @@ class AddSamplesAuto
                         if ($correctAnswer[$i] != $answer[$i]) {
                             $this->addSampleToDictionary($correctAnswer[$i], $oneDCharStr[$i], $this->indexController);
                             if (!($this->getDictionarySampleCount($this->indexController) % 100)) {
-                                //TODO 如果批量测试 正确率大于既定值，则结束训练
+                                // 如果批量测试 正确率大于既定值，则结束训练
                                 //TODO 结束的时候需要全部测试集测试
 
                                 // 调用批量测试
                                 $testResult = $this->multipleTests->run($groupName, $this->indexController, $this->trainingId, 0);
                                 Log::writeAddSamplesAutoLog($groupName, $testResult, $this->getDictionarySampleCount($this->indexController), $this->trainingId, $key_);
 
+                                if ($testResult['correctRate'] > $this->trainingConf['testSuccessRateLine']) {
+                                    echo "\n\n\n\n\n\n\n";
+                                    echo "*****************************************************************";
+                                    echo "*****************************************************************";
+                                    echo "\ntraining success \n reason: The overall accuracy rate reached the standard ///\n";
+                                    $endFlag = true;
+                                    break;
+                                }
                             }
                         }
                     }
 
-                    if ($testResult['correctRate'] > $this->trainingConf['testSuccessRateLine']) {
-                        echo "\n\n\n\n\n\n\n";
-                        echo "*****************************************************************";
-                        echo "*****************************************************************";
-                        echo "\ntraining success \n reason: The overall accuracy rate reached the standard ///\n";
+                    if (($endFlag ?? false) == true) {
                         break;
                     }
+
 
                     //在比对结果的过程中，如果样本数到达某个阈值，则开始批量测试，如果到达退出阈值则输出结果，结束学习过程，
                     //TODO 结束的时候需要全部测试集测试

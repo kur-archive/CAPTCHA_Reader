@@ -13,5 +13,12 @@ use CAPTCHAReader\src\App\IndexController;
 
 interface TestsInterface
 {
+    /**
+     * @param $groupName
+     * @param IndexController $indexController
+     * @param null $trainingId
+     * @param null $area
+     * @return mixed
+     */
     public function run($groupName, IndexController $indexController, $trainingId = null,$area=null);
 }
