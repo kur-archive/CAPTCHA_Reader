@@ -30,7 +30,7 @@ class IndexController
      * @return string
      *
      */
-    public function entrance($imagePath, $mode)
+    public function entrance($imagePath, $mode, $test = false)
     {
         try {
             //获取 装饰器
@@ -42,8 +42,11 @@ class IndexController
             $resultContainer->setMode($mode);
             $resultContainer = $decorator->run($resultContainer);
 
-            dump($resultContainer->getResultStr());
-            //            self::dd( $resultContainer->getResultStr() );
+            if ($test) {
+                return $resultContainer;
+            } else {
+                return $resultContainer->getResultStr();
+            }
 
         } catch (\Exception $exception) {
             return $exception->getMessage();
@@ -70,7 +73,6 @@ class IndexController
     public function instantiationDecorator($components)
     {
         $components = array_reverse($components);
-//        self::dd( $components );
         $decorator = null;
 
         foreach ($components as $component) {

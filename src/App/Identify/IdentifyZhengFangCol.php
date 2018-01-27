@@ -36,7 +36,7 @@ class IdentifyZhengFangCol extends Restriction
         $this->conf = $this->resultContainer->getConf();
         $this->charPixedCollection = $this->resultContainer->getCharPixedCollection();
 
-        $this->dictionary = $this->getDictionary($this->conf['componentGroup'][$this->conf['useGroup']]);
+        $this->dictionary = $this->getDictionary($this->conf['componentGroup'][$this->conf['useGroup']]['dictionary']);
 
         //空字典处理
         if (!count($this->dictionary)) {
@@ -48,7 +48,6 @@ class IdentifyZhengFangCol extends Restriction
         foreach ($this->charPixedCollection as $charPixed) {
             $oneDCharStrArr[] = $this->twoD2oneDArrayCol($charPixed);
         }
-//        self::dd($oneDCharStrArr);
 
         $this->resultContainer->setOneDCharStrArr($oneDCharStrArr);
 

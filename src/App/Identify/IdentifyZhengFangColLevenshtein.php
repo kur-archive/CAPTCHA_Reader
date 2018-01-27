@@ -36,7 +36,7 @@ class IdentifyZhengFangColLevenshtein extends Restriction
         $this->conf = $this->resultContainer->getConf();
         $this->charPixedCollection = $this->resultContainer->getCharPixedCollection();
 
-        $this->dictionary = $this->getDictionary($this->conf['componentGroup'][$this->conf['useGroup']]);
+        $this->dictionary = $this->getDictionary($this->conf['componentGroup'][$this->conf['useGroup']]['dictionary']);
         //异常处理
         if (!count($this->dictionary)) {
             $this->resultContainer->setResultStr(null);

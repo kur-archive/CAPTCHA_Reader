@@ -19,7 +19,6 @@ class AddSamplesAuto
 
     protected $indexController;
     protected $multipleTests;
-    protected $sampleList;
 
     /**
      * new
@@ -42,47 +41,90 @@ class AddSamplesAuto
      * 在成功率达到多少之后就停止学习，例如达到90%
      */
 
+    /**
+     * AddSamplesAuto constructor.
+     */
     public function __construct()
     {
         $this->trainingConf = $this->getConfig('training');
-
         $this->indexController = new IndexController();
     }
 
     public function run()
     {
+        //循环每类
         foreach ($this->trainingConf['studyGroup'] as $groupName => $componentGroups) {
+            //获取 验证码列表
             $sampleList = $this->getStudySampleList($groupName);
 
+            //循环 每组 学习
             foreach ($componentGroups as $componentGroup) {
                 //修改 indexController 的 conf
                 $appConf = $this->indexController->getConf();
-                $useGroup = $this->getRandomHexStr(16);
+                $useGroup = $this->getRandomHexStr(32);
                 $appConf['useGroup'] = $useGroup;
                 $appComponentGroups = $appConf['componentGroup'];
-                    array_push($appComponentGroups, [$useGroup => $componentGroup]);
-                $appConf['componentGroup'] = $appComponentGroups;
+                $appConf['componentGroup'][$useGroup] =
+                    array_merge(
+                        ['components' => $componentGroup],
+                        ['dictionary' => $this->generateDictionaryName($componentGroup)]
+                    );
+                $appConf['noteDetailJudgeProcess'] = true;
                 $this->indexController->setConf($appConf);
 
                 foreach ($sampleList as $samplePath) {
-                    //识别sample
 
+                    //识别sample 得到resultContainer
+                    $resultContainer = $this->indexController->entrance($samplePath, 'local', true);
 
-                    //得到resultContainer 取出一维样本字符串
+                    preg_match('/\w+(?=\.?\w+$)/', $samplePath, $matches);
+                    $correctAnswer = $matches[0];
+                    $answer = $resultContainer->getResultStr();
 
-                    //如果结果不对，将样本加入字典
+                    if ($correctAnswer == $answer) {
+                        continue;
+                    }
+
+                    // 取出一维样本字符串
+                    $oneDCharStr = $resultContainer->getOneDCharStrArr();
+
+                    //将错误识别错误的字母添加到字典
+                    for ($i = 0; $i < strlen($answer); ++$i) {
+                        if ($correctAnswer[$i] != $answer[$i]) {
+                            $this->addSampleToDictionary($correctAnswer[$i], $oneDCharStr[$i], $this->indexController);
+                        }
+                        if (!($this->getDictionarySampleCount($this->indexController)%100)) {
+                            //TODO 调用批量测试
+                            //TODO 如果批量测试 正确率大于既定值，则结束训练
+                        }
+
+                    }
 
                     //在比对结果的过程中，如果样本数到达某个阈值，则开始批量测试，如果到达退出阈值则输出结果，结束学习过程
-
+                    if ($this->getDictionarySampleCount($this->indexController) > $this->trainingConf['dictionarySampleLimit']) {
+                        echo "\n\n\n\n\n\n\n";
+                        echo "*****************************************************************";
+                        echo "*****************************************************************";
+                        echo "\ntraining success \n reason: dict sample number more than setting value ///\n";
+                        break;
+                    }
                 }
-
-
-
             }
-
-
         }
+    }
 
+    /**
+     * @param $componentGroup
+     * @return string
+     */
+    public function generateDictionaryName($componentGroup)
+    {
+        $name = '';
+        foreach ($componentGroup as $component) {
+            $n = preg_match('/(?<=\\\)[\w\-]+$/', $component, $matches);
+            $name .= $matches[0] . '-';
+        }
+        return substr($name, 0, strlen($name) - 1) . '.json';
     }
 
 

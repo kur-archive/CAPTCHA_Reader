@@ -20,6 +20,10 @@ trait IdentifyTrait
 
     //use CuttingTrait;
 
+    /**
+     * @param $label
+     * @return IdentifyZhengFangColLevenshteinRepository|IdentifyZhengFangColRepository|IdentifyZhengFangRowColLevenshteinRepository|IdentifyZhengFangRowColRepository
+     */
     public function getRepository( $label ){
         switch ($label) {
             case 'ZhengFangRowColLevenshtein':
@@ -33,8 +37,14 @@ trait IdentifyTrait
         }
     }
 
-    public function getDictionary( array $componentGroup ){
-        $dictionaryName = $componentGroup['dictionary'];
+    /**
+     * @param $dictionaryName
+     * @return array|mixed
+     */
+    public function getDictionary(  $dictionaryName ){
+        if (!is_file(__DIR__ . '/../Dictionary/' . $dictionaryName)) {
+            return [];
+        }
         $dictionary     = json_decode( file_get_contents( __DIR__ . '/../Dictionary/' . $dictionaryName ) , true );
         return $dictionary;
     }
