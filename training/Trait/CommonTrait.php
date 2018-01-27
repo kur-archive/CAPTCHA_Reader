@@ -32,11 +32,61 @@ trait CommonTrait
         return $sampleList;
     }
 
-    public function getTestSampleList()
+    public function getTestSampleList($groupName, $area = null)
     {
+        $trainingConf = $this->getConfig('training');
+        $sampleDir = $trainingConf['testSampleGroup'][$groupName];
+        $testSets = $this->getTestSet($sampleDir);
+        if (empty($testSets)) {
+            throw new \Exception('Test set is empty');
+        }
+
+        if ($area == 'all') {
+            foreach ($testSets as $testSet) {
+                $testSetArr = $this->getDirAllFile($sampleDir . $testSet . '/');
+                $sampleList[$testSet] = $this->custom_shuffle($testSetArr);
+            }
+            return $sampleList;
+
+        } elseif (is_string($area) || is_int($area)) {
+            if (!in_array($area, $testSets)) {
+                throw new \Exception('Invalid test set name passed in');
+            }
+            $testSetArr = $this->getDirAllFile($sampleDir . $area . '/');
+            $sampleList[] = $this->custom_shuffle($testSetArr);
+            return $sampleList;
+
+        } elseif (is_array($area)) {
+            foreach ($area as $testSet) {
+                if (!in_array($area, $testSets)) {
+                    throw new \Exception('Invalid test set name passed in');
+                }
+                $testSetArr = $this->getDirAllFile($sampleDir . $testSet . '/');
+                $sampleList[$testSet] = $this->custom_shuffle($testSetArr);
+            }
+            return $sampleList;
+
+        } elseif ($area == null) {
+            foreach ($testSets as $testSet) {
+                $testSetArr = $this->getDirAllFile($sampleDir . $testSet . '/');
+                $sampleList[] = $this->custom_shuffle($testSetArr);
+                return $sampleList;
+            }
+        }
 
     }
 
+    public function getTestSet($dirPath)
+    {
+        $fileList = [];
+        $dir = dir($dirPath);
+        while ($file = $dir->read()) {
+            array_push($fileList, $dirPath . $file);
+        }
+
+        $dir->close();
+        return $fileList;
+    }
 
     /**
      * @param $dirPath
@@ -89,15 +139,15 @@ trait CommonTrait
         return $str;
     }
 
-    public function addSampleToDictionary($char, $rowStr,IndexController $indexController)
+    public function addSampleToDictionary($char, $rowStr, IndexController $indexController)
     {
         $conf = $indexController->getConf();
         $dictionaryName = $conf['componentGroup'][$conf['useGroup']]['dictionary'];
         $dictionary = $this->getDictionary($dictionaryName);
 
         $dictionary[] = [
-            'char' => $char,
-            'rowStr'  => $rowStr,
+            'char'   => $char,
+            'rowStr' => $rowStr,
         ];
         file_put_contents(__DIR__ . '/../../src/Dictionary/' . $dictionaryName, json_encode($dictionary));
     }
@@ -109,7 +159,7 @@ trait CommonTrait
         $dictionary = $this->getDictionary($dictionaryName);
         return count($dictionary);
 
-        
+
     }
 
 

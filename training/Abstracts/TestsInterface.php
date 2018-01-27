@@ -9,7 +9,9 @@
 namespace CAPTCHAReader\training\Abstracts;
 
 
+use CAPTCHAReader\src\App\IndexController;
+
 interface TestsInterface
 {
-    public static function run($a = null, $b = null);
+    public function run($groupName, IndexController $indexController, $trainingId = null,$area=null);
 }

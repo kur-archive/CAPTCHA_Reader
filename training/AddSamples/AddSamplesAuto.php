@@ -9,6 +9,8 @@
 namespace CAPTCHAReader\Training\AddSamples\AddSamplesAuto;
 
 use CAPTCHAReader\src\App\IndexController;
+use CAPTCHAReader\src\Log\Log;
+use CAPTCHAReader\Training\MultiplesTests\NormalMultiplesTests\NormalMultipleTests;
 use CAPTCHAReader\training\Traits\CommonTrait;
 
 class AddSamplesAuto
@@ -19,6 +21,8 @@ class AddSamplesAuto
 
     protected $indexController;
     protected $multipleTests;
+
+    protected $trainingId;
 
     /**
      * new
@@ -48,6 +52,8 @@ class AddSamplesAuto
     {
         $this->trainingConf = $this->getConfig('training');
         $this->indexController = new IndexController();
+        $this->trainingId = $this->getRandomHexStr(32);
+        $this->multipleTests = new NormalMultipleTests();
     }
 
     public function run()
@@ -58,12 +64,11 @@ class AddSamplesAuto
             $sampleList = $this->getStudySampleList($groupName);
 
             //循环 每组 学习
-            foreach ($componentGroups as $componentGroup) {
+            foreach ($componentGroups as $key_ => $componentGroup) {
                 //修改 indexController 的 conf
                 $appConf = $this->indexController->getConf();
                 $useGroup = $this->getRandomHexStr(32);
                 $appConf['useGroup'] = $useGroup;
-                $appComponentGroups = $appConf['componentGroup'];
                 $appConf['componentGroup'][$useGroup] =
                     array_merge(
                         ['components' => $componentGroup],
@@ -92,15 +97,28 @@ class AddSamplesAuto
                     for ($i = 0; $i < strlen($answer); ++$i) {
                         if ($correctAnswer[$i] != $answer[$i]) {
                             $this->addSampleToDictionary($correctAnswer[$i], $oneDCharStr[$i], $this->indexController);
-                        }
-                        if (!($this->getDictionarySampleCount($this->indexController)%100)) {
-                            //TODO 调用批量测试
-                            //TODO 如果批量测试 正确率大于既定值，则结束训练
-                        }
+                            if (!($this->getDictionarySampleCount($this->indexController) % 100)) {
+                                //TODO 如果批量测试 正确率大于既定值，则结束训练
+                                //TODO 结束的时候需要全部测试集测试
 
+                                // 调用批量测试
+                                $testResult = $this->multipleTests->run($groupName, $this->indexController, $this->trainingId, 0);
+                                Log::writeAddSamplesAutoLog($groupName, $testResult, $this->getDictionarySampleCount($this->indexController), $this->trainingId, $key_);
+
+                            }
+                        }
                     }
 
-                    //在比对结果的过程中，如果样本数到达某个阈值，则开始批量测试，如果到达退出阈值则输出结果，结束学习过程
+                    if ($testResult['correctRate'] > $this->trainingConf['testSuccessRateLine']) {
+                        echo "\n\n\n\n\n\n\n";
+                        echo "*****************************************************************";
+                        echo "*****************************************************************";
+                        echo "\ntraining success \n reason: The overall accuracy rate reached the standard ///\n";
+                        break;
+                    }
+
+                    //在比对结果的过程中，如果样本数到达某个阈值，则开始批量测试，如果到达退出阈值则输出结果，结束学习过程，
+                    //TODO 结束的时候需要全部测试集测试
                     if ($this->getDictionarySampleCount($this->indexController) > $this->trainingConf['dictionarySampleLimit']) {
                         echo "\n\n\n\n\n\n\n";
                         echo "*****************************************************************";
