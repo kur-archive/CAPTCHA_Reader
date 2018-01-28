@@ -7,7 +7,7 @@
 
 [EN](https://github.com/Kuri-su/CAPTCHA_Reader "EN" )
 
-### 对各种验证码的支持现状
+### 对 各种验证码 的支持现状
 * `正方教务系统验证码` 已经完全支持，精简后的 验证码字典样本数 为 `500条` (不继续往上加是样本不够了。。。。)，不加上网络延时的运行用时在 `0.14s` - `0.2s` 之间，
 
 `例示 :` ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/1508770737.png)
