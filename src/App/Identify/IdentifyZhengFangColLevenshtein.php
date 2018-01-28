@@ -37,11 +37,6 @@ class IdentifyZhengFangColLevenshtein extends Restriction
         $this->charPixedCollection = $this->resultContainer->getCharPixedCollection();
 
         $this->dictionary = $this->getDictionary($this->conf['componentGroup'][$this->conf['useGroup']]['dictionary']);
-        //异常处理
-        if (!count($this->dictionary)) {
-            $this->resultContainer->setResultStr(null);
-            return $this->resultContainer;
-        }
 
         //将 数组 转为 字符串
         foreach ($this->charPixedCollection as $charPixed) {
@@ -49,6 +44,12 @@ class IdentifyZhengFangColLevenshtein extends Restriction
         }
 
         $this->resultContainer->setOneDCharStrArr($oneDCharStrArr);
+
+        //异常处理
+        if (!count($this->dictionary)) {
+            $this->resultContainer->setResultStr(null);
+            return $this->resultContainer;
+        }
 
         //在 字典中 寻找 相似度 最高的 样本
         $result = '';

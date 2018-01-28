@@ -42,6 +42,7 @@ trait CommonTrait
         $trainingConf = $this->getConfig('training');
         $sampleDir = $trainingConf['testSampleGroup'][$groupName];
         $testSets = $this->getTestSet($sampleDir);
+
         if (empty($testSets)) {
             throw new \Exception('Test set is empty');
         }
@@ -87,13 +88,8 @@ trait CommonTrait
      */
     public function getTestSet($dirPath)
     {
-        $fileList = [];
-        $dir = dir($dirPath);
-        while ($file = $dir->read()) {
-            array_push($fileList, $dirPath . $file);
-        }
-
-        $dir->close();
+        $fileList = scandir($dirPath);
+        array_splice($fileList, 0, 2);
         return $fileList;
     }
 
@@ -102,21 +98,21 @@ trait CommonTrait
      * @param array $fileList
      * @return array
      */
-    public function getDirAllFile($dirPath, $fileList = [])
+    public function getDirAllFile($dirPath)
     {
-        $dir = dir($dirPath);
-        while ($file = $dir->read()) {
-            if ((is_dir($dirPath . $file)) && ($file != ".") && ($file != "..")) {
-                $fileListTMP = $this->getDirAllFile($dirPath . $file, $fileList);
-                array_merge($fileListTMP, $fileList);
+        $fileList = scandir($dirPath);
+        $fileListTmp = [];
+        array_splice($fileList, 0, 2);
+        foreach ($fileList as $key => $fileName) {
+            if (is_dir($dirPath . $fileName)) {
+                unset($fileList[$key]);
+                $fileListTmp_ = $this->getDirAllFile($dirPath . $fileName);
+                $fileListTmp = array_merge($fileListTmp, $fileListTmp_);
             } else {
-                if ($file === '.' || $file === '..') {
-                    continue;
-                }
-                array_push($fileList, $dirPath . $file);
+                $fileList[$key] = $dirPath . $fileName;
             }
         }
-        $dir->close();
+        $fileList = array_merge($fileList, $fileListTmp);
         return $fileList;
     }
 
@@ -152,11 +148,12 @@ trait CommonTrait
      * @param $dictionaryName
      * @return array|mixed
      */
-    public function getDictionary(  $dictionaryName ){
+    public function getDictionary($dictionaryName)
+    {
         if (!is_file(__DIR__ . '/../../src/Dictionary/' . $dictionaryName)) {
             return [];
         }
-        $dictionary     = json_decode( file_get_contents( __DIR__ . '/../../src/Dictionary/' . $dictionaryName ) , true );
+        $dictionary = json_decode(file_get_contents(__DIR__ . '/../../src/Dictionary/' . $dictionaryName), true);
         return $dictionary;
     }
 

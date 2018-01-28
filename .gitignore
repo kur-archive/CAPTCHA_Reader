@@ -2,6 +2,7 @@
 .idea
 sample/StudySamples/*
 sample/TestSamples/*
+sample/TmpSamples/*
 composer.lock
 vendor/
 src/App/test.php

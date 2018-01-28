@@ -25,12 +25,6 @@ return [
                 \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class,
                 \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class,
             ],
-            [
-                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class,
-                \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class,
-                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class,
-                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangCol::class,
-            ],
         ],
     ],
 
@@ -45,9 +39,9 @@ return [
 
     'studySampleGroup' => [
         'neea.edu.cn' => __DIR__ . '/../../sample/StudySamples/neea.edu.cn/',
-        'qinguo'      => __DIR__ . '/../../sample/StudySamples/qinguo/',
-        'tianyi'      => __DIR__ . '/../../sample/StudySamples/tianyi/',
-        'zhengfang'   => __DIR__ . '/../../sample/StudySamples/zhengfang/',
+        'qinguo'      => __DIR__ . '/../../sample/StudySamples/QinGuo/',
+        'tianyi'      => __DIR__ . '/../../sample/StudySamples/TianYi/',
+        'zhengfang'   => __DIR__ . '/../../sample/StudySamples/ZhengFang/',
     ],
 
     /*
@@ -60,9 +54,9 @@ return [
     */
     'testSampleGroup'  => [
         'neea.edu.cn' => __DIR__ . '/../../sample/TestSamples/neea.edu.cn/',
-        'qinguo'      => __DIR__ . '/../../sample/TestSamples/qinguo/',
-        'tianyi'      => __DIR__ . '/../../sample/TestSamples/tianyi/',
-        'zhengfang'   => __DIR__ . '/../../sample/TestSamples/zhengfang/',
+        'qinguo'      => __DIR__ . '/../../sample/TestSamples/QinGuo/',
+        'tianyi'      => __DIR__ . '/../../sample/TestSamples/TianYi/',
+        'zhengfang'   => __DIR__ . '/../../sample/TestSamples/ZhengFang/',
     ],
 
     /*

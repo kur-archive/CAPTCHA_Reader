@@ -30,10 +30,10 @@ return [
             'components' => [
                 \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
                 \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class ,
-                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangMove::class ,
+                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
                 \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class ,
             ] ,
-            'dictionary' => 'ZhengFangNormal.json' ,
+            'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json' ,
         ] ,
     ] ,
 

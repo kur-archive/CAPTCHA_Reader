@@ -22,14 +22,10 @@ trait IdentifyTrait
 
     /**
      * @param $label
-     * @return IdentifyZhengFangColLevenshteinRepository|IdentifyZhengFangColRepository|IdentifyZhengFangRowColLevenshteinRepository|IdentifyZhengFangRowColRepository
+     * @return IdentifyZhengFangColLevenshteinRepository|IdentifyZhengFangColRepository
      */
     public function getRepository( $label ){
         switch ($label) {
-            case 'ZhengFangRowColLevenshtein':
-                return new IdentifyZhengFangRowColLevenshteinRepository();
-            case 'ZhengFangRowCol':
-                return new IdentifyZhengFangRowColRepository();
             case 'ZhengFangColLevenshtein':
                 return new IdentifyZhengFangColLevenshteinRepository();
             case 'ZhengFangCol':

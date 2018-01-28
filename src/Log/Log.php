@@ -28,7 +28,7 @@ class Log
      */
     public static function writeMultipleTestsLog($groupName, $testLog, $trainingId, $testSetNumber)
     {
-        file_put_contents(__DIR__ . '/training/MultipleTestsLog' . $groupName . '_' . $trainingId . '_' . $testSetNumber, json_encode($testLog));
+        file_put_contents(__DIR__ . '/training/MultipleTestsLog_' . $groupName . '_' . $trainingId . '_' . $testSetNumber, json_encode($testLog));
     }
 
     /**
@@ -38,9 +38,9 @@ class Log
      * @param $trainingId
      * @param $labelNumber
      */
-    public static function writeAddSamplesAutoLog($groupName, $percent,$dictionarySampleCount, $trainingId,$labelNumber)
+    public static function writeAddSamplesAutoLog($groupName, $percent, $dictionarySampleCount, $trainingId, $labelNumber)
     {
-        file_put_contents(__DIR__ . '/training/AddSamplesAutoLog' . $groupName . '_' . $trainingId . '_' . $labelNumber, "$groupName --- $labelNumber --- $trainingId --- $dictionarySampleCount --- {$percent['correctRate']} --- {$percent['charCorrectRate']} \n\n",FILE_APPEND);
+        file_put_contents(__DIR__ . '/training/AddSamplesAutoLog' . $groupName . '_' . $trainingId . '_' . $labelNumber, "$groupName --- $labelNumber --- $trainingId --- $dictionarySampleCount --- {$percent['correctRate']} --- {$percent['charCorrectRate']} \n\n", FILE_APPEND);
 
     }
 

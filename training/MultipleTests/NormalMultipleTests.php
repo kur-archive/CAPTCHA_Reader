@@ -53,6 +53,7 @@ class NormalMultipleTests implements TestsInterface
                 $answer = $indexController->entrance($sampleFilePath, 'local');
                 //进行判断，得到判断结果数组
                 $judgmentResult = $this->judgment($trueAnswer, $answer);
+                dump($judgmentResult);
                 if ($judgmentResult['result']) {
                     ++$resultDistributed['true'];
                 } else {
@@ -71,11 +72,11 @@ class NormalMultipleTests implements TestsInterface
             $testLog['resultDistributed'] = $resultDistributed;
             Log::writeMultipleTestsLog($groupName, $testLog, $trainingId, $testSetNumber);
 
-            $resultArr[] = [
+            $resultArr = [
                 'correctRate'     =>
                     ($resultDistributed['true'] / $resultDistributed['count']) * 100,
                 'charCorrectRate' =>
-                    ($resultDistributed['charTrue'] / ($resultDistributed['count'] * 4 * 100)),
+                    ($resultDistributed['charTrue'] / ($resultDistributed['count'] * 4 )* 100),
             ];
         }
 

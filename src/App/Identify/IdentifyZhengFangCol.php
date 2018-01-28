@@ -27,7 +27,7 @@ class IdentifyZhengFangCol extends Restriction
 
     public function __construct()
     {
-        $this->identifyRepository = $this->getRepository('ZhengFangRow');
+        $this->identifyRepository = $this->getRepository('ZhengFangCol');
     }
 
     function run(ResultContainer $resultContainer)

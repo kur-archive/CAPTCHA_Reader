@@ -88,6 +88,7 @@ class AddSamplesAuto
                     preg_match('/\w+(?=\.?\w+$)/', $samplePath, $matches);
                     $correctAnswer = $matches[0];
                     $answer = $resultContainer->getResultStr();
+                    dump($correctAnswer, $answer);
 
                     if ($correctAnswer == $answer) {
                         continue;
@@ -97,8 +98,11 @@ class AddSamplesAuto
                     $oneDCharStr = $resultContainer->getOneDCharStrArr();
 
                     //将错误识别错误的字母添加到字典
-                    for ($i = 0; $i < strlen($answer); ++$i) {
+                    for ($i = 0; $i < strlen($correctAnswer); ++$i) {
+
                         if ($correctAnswer[$i] != $answer[$i]) {
+                            dump($correctAnswer[$i] . ' --------- ' . $answer[$i] .' --------- ' . 'error');
+                            dump($this->getDictionarySampleCount($this->indexController));
                             $this->addSampleToDictionary($correctAnswer[$i], $oneDCharStr[$i], $this->indexController);
                             if (!($this->getDictionarySampleCount($this->indexController) % 100)) {
                                 // 如果批量测试 正确率大于既定值，则结束训练
@@ -109,10 +113,7 @@ class AddSamplesAuto
                                 Log::writeAddSamplesAutoLog($groupName, $testResult, $this->getDictionarySampleCount($this->indexController), $this->trainingId, $key_);
 
                                 if ($testResult['correctRate'] > $this->trainingConf['testSuccessRateLine']) {
-                                    echo "\n\n\n\n\n\n\n";
-                                    echo "*****************************************************************";
-                                    echo "*****************************************************************";
-                                    echo "\ntraining success \n reason: The overall accuracy rate reached the standard ///\n";
+                                    $this->echoOverallAccuracyExceedTheLimit();
                                     $endFlag = true;
                                     break;
                                 }
@@ -128,10 +129,7 @@ class AddSamplesAuto
                     //在比对结果的过程中，如果样本数到达某个阈值，则开始批量测试，如果到达退出阈值则输出结果，结束学习过程，
                     //TODO 结束的时候需要全部测试集测试
                     if ($this->getDictionarySampleCount($this->indexController) > $this->trainingConf['dictionarySampleLimit']) {
-                        echo "\n\n\n\n\n\n\n";
-                        echo "*****************************************************************";
-                        echo "*****************************************************************";
-                        echo "\ntraining success \n reason: dict sample number more than setting value ///\n";
+                        $this->echoSampleExceedTheLimit();
                         break;
                     }
                 }
@@ -151,6 +149,22 @@ class AddSamplesAuto
             $name .= $matches[0] . '-';
         }
         return substr($name, 0, strlen($name) - 1) . '.json';
+    }
+
+    public function echoSampleExceedTheLimit()
+    {
+        echo "\n\n\n\n\n\n\n";
+        echo "*****************************************************************";
+        echo "*****************************************************************";
+        echo "\ntraining success \n reason: dict sample number more than setting value ///\n";
+    }
+
+    public function echoOverallAccuracyExceedTheLimit()
+    {
+        echo "\n\n\n\n\n\n\n";
+        echo "*****************************************************************";
+        echo "*****************************************************************";
+        echo "\ntraining success \n reason: The overall accuracy rate reached the standard ///\n";
     }
 
 
