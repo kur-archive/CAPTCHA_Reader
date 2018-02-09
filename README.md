@@ -1,33 +1,34 @@
 ## CAPTCHA_Reader
 验证码识别与训练 框架
 
- ![](https://img.shields.io/packagist/l/doctrine/orm.svg)
- ![](https://img.shields.io/badge/php-%5E7.0.0-green.svg)
+![](https://img.shields.io/packagist/l/doctrine/orm.svg)
+![](https://img.shields.io/badge/php-%5E7.0.0-green.svg)
 
 
 [EN](https://github.com/Kuri-su/CAPTCHA_Reader "EN" )
 
-### 对 各种验证码 的支持现状
-* `正方教务系统验证码` 已经完全支持，精简后的 验证码字典样本数 为 `500条` (不继续往上加是样本不够了。。。。)，不加上网络延时的运行用时在 `0.14s` - `0.2s` 之间，
+## 对 各种验证码 的支持现状
 
-`例示 :` ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/1508770737.png)
 
-> 测试集测试的结果 》
->
-> `200`个测试样本 中 整体识别正确率 `87%`，单个字母识别正确率率到 `96.5`
-> 待补足样本后，会有更高的整体识别率
+* **正方教务系统验证码** 已经完全支持，精简后的 验证码字典样本数 为 `500` 条 (不继续往上加是样本不够了....)，不加上网络延时的耗时在 `0.14s - 0.2s` 之间，
 
-* `青果教务系统验证码` 正在支持中，请等待
+  例示 : ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/1508770737.png)
+  > 测试集测试的结果
+  >
+  > `200`个测试样本 中 整体识别正确率 `87%`，单个字母识别正确率率到 `96.5%`
+  > 待补足样本后，会有更高的整体识别率
 
-`例示 :` ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/0.png)
+* **青果教务系统验证码** 正在支持中，请等待
 
-* `天翼校园网认证验证码` 正在支持中
+  例示 : ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/0.png)
 
-`例示 :` ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/1.png)
+* **天翼校园网认证验证码** 正在支持中
 
-* `neea.edu.cn` 正在支持中，请等待 (这站巨烦。。。down验证码还要把之前的东西作为请求体。。。)
+  例示 : ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/1.png)
 
-`例示 :` ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/a91518a87b984b1b88d3983178ec5cad.png)
+* **neea.edu.cn** 正在支持中，请等待
+
+  例示 : ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/a91518a87b984b1b88d3983178ec5cad.png)
 
 ## Examples
 `待添加`
