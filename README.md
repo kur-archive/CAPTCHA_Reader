@@ -34,7 +34,26 @@
 `待添加`
 
 ## How to use
-`待添加`
+* Get Started Now
+    * 执行 `git clone https://github.com/Kuri-su/CAPTCHA_Reader.git`
+    * 在根目录下执行`composer update`
+    *  不用管 `sample`,`training`,`vendor`, 直接进入 `src/App/index.php` 下，仿照该文件的调用方式即可，例示代码段如下
+    ```php
+    <?php
+    use CAPTCHAReader\src\App\IndexController;
+    
+    $indexController = new IndexController();  
+    $res = $indexController->entrance(
+      'http://61.142.33.204/CheckCode.aspx',
+      'online');
+    ```
+    输出例示如下：
+    
+        qacd
+    > 会直接输出结果
+
+* Develop
+  * `待添加`
 
 ## Update plan
 * :heavy_check_mark: 更有效率的字典训练方法
