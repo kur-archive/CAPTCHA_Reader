@@ -18,7 +18,7 @@
   > `200`个测试样本 中 整体识别正确率 `87%`，单个字母识别正确率率到 `96.5%`
   > 待补足样本后，会有更高的整体识别率
 
-* **青果教务系统验证码** 正在支持中，请等待
+* **青果教务系统验证码** 思路已经明确，编写中
 
   例示 : ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/0.png)
 
@@ -26,7 +26,7 @@
 
   例示 : ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/1.png)
 
-* **neea.edu.cn** 正在支持中，请等待
+* **neea.edu.cn** 可能是为了防御四六级的查询高峰，新增了（阴影，固定网格，加强扭曲）的验证码，所以延后
 
   例示 : ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/a91518a87b984b1b88d3983178ec5cad.png)
 
