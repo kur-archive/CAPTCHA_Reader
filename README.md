@@ -4,8 +4,11 @@
 ![](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![](https://img.shields.io/badge/php-%5E7.0.0-green.svg)
 
+> 需要最初一个 PHP 脚本的版本前往 [master branch](https://github.com/Kuri-su/CAPTCHA_Reader/tree/master)
 
-[EN](https://github.com/Kuri-su/CAPTCHA_Reader "EN" )
+```python
+  # [EN](https:// "EN" )
+```
 
 ## 对 各种验证码 的支持现状
 
