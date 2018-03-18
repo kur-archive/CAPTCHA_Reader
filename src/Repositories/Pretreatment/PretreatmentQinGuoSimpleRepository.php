@@ -11,7 +11,7 @@ namespace CAPTCHAReader\src\Repository\Pretreatment;
 
 use CAPTCHAReader\src\Traits\CommonTrait;
 
-class PretreatmentQinGuoRepository
+class PretreatmentQinGuoSimpleRepository
 {
     use CommonTrait;
 
@@ -28,15 +28,14 @@ class PretreatmentQinGuoRepository
         for ($y = 0; $y < $height; ++$y) {
             for ($x = 0; $x < $width; ++$x) {
                 $rgbArray = $this->getPixelRGB($image, $x, $y);
-                if ($rgbArray['red'] < 180 && $rgbArray['green'] < 180 && $rgbArray['blue'] < 180) {
-                    $imageArr[$y][$x] = '1';
+                if ($rgbArray['red'] > 230 && $rgbArray['green'] > 230 && $rgbArray['blue'] > 230) {
+                    $imageArr[$y][$x] = '0';
                 } else {
+                    $imageArr[$y][$x] = '1';
+                }
+                if ($x == 0 || $y < 12 || $x == $width - 1 || $y == $height - 1) {
                     $imageArr[$y][$x] = '0';
                 }
-                if ($x == 0 || $y == 0 || $x == $width - 1 || $y == $height - 1) {
-                    $imageArr[$y][$x] = '0';
-                }
-
             }
         }
         return $imageArr;
@@ -67,7 +66,7 @@ class PretreatmentQinGuoRepository
      * @return mixed
      * 简单的降噪方法
      */
-    public function simpleNoiseCancel($width, $height, $array)
+    public function SimpleNoiseCancel($width, $height, $array)
     {
         for ($y = 0; $y < $height; ++$y) {
             for ($x = 0; $x < $width; ++$x) {
@@ -112,70 +111,7 @@ class PretreatmentQinGuoRepository
 
                 if ($array[$y][$x]) {
                     //如果周围的像素数量小于3（也就是为1，或2）则判定为噪点，去除
-                    if ($num < 3) {
-                        $array[$y][$x] = '0';
-                    } else {
-                        $array[$y][$x] = '1';
-                    }
-                }
-            }
-        }
-        return $array;
-    }
-
-    /**
-     * @param $width
-     * @param $height
-     * @param $array
-     * @return mixed
-     * 简单的降噪方法
-     */
-    public function noiseCancel($width, $height, $array)
-    {
-        for ($y = 0; $y < $height; ++$y) {
-            for ($x = 0; $x < $width; ++$x) {
-                //计算5*5的领点
-                /** y x
-                 * -2-2 -2-1 -2-0 -2+1 -2+2
-                 * -1-2 -1-1 -1-0 -1+1 -1+2
-                 * -0-2 -0-1 -0-0 -0+1 -0+2
-                 * +1-2 +1-1 +1-0 +1+1 +1+2
-                 * +2-2 +2-1 +2-0 +2+1 +2+2
-                 */
-                $num = 0;
-                $num += $array[$y - 2][$x - 2] ?? 0;
-                $num += $array[$y - 2][$x - 1] ?? 0;
-                $num += $array[$y - 2][$x] ?? 0;
-                $num += $array[$y - 2][$x + 1] ?? 0;
-                $num += $array[$y - 2][$x + 2] ?? 0;
-
-                $num += $array[$y - 1][$x - 2] ?? 0;
-                $num += $array[$y - 1][$x - 1] ?? 0;
-                $num += $array[$y - 1][$x] ?? 0;
-                $num += $array[$y - 1][$x + 1] ?? 0;
-                $num += $array[$y - 1][$x + 2] ?? 0;
-
-                $num += $array[$y][$x - 2] ?? 0;
-                $num += $array[$y][$x - 1] ?? 0;
-                $num += $array[$y][$x] ?? 0;
-                $num += $array[$y][$x + 1] ?? 0;
-                $num += $array[$y][$x + 2] ?? 0;
-
-                $num += $array[$y + 1][$x - 2] ?? 0;
-                $num += $array[$y + 1][$x - 1] ?? 0;
-                $num += $array[$y + 1][$x] ?? 0;
-                $num += $array[$y + 1][$x + 1] ?? 0;
-                $num += $array[$y + 1][$x + 2] ?? 0;
-
-                $num += $array[$y + 2][$x - 2] ?? 0;
-                $num += $array[$y + 2][$x - 1] ?? 0;
-                $num += $array[$y + 2][$x] ?? 0;
-                $num += $array[$y + 2][$x + 1] ?? 0;
-                $num += $array[$y + 2][$x + 2] ?? 0;
-
-                if ($array[$y][$x]) {
-                    //如果周围的像素数量小于3（也就是为1，或2）则判定为噪点，去除
-                    if ($num < 5) {
+                    if ($num < 4) {
                         $array[$y][$x] = '0';
                     } else {
                         $array[$y][$x] = '1';
@@ -214,7 +150,7 @@ class PretreatmentQinGuoRepository
                     //左
                     $sum += $arr[$indexY][$indexX - 1];
                     //左下
-                    $sum += $bottom ? $arr[$indexY + 1][$indexX - 1] : 0;
+//                    $sum += $bottom ? $arr[$indexY + 1][$indexX - 1] : 0;
                 }
                 if ($bottom) {
                     //正下
@@ -222,14 +158,14 @@ class PretreatmentQinGuoRepository
                 }
                 if ($rightmost) {
                     //右上
-                    $sum += $top ? $arr[$indexY - 1][$indexX + 1] : 0;
+//                    $sum += $top ? $arr[$indexY - 1][$indexX + 1] : 0;
                     //右
                     $sum += $arr[$indexY][$indexX + 1];
                     //右下
 //                    $sum += $bottom ? $arr[$indexY + 1][$indexX + 1] : 0;
                 }
 
-                if ($sum < 5) {
+                if ($sum < 4) {
                     $result[$indexY][$indexX] = 0;
                 } else {
                     $result[$indexY][$indexX] = 1;

@@ -13,14 +13,13 @@ use CAPTCHAReader\src\App\Abstracts\Restriction;
 use CAPTCHAReader\src\App\ResultContainer;
 use CAPTCHAReader\src\Traits\PretreatmentTrait;
 
-class PretreatmentQinGuo extends Load
+class PretreatmentNeea extends Load
 {
     use PretreatmentTrait;
 
     private $conf;
     private $resultContainer;
     private $pretreatmentRepository;
-
 
     /**
      * PretreatmentZhengFang constructor.
@@ -29,7 +28,7 @@ class PretreatmentQinGuo extends Load
     public function __construct(Restriction $nextStep)
     {
         parent::__construct($nextStep);
-        $this->pretreatmentRepository = $this->getRepository('QinGuo');
+        $this->pretreatmentRepository = $this->getRepository('Neea');
     }
 
     /**
@@ -40,42 +39,31 @@ class PretreatmentQinGuo extends Load
     {
         $this->resultContainer = $resultContainer;
         $this->conf = $this->resultContainer->getConf();
+
         $imageInfo = $this->resultContainer->getImageInfo();
         $image = $this->resultContainer->getImage();
-        imagefilter($image, IMG_FILTER_GRAYSCALE);
-//        imagejpeg($image, 'test.jpg');
-//        imagefilter($image, IMG_FILTER_CONTRAST,-20);
-//        imagefilter($image, IMG_FILTER_EMBOSS);
-//        imagejpeg($image, 'test1.jpg');
-//        self::dd(1);
 
-        //首先進行顏色統計
-//        $colorAggs = $this->pretreatmentRepository->colorAggregation($image, $imageInfo['width'], $imageInfo['height']);
-//        self::dd($image);
-//        self::dd($colorAggs);
+        //首先确定类型，
+        $CAPTCHAType = $this->pretreatmentRepository->checkCAPTCHAType($image);
 
-//        $colorTop4 = [];
-//
-//        foreach ($colorAggs as $value) {
-//            if (count($colorTop4) == 4) {
-//                break;
-//            }
-//            $colorTop4[] = [
-//                'red'   => $value['red'],
-//                'green' => $value['green'],
-//                'blue'  => $value['blue'],
-//            ];
-//        }
-//        self::dd($colorTop4);
+
+//        如果这里是A类型，就需要先去网格
+        if ($CAPTCHAType == 'A') {
+            //统计各种颜色的点位的量
+            $colorAggs = $this->pretreatmentRepository->colorAggregation($image, $imageInfo['width'], $imageInfo['height']);
+            self::dd($colorAggs);
+        }
 
         //二值化
-        $imageBinaryArr = $this->pretreatmentRepository->binarization($imageInfo['width'], $imageInfo['height'], $image, $colorTop4 ?? '');
+        $imageBinaryArr = $this->pretreatmentRepository->binarization($imageInfo['width'], $imageInfo['height'], $image);
+        $this->showResArr($imageBinaryArr);
+        self::dd(1);
 
         //去掉散点
+//        $noiseCancelArr = $this->pretreatmentRepository->SimpleNoiseCancel($imageInfo['width'], $imageInfo['height'], $imageBinaryArr);
         $noiseCancelArr = $imageBinaryArr;
-        $noiseCancelArr = $this->pretreatmentRepository->erosion($imageBinaryArr, $imageInfo['width'], $imageInfo['height']);
-        $noiseCancelArr = $this->pretreatmentRepository->noiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
-        $noiseCancelArr = $this->pretreatmentRepository->simpleNoiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
+
+
 
         $this->resultContainer->unsetImage();
         $this->resultContainer->setImageBinaryArr($imageBinaryArr);

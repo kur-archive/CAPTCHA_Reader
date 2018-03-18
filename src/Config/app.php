@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'useGroup' => 'ZhengFangNormal' ,
+    'useGroup' => 'QinGuoNormal' ,
 
     /*
     |--------------------------------------------------------------------------
@@ -30,6 +30,33 @@ return [
             'components' => [
                 \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
                 \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class ,
+                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
+                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class ,
+            ] ,
+            'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json' ,
+        ] ,
+        'QinGuoNormal' => [
+            'components' => [
+                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuo::class ,
+                \CAPTCHAReader\src\App\Cutting\CuttingQinGuo::class ,
+                \CAPTCHAReader\src\App\Identify\IdentifyQinGuo::class ,
+            ] ,
+            'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json' ,
+        ] ,
+        'TianYiNormal' => [
+            'components' => [
+                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentTianYi::class ,
+                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
+                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class ,
+            ] ,
+            'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json' ,
+        ] ,
+        'NeeaNormal' => [
+            'components' => [
+                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentNeea::class ,
                 \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
                 \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class ,
             ] ,

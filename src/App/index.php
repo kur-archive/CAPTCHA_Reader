@@ -8,10 +8,15 @@
 $start_time = microtime(true);//运行时间开始计时
 
 require_once(__DIR__ . '/../../vendor/autoload.php');
+
 use CAPTCHAReader\src\App\IndexController;
 
 $a = new IndexController();
-$c=$a->entrance('http://61.142.33.204/CheckCode.aspx','online');
+
+//$c=$a->entrance(__DIR__.'/../../sample/TmpSamples/0736425001517150928.gif','local');
+$c=$a->entrance(__DIR__.'/../../sample/StudySamples/QinGuo/2dww.png','local');
+//$c = $a->entrance(__DIR__ . '/../../sample/1.png', 'local');
+//$c=$a->entrance(__DIR__.'/../../sample/StudySamples/neea.edu.cn/3fyn.png','local');
 dump($c);
 
 $end_time = microtime(true);//计时停止

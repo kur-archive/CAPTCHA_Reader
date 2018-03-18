@@ -13,7 +13,7 @@ use CAPTCHAReader\src\App\Abstracts\Restriction;
 use CAPTCHAReader\src\App\ResultContainer;
 use CAPTCHAReader\src\Traits\PretreatmentTrait;
 
-class PretreatmentQinGuo extends Load
+class PretreatmentQinGuoSimple extends Load
 {
     use PretreatmentTrait;
 
@@ -29,7 +29,7 @@ class PretreatmentQinGuo extends Load
     public function __construct(Restriction $nextStep)
     {
         parent::__construct($nextStep);
-        $this->pretreatmentRepository = $this->getRepository('QinGuo');
+        $this->pretreatmentRepository = $this->getRepository('QinGuoSimple');
     }
 
     /**
@@ -40,13 +40,15 @@ class PretreatmentQinGuo extends Load
     {
         $this->resultContainer = $resultContainer;
         $this->conf = $this->resultContainer->getConf();
+
         $imageInfo = $this->resultContainer->getImageInfo();
         $image = $this->resultContainer->getImage();
-        imagefilter($image, IMG_FILTER_GRAYSCALE);
+//        imagefilter($image, IMG_FILTER_GRAYSCALE);
 //        imagejpeg($image, 'test.jpg');
-//        imagefilter($image, IMG_FILTER_CONTRAST,-20);
-//        imagefilter($image, IMG_FILTER_EMBOSS);
-//        imagejpeg($image, 'test1.jpg');
+        imagefilter($image, IMG_FILTER_CONTRAST,-40);
+
+        imagefilter($image, IMG_FILTER_BRIGHTNESS,50);
+        imagejpeg($image, 'test1.jpg');
 //        self::dd(1);
 
         //首先進行顏色統計
@@ -73,9 +75,8 @@ class PretreatmentQinGuo extends Load
 
         //去掉散点
         $noiseCancelArr = $imageBinaryArr;
-        $noiseCancelArr = $this->pretreatmentRepository->erosion($imageBinaryArr, $imageInfo['width'], $imageInfo['height']);
-        $noiseCancelArr = $this->pretreatmentRepository->noiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
-        $noiseCancelArr = $this->pretreatmentRepository->simpleNoiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
+//        $noiseCancelArr = $this->pretreatmentRepository->erosion($imageBinaryArr, $imageInfo['width'], $imageInfo['height']);
+        $noiseCancelArr = $this->pretreatmentRepository->SimpleNoiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
 
         $this->resultContainer->unsetImage();
         $this->resultContainer->setImageBinaryArr($imageBinaryArr);

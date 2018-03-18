@@ -9,6 +9,8 @@
 namespace CAPTCHAReader\src\Traits;
 
 
+use CAPTCHAReader\src\Repository\Cutting\CuttingNeeaRepository;
+use CAPTCHAReader\src\Repository\Cutting\CuttingQinGuoRepository;
 use CAPTCHAReader\src\Repository\Cutting\CuttingZhengFangFixedRepository;
 use CAPTCHAReader\src\Repository\Cutting\CuttingZhengFangMoveRepository;
 
@@ -18,7 +20,7 @@ trait CuttingTrait
 
     /**
      * @param string $label
-     * @return CuttingZhengFangFixedRepository|CuttingZhengFangMoveRepository
+     * @return CuttingNeeaRepository|CuttingQinGuoRepository|CuttingZhengFangFixedRepository|CuttingZhengFangMoveRepository
      */
     public function getRepository( string $label ){
         switch ($label) {
@@ -26,6 +28,10 @@ trait CuttingTrait
                 return new CuttingZhengFangFixedRepository();
             case "ZhengFangMove":
                 return new CuttingZhengFangMoveRepository();
+            case "QinGuo":
+                return new CuttingQinGuoRepository();
+            case "Neea":
+                return new CuttingNeeaRepository();
         }
     }
 

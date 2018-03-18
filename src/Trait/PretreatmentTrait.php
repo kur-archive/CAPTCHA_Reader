@@ -9,22 +9,32 @@
 namespace CAPTCHAReader\src\Traits;
 
 
+use CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuoSimple;
+use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentNeeaRepository;
 use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentQinGuoRepository;
+use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentQinGuoSimpleRepository;
+use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentTianYiRepository;
 use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentZhengFangRepository;
 
 trait PretreatmentTrait
 {
     use CommonTrait;
 
-    public function getRepository( string $label ){
+    public function getRepository(string $label)
+    {
         switch ($label) {
             case 'ZhengFang':
                 return new PretreatmentZhengFangRepository();
             case 'QinGuo':
                 return new PretreatmentQinGuoRepository();
+            case 'QinGuoSimple':
+                return new PretreatmentQinGuoSimpleRepository();
+            case 'TianYi':
+                return new  PretreatmentTianYiRepository();
+            case 'Neea':
+                return new PretreatmentNeeaRepository();
         }
     }
-
 
 
 }
