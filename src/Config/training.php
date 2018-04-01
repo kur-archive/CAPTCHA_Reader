@@ -18,12 +18,12 @@ return [
     */
 
     'studyGroup' => [
-        'zhengfang' => [
+        'qinguo' => [
             [
                 \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class,
-                \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class,
-                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class,
-                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuo::class,
+                \CAPTCHAReader\src\App\Cutting\CuttingQinGuo::class,
+                \CAPTCHAReader\src\App\Identify\IdentifyQinGuo::class,
             ],
         ],
     ],

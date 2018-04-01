@@ -47,10 +47,10 @@ trait CommonTrait
 //                echo ' ';
 //            }
             foreach ($resY as $key2 => $resX) {
-                if (in_array($key2, [35, 65, 92])) {
-                    echo '●';
-                    continue;
-                }
+//                if (in_array($key2, [30, 51, 68])) {
+//                    echo '●';
+//                    continue;
+//                }
                 $resX ? $output = 'l' : $output = '_';
                 echo $output;
             }
@@ -62,16 +62,16 @@ trait CommonTrait
 
     public function showResArrAndAggs($imageArr)
     {
-        $height= count($imageArr);
+        $height = count($imageArr);
         $width = count($imageArr[0]);
 
         foreach ($imageArr as $key => $resY) {
 
             foreach ($resY as $key2 => $resX) {
-                if (in_array($key2, [35, 65, 92])) {
-                    echo '●';
-                    continue;
-                }
+//                if (in_array($key2, [35, 65, 92])) {
+//                    echo '●';
+//                    continue;
+//                }
                 $resX ? $output = 'l' : $output = '_';
                 echo $output;
             }
@@ -82,11 +82,33 @@ trait CommonTrait
 
         $aggs = [];
         //获取每一列的像素数量
+//        for ($i = 0; $i < $width; ++$i) {
+//            for ($j = 0; $j < $height; ++$j) {
+//                $aggs[$i] = ($aggs[$i] ?? 0) + $imageArr[$j][$i];
+//            }
+//        }
+
+        //获取每一行的投影
         for ($i = 0; $i < $width; ++$i) {
+            $start = 0;
+            $startFlag = 0;
+            $end = 0;
             for ($j = 0; $j < $height; ++$j) {
-                $aggs[$i] = ($aggs[$i] ?? 0) + $imageArr[$j][$i];
+                if ($imageArr[$j][$i]) {
+                    if (!$startFlag) {
+                        $start = $j;
+                        $startFlag = 1;
+                    }
+                }
+                if ($imageArr[$j][$i]) {
+                    $end = $j + 1;
+                }
+                if ($j == $height - 1) {
+                    $aggs[$i] = $end - $start;
+                }
             }
         }
+
         $floor = 0;
         while (true) {
             $flag = 0;
@@ -117,6 +139,11 @@ trait CommonTrait
         $rgbArray = imagecolorsforindex($image, imagecolorat($image, $x, $y));
         return $rgbArray;
     }
+
+//    public function colProjection($)
+//    {
+//
+//    }
 
 
 }
