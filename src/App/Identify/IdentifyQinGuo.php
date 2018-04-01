@@ -27,7 +27,7 @@ class IdentifyQinGuo extends Restriction
 
     public function __construct()
     {
-        $this->identifyRepository = $this->getRepository('ZhengFangCol');
+        $this->identifyRepository = $this->getRepository('QinGuo');
     }
 
     function run(ResultContainer $resultContainer)
