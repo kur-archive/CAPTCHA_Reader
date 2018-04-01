@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: kurisu
  * Date: 2018/01/13
- * Time: 1:03
+ * Time: 1:10
  */
 
 namespace CAPTCHAReader\src\App\Cutting;
@@ -34,11 +34,11 @@ class CuttingNeea extends Load
     function run(ResultContainer $resultContainer)
     {
         $this->resultContainer = $resultContainer;
-        $this->conf = $this->resultContainer->getConf();
-        $this->imageInfo = $this->resultContainer->getImageInfo();
-        $this->noiseCancelArr = $this->resultContainer->getNoiseCancelArr();
+        $this->conf            = $this->resultContainer->getConf();
+        $this->imageInfo       = $this->resultContainer->getImageInfo();
+        $this->noiseCancelArr  = $this->resultContainer->getNoiseCancelArr();
 
-        $this->noiseCancelArr = $this->cuttingRepository->droplet($this->noiseCancelArr); 
+        $this->noiseCancelArr = $this->cuttingRepository->droplet($this->noiseCancelArr);
 
         $this->showResArr( $this->noiseCancelArr );
         self::dd(1);
