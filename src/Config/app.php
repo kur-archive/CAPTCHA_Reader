@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'useGroup' => 'QinGuoNormal' ,
+    'useGroup' => 'NeeaNormal' ,
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
                 \CAPTCHAReader\src\App\Cutting\CuttingQinGuo::class ,
                 \CAPTCHAReader\src\App\Identify\IdentifyQinGuo::class ,
             ] ,
-            'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json' ,
+            'dictionary' => 'GetImageInfo-PretreatmentQinGuo-CuttingQinGuo-IdentifyQinGuo.json' ,
         ] ,
         'TianYiNormal' => [
             'components' => [
@@ -57,7 +57,7 @@ return [
             'components' => [
                 \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
                 \CAPTCHAReader\src\App\Pretreatment\PretreatmentNeea::class ,
-                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
+                \CAPTCHAReader\src\App\Cutting\CuttingNeea::class ,
                 \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class ,
             ] ,
             'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json' ,
