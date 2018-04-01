@@ -38,7 +38,7 @@ class CuttingNeea extends Load
         $this->imageInfo = $this->resultContainer->getImageInfo();
         $this->noiseCancelArr = $this->resultContainer->getNoiseCancelArr();
 
-        $this->noiseCancelArr = $this->cuttingRepository->droplet($this->noiseCancelArr);
+        $this->noiseCancelArr = $this->cuttingRepository->droplet($this->noiseCancelArr); 
 
         $this->showResArr( $this->noiseCancelArr );
         self::dd(1);
