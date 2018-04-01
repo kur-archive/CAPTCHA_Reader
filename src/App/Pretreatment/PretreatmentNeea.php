@@ -43,27 +43,36 @@ class PretreatmentNeea extends Load
         $imageInfo = $this->resultContainer->getImageInfo();
         $image = $this->resultContainer->getImage();
 
+
         //首先确定类型，
-        $CAPTCHAType = $this->pretreatmentRepository->checkCAPTCHAType($image);
-
-
+//        $CAPTCHAType = $this->pretreatmentRepository->checkCAPTCHAType($image);
+//
+//
 //        如果这里是A类型，就需要先去网格
-        if ($CAPTCHAType == 'A') {
-            //统计各种颜色的点位的量
-            $colorAggs = $this->pretreatmentRepository->colorAggregation($image, $imageInfo['width'], $imageInfo['height']);
-            self::dd($colorAggs);
-        }
+//        if ($CAPTCHAType == 'A') {
+//            统计各种颜色的点位的量
+//            $colorAggs = $this->pretreatmentRepository->colorAggregation($image, $imageInfo['width'], $imageInfo['height']);
+//            self::dd($colorAggs);
+//        }
 
         //二值化
         $imageBinaryArr = $this->pretreatmentRepository->binarization($imageInfo['width'], $imageInfo['height'], $image);
-        $this->showResArr($imageBinaryArr);
-        self::dd(1);
 
         //去掉散点
-//        $noiseCancelArr = $this->pretreatmentRepository->SimpleNoiseCancel($imageInfo['width'], $imageInfo['height'], $imageBinaryArr);
         $noiseCancelArr = $imageBinaryArr;
 
+        $noiseCancelArr = $this->pretreatmentRepository->expansion($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+        $noiseCancelArr = $this->pretreatmentRepository->erosion($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+        $noiseCancelArr = $this->pretreatmentRepository->erosion($noiseCancelArr, $imageInfo['width'], $imageInfo['height'],8);
+        $noiseCancelArr = $this->pretreatmentRepository->erosion($noiseCancelArr, $imageInfo['width'], $imageInfo['height'],8);
+//        $noiseCancelArr = $this->pretreatmentRepository->erosion($noiseCancelArr, $imageInfo['width'], $imageInfo['height'],8);
+        $noiseCancelArr = $this->pretreatmentRepository->noiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
+        $noiseCancelArr = $this->pretreatmentRepository->noiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
+//        $noiseCancelArr = $this->pretreatmentRepository->simpleNoiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
+        $noiseCancelArr = $this->pretreatmentRepository->shrink($noiseCancelArr);
 
+        $this->showResArrAndAggs($noiseCancelArr);
+        self::dd(1);
 
         $this->resultContainer->unsetImage();
         $this->resultContainer->setImageBinaryArr($imageBinaryArr);
