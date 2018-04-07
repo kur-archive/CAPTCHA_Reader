@@ -24,33 +24,31 @@
   >
   > `200`个测试样本 中 整体识别正确率 `90%`，单个字母识别正确率率到 `96.875%`
 
-* **天翼校园网认证验证码** 待支持中
+* **天翼校园网认证验证码** 待支持中2
   例示 : ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/1.png)
 
-* **neea.edu.cn** 待支持中
+* **neea.edu.cn** 待支持中1
   例示 : ![](https://github.com/Kuri-su/CAPTCHA_Reader/blob/oop/sample/a91518a87b984b1b88d3983178ec5cad.png)
 
-## Examples
+## Examples 
 `待添加`
 
 ## How to use
-* Get Started Now
-    * 执行 `git clone https://github.com/Kuri-su/CAPTCHA_Reader.git`
-    * 在根目录下执行`composer update` 
-    * 不用管 `sample`,`training`,`vendor`文件夹, 直接进入 `src/App/index.php` 下，仿照该文件的调用方式即可，例示代码段如下
-    ```php
-    <?php
-    use CAPTCHAReader\src\App\IndexController;
-    
-    $indexController = new IndexController();  
-    $res = $indexController->entrance(
-      'http://61.142.33.204/CheckCode.aspx',
-      'online');
-    ```
-    输出例示如下：
-    
-        qacd
-    > 会直接输出结果
+
+* 执行 `git clone https://github.com/Kuri-su/CAPTCHA_Reader.git`
+* 在根目录下执行`composer update` 
+* 不用管 `sample`,`training`,`vendor`文件夹, 直接进入 `src/App/index.php` 下，仿照该文件的调用方式即可，例示代码段如下
+```php
+<?php
+  use CAPTCHAReader\src\App\IndexController;
+
+  $indexController = new IndexController();
+  $res = $indexController->entrance('http://61.142.33.204/CheckCode.aspx','online');
+```
+输出例示如下：
+
+    qacd
+> 会直接输出结果
 
 * Develop
   * `待添加`
