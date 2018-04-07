@@ -64,10 +64,10 @@
 
   ![](docs/sample/qinguo.png)
 
-* **neea.edu.cn** 待支持中
+* **neea.edu.cn** 待支持中  
   ![](docs/sample/neea.png)
 
-* **天翼校园网认证验证码** 待支持中
+* **天翼校园网认证验证码** 待支持中  
   ![](docs/sample/tianyi.png)
 
 
