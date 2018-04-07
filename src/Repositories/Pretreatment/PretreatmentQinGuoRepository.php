@@ -312,4 +312,43 @@ class PretreatmentQinGuoRepository
     }
 
 
+    /**
+     * @param $arr
+     * @return array
+     */
+    public function shrink($arr)
+    {
+//        if (empty($arr)) {
+//            throw new \Exception('arr can\'t empty');
+//        }
+        $height = count($arr);
+        $weight = count($arr[0]);
+
+        $result = [];
+
+        for ($h = 0; $h < $height; $h += 2) {
+            for ($w = 0; $w < $weight; $w += 2) {
+                $sum = 0;
+                if ($arr[$h][$w] ?? 0) {
+                    ++$sum;
+                }
+                if ($arr[$h + 1][$w] ?? 0) {
+                    ++$sum;
+                }
+                if ($arr[$h + 1][$w] ?? 0) {
+                    ++$sum;
+                }
+                if ($arr[$h + 1][$w + 1] ?? 0) {
+                    ++$sum;
+                }
+                if ($sum) {
+                    $result[$h / 2][$w / 2] = 1;
+                } else {
+                    $result[$h / 2][$w / 2] = 0;
+                }
+            }
+        }
+        return $result;
+    }
+
 }

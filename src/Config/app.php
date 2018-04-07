@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'useGroup' => 'NeeaNormal' ,
+    'useGroup' => 'QinGuoNormal' ,
 
     /*
     |--------------------------------------------------------------------------
@@ -37,12 +37,12 @@ return [
         ] ,
         'QinGuoNormal' => [
             'components' => [
-                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
-                \CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuo::class ,
-                \CAPTCHAReader\src\App\Cutting\CuttingQinGuo::class ,
-                \CAPTCHAReader\src\App\Identify\IdentifyQinGuo::class ,
+                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuoShrink::class,
+                \CAPTCHAReader\src\App\Cutting\CuttingQinGuoShrink::class,
+                \CAPTCHAReader\src\App\Identify\IdentifyQinGuoLevenshtein::class,
             ] ,
-            'dictionary' => 'GetImageInfo-PretreatmentQinGuo-CuttingQinGuo-IdentifyQinGuo.json' ,
+            'dictionary' => 'GetImageInfo-PretreatmentQinGuoShrink-CuttingQinGuoShrink-IdentifyQinGuoLevenshtein.json' ,
         ] ,
         'TianYiNormal' => [
             'components' => [

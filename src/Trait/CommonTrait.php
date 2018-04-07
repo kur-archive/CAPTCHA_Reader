@@ -47,10 +47,10 @@ trait CommonTrait
 //                echo ' ';
 //            }
             foreach ($resY as $key2 => $resX) {
-//                if (in_array($key2, [30, 51, 68])) {
-//                    echo '●';
-//                    continue;
-//                }
+                if (in_array($key2, [30, 51, 68])) {
+                    echo '●';
+                    continue;
+                }
                 $resX ? $output = 'l' : $output = '_';
                 echo $output;
             }
@@ -68,10 +68,10 @@ trait CommonTrait
         foreach ($imageArr as $key => $resY) {
 
             foreach ($resY as $key2 => $resX) {
-//                if (in_array($key2, [35, 65, 92])) {
-//                    echo '●';
-//                    continue;
-//                }
+                if (in_array($key2, [18, 32, 46])) {
+                    echo '●';
+                    continue;
+                }
                 $resX ? $output = 'l' : $output = '_';
                 echo $output;
             }
@@ -145,5 +145,24 @@ trait CommonTrait
 //
 //    }
 
+    /**
+     * @param $charCollection
+     */
+    public function showChar($charCollection)
+    {
+        foreach ($charCollection as $key => $char) {
+            foreach ($char as $y => $row) {
+                foreach ($row as $x => $value) {
+                    if ($value) {
+                        echo 'l ';
+                    } else {
+                        echo '_ ';
+                    }
+                }
+                echo "\n";
+            }
+            echo "\n";
 
+        }
+    }
 }

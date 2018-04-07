@@ -21,9 +21,9 @@ return [
         'qinguo' => [
             [
                 \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class,
-                \CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuo::class,
-                \CAPTCHAReader\src\App\Cutting\CuttingQinGuo::class,
-                \CAPTCHAReader\src\App\Identify\IdentifyQinGuo::class,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuoShrink::class,
+                \CAPTCHAReader\src\App\Cutting\CuttingQinGuoShrink::class,
+                \CAPTCHAReader\src\App\Identify\IdentifyQinGuoLevenshtein::class,
             ],
         ],
     ],
@@ -84,6 +84,6 @@ return [
     | 自动训练到达触发的测试成功率线
     */
 
-    'testSuccessRateLine' => 85 ,
+    'testSuccessRateLine' => 95 ,
 
 ];

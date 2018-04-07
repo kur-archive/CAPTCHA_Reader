@@ -9,9 +9,8 @@
 namespace CAPTCHAReader\src\Traits;
 
 
+use CAPTCHAReader\src\Repository\Identify\IdentifyQinGuoColLevenshteinRepository;
 use CAPTCHAReader\src\Repository\Identify\IdentifyQinGuoColRepository;
-use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangRowColLevenshteinRepository;
-use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangRowColRepository;
 use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangColLevenshteinRepository;
 use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangColRepository;
 
@@ -23,7 +22,7 @@ trait IdentifyTrait
 
     /**
      * @param $label
-     * @return IdentifyQinGuoColRepository|IdentifyZhengFangColLevenshteinRepository|IdentifyZhengFangColRepository
+     * @return IdentifyQinGuoColLevenshteinRepository|IdentifyQinGuoColRepository|IdentifyZhengFangColLevenshteinRepository|IdentifyZhengFangColRepository
      */
     public function getRepository($label)
     {
@@ -34,6 +33,8 @@ trait IdentifyTrait
                 return new IdentifyZhengFangColRepository();
             case 'QinGuo':
                 return new IdentifyQinGuoColRepository();
+            case 'QinGuoLevenshtein':
+                return new IdentifyQinGuoColLevenshteinRepository();
         }
     }
 

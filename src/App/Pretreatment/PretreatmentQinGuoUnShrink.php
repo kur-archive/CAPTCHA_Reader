@@ -13,7 +13,7 @@ use CAPTCHAReader\src\App\Abstracts\Restriction;
 use CAPTCHAReader\src\App\ResultContainer;
 use CAPTCHAReader\src\Traits\PretreatmentTrait;
 
-class PretreatmentQinGuo extends Load
+class PretreatmentQinGuoUnShrink extends Load
 {
     use PretreatmentTrait;
 

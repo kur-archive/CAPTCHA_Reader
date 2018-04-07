@@ -10,7 +10,7 @@ namespace CAPTCHAReader\src\Repository\Cutting;
 
 use CAPTCHAReader\src\Traits\CuttingTrait;
 
-class CuttingQinGuoRepository
+class CuttingQinGuoUnShrinkRepository
 {
     use CuttingTrait;
 

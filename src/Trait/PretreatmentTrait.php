@@ -12,6 +12,7 @@ namespace CAPTCHAReader\src\Traits;
 use CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuoSimple;
 use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentNeeaRepository;
 use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentQinGuoRepository;
+use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentQinGuoUnShrinkRepository;
 use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentQinGuoSimpleRepository;
 use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentTianYiRepository;
 use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentZhengFangRepository;
@@ -27,8 +28,6 @@ trait PretreatmentTrait
                 return new PretreatmentZhengFangRepository();
             case 'QinGuo':
                 return new PretreatmentQinGuoRepository();
-            case 'QinGuoSimple':
-                return new PretreatmentQinGuoSimpleRepository();
             case 'TianYi':
                 return new  PretreatmentTianYiRepository();
             case 'Neea':

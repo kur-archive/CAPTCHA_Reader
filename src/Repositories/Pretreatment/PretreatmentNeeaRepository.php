@@ -397,6 +397,10 @@ class PretreatmentNeeaRepository
         return $result;
     }
 
+    /**
+     * @param $arr
+     * @return array
+     */
     public function shrink($arr)
     {
 //        if (empty($arr)) {

@@ -14,7 +14,7 @@ use CAPTCHAReader\src\App\Abstracts\Restriction;
 use CAPTCHAReader\src\App\ResultContainer;
 use CAPTCHAReader\src\Traits\CuttingTrait;
 
-class CuttingQinGuo extends Load
+class CuttingQinGuoUnShrink extends Load
 {
     use CuttingTrait;
 
@@ -27,7 +27,7 @@ class CuttingQinGuo extends Load
     public function __construct(Restriction $nextStep)
     {
         parent::__construct($nextStep);
-        $this->cuttingRepository = $this->getRepository('QinGuo');
+        $this->cuttingRepository = $this->getRepository('QinGuoUnShrink');
     }
 
 
@@ -39,6 +39,7 @@ class CuttingQinGuo extends Load
         $this->noiseCancelArr = $this->resultContainer->getNoiseCancelArr();
 
 //        $this->showResArrAndAggs($this->noiseCancelArr);
+
         list($width, $height) = [$this->imageInfo['width'], $this->imageInfo['height']];
 
         //获取坐标
