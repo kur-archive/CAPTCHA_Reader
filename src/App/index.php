@@ -8,11 +8,17 @@
 $start_time = microtime(true);//运行时间开始计时
 
 require_once(__DIR__ . '/../../vendor/autoload.php');
+
 use CAPTCHAReader\src\App\IndexController;
 
 $a = new IndexController();
-$c=$a->entrance('http://61.142.33.204/CheckCode.aspx','online');
+
+//$c=$a->entrance(__DIR__.'/../../sample/TmpSamples/0736425001517150928.gif','local');
+//$c = $a->entrance(__DIR__ . '/../../sample/StudySamples/QinGuo/8aed.png', 'local');
+$c = $a->entrance(__DIR__ . '/../../sample/StudySamples/unmark/qinGuo/20003.png', 'local');
+//$c = $a->entrance(__DIR__ . '/../../sample/1.png', 'local');
+//$c=$a->entrance(__DIR__.'/../../sample/StudySamples/neea.edu.cn/mpf3.png','local');
 dump($c);
 
 $end_time = microtime(true);//计时停止
-echo '执行时间为：' . ($end_time - $start_time) . ' s' . '<br/>';
+echo '执行时间为：' . ($end_time - $start_time) . ' s' . "<br/>\n";

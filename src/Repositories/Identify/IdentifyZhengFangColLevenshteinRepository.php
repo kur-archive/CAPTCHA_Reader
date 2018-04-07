@@ -13,17 +13,18 @@ use CAPTCHAReader\src\App\ResultContainer;
 
 class IdentifyZhengFangColLevenshteinRepository
 {
-    public function getHighestSimilarityResultLevenshtein( $oneDChar , $dictionary,ResultContainer $resultContainer ){
+    public function getHighestSimilarityResultLevenshtein($oneDChar, $dictionary, ResultContainer $resultContainer)
+    {
         $nowBest = [
-            'score' => 255 ,
-            'char'  => null ,
+            'score' => 255,
+            'char'  => null,
         ];
-        foreach($dictionary as $key => $sample){
-            $percent=levenshtein($oneDChar,$sample['rowStr']);
+        foreach ($dictionary as $key => $sample) {
+            $percent = levenshtein($oneDChar, $sample['rowStr']);
 
             if ($percent < $nowBest['score']) {
                 $nowBest['score'] = $percent;
-                $nowBest['char']  = $sample['char'];
+                $nowBest['char'] = $sample['char'];
             }
 
             if ($nowBest['score'] < 2) {

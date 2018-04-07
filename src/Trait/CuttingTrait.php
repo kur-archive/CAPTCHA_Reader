@@ -9,6 +9,9 @@
 namespace CAPTCHAReader\src\Traits;
 
 
+use CAPTCHAReader\src\Repository\Cutting\CuttingNeeaRepository;
+use CAPTCHAReader\src\Repository\Cutting\CuttingQinGuoShrinkRepository;
+use CAPTCHAReader\src\Repository\Cutting\CuttingQinGuoUnShrinkRepository;
 use CAPTCHAReader\src\Repository\Cutting\CuttingZhengFangFixedRepository;
 use CAPTCHAReader\src\Repository\Cutting\CuttingZhengFangMoveRepository;
 
@@ -18,14 +21,21 @@ trait CuttingTrait
 
     /**
      * @param string $label
-     * @return CuttingZhengFangFixedRepository|CuttingZhengFangMoveRepository
+     * @return CuttingNeeaRepository|CuttingQinGuoShrinkRepository|CuttingQinGuoUnShrinkRepository|CuttingZhengFangFixedRepository|CuttingZhengFangMoveRepository
      */
-    public function getRepository( string $label ){
+    public function getRepository(string $label)
+    {
         switch ($label) {
             case "ZhengFangFixed":
                 return new CuttingZhengFangFixedRepository();
             case "ZhengFangMove":
                 return new CuttingZhengFangMoveRepository();
+            case "QinGuoShrink":
+                return new CuttingQinGuoShrinkRepository();
+            case "QinGuoUnShrink":
+                return new CuttingQinGuoUnShrinkRepository();
+            case "Neea":
+                return new CuttingNeeaRepository();
         }
     }
 
@@ -38,7 +48,8 @@ trait CuttingTrait
      * @param $afterY
      * @return bool
      */
-    public function isInArea( $x , $y , $beforeX , $afterX , $beforeY , $afterY ){
+    public function isInArea($x, $y, $beforeX, $afterX, $beforeY, $afterY)
+    {
         $flag = 0;
         if ($x >= $beforeX && $x <= $afterX) {
             ++$flag;
@@ -62,22 +73,24 @@ trait CuttingTrait
      * @param $beforeY
      * @return array
      */
-    public function getPointPositionInArea( $x_ , $y_ , $beforeX , $beforeY ){
+    public function getPointPositionInArea($x_, $y_, $beforeX, $beforeY)
+    {
         $x = (int)$x_ - (int)$beforeX;
         $y = (int)$y_ - (int)$beforeY;
-        return compact( 'x' , 'y' );
+        return compact('x', 'y');
     }
 
     /**
      * @param $charCollection
      * 展示切割后的结果和二值化后的数组
      */
-    public function showCharWeb( $charCollection ){
+    public function showCharWeb($charCollection)
+    {
         echo '<div style="float: left;line-height: 10px;margin-left: 20px;">';
 
-        foreach($charCollection as $key => $char){
-            foreach($char as $y => $row){
-                foreach($row as $x => $value){
+        foreach ($charCollection as $key => $char) {
+            foreach ($char as $y => $row) {
+                foreach ($row as $x => $value) {
                     if ($value) {
                         echo '◆';
                     } else {
@@ -90,24 +103,6 @@ trait CuttingTrait
         echo '</div>';
     }
 
-    /**
-     * @param $charCollection
-     */
-    public function showChar( $charCollection ){
-        foreach($charCollection as $key => $char){
-            foreach($char as $y => $row){
-                foreach($row as $x => $value){
-                    if ($value) {
-                        echo 'l ';
-                    } else {
-                        echo '_ ';
-                    }
-                }
-                echo "\n";
-            }
-            echo "\n";
 
-        }
-    }
 
 }

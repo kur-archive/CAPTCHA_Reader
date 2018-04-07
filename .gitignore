@@ -1,8 +1,22 @@
 .gitignore
 .idea
-sample/StudySamples/*
-sample/TestSamples/*
-sample/TmpSamples/*
+
+sample/*.png
 composer.lock
 vendor/
 src/App/test.php
+script
+*.png *.jpg *.jpeg *.gif *.7z *.zip *.rar
+
+sample/StudySamples/QinGuo/*
+sample/StudySamples/neea.edu.cn/*
+sample/StudySamples/TianYi/*
+sample/StudySamples/unmark/*
+sample/StudySamples/ZhengFang/*
+sample/TestSamples/QinGuo/*
+sample/TestSamples/neea.edu.cn/*
+sample/TestSamples/TianYi/*
+sample/TestSamples/unmark/*
+sample/TestSamples/ZhengFang/*
+
+!.gitkeep

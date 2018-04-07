@@ -14,15 +14,19 @@ return [
     |
     | 当前使用的模组名
     |
+    | 这里的方案名和下面的是一一对应的
+    |
     */
 
-    'useGroup' => 'ZhengFangNormal' ,
+    'useGroup' => 'QinGuoNormal' ,
 
     /*
     |--------------------------------------------------------------------------
     | componentGroup
     |--------------------------------------------------------------------------
     | 设定的组件模组
+    | components组件的顺序是 获取 图片类-降噪类-切割类-识别类
+    | dictionary 对应的是使用的字典
     */
 
     'componentGroup' => [
@@ -31,6 +35,33 @@ return [
                 \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
                 \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class ,
                 \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
+                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class ,
+            ] ,
+            'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json' ,
+        ] ,
+        'QinGuoNormal' => [
+            'components' => [
+                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuoShrink::class,
+                \CAPTCHAReader\src\App\Cutting\CuttingQinGuoShrink::class,
+                \CAPTCHAReader\src\App\Identify\IdentifyQinGuoLevenshtein::class,
+            ] ,
+            'dictionary' => 'GetImageInfo-PretreatmentQinGuoShrink-CuttingQinGuoShrink-IdentifyQinGuoLevenshtein.json' ,
+        ] ,
+        'TianYiNormal' => [
+            'components' => [
+                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentTianYi::class ,
+                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
+                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class ,
+            ] ,
+            'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json' ,
+        ] ,
+        'NeeaNormal' => [
+            'components' => [
+                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentNeea::class ,
+                \CAPTCHAReader\src\App\Cutting\CuttingNeea::class ,
                 \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class ,
             ] ,
             'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json' ,

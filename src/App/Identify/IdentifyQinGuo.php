@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: kurisu
  * Date: 2018/01/13
- * Time: 1:13
+ * Time: 1:11
  */
 
 namespace CAPTCHAReader\src\App\Identify;
@@ -13,7 +13,7 @@ use CAPTCHAReader\src\App\Abstracts\Restriction;
 use CAPTCHAReader\src\App\ResultContainer;
 use CAPTCHAReader\src\Traits\IdentifyTrait;
 
-class IdentifyZhengFangColLevenshtein extends Restriction
+class IdentifyQinGuo extends Restriction
 {
     use IdentifyTrait;
 
@@ -27,7 +27,7 @@ class IdentifyZhengFangColLevenshtein extends Restriction
 
     public function __construct()
     {
-        $this->identifyRepository = $this->getRepository('ZhengFangColLevenshtein');
+        $this->identifyRepository = $this->getRepository('QinGuo');
     }
 
     function run(ResultContainer $resultContainer)
@@ -38,31 +38,25 @@ class IdentifyZhengFangColLevenshtein extends Restriction
 
         $this->dictionary = $this->getDictionary($this->conf['componentGroup'][$this->conf['useGroup']]['dictionary']);
 
-        //将 数组 转为 字符串
-        foreach ($this->charPixedCollection as $charPixed) {
-            $str = $this->twoD2oneDArrayCol($charPixed);
-            if (strlen($str) > 255) {
-                $this->resultContainer->setResultStr(null);
-                return $this->resultContainer;
-            }
-            $oneDCharStrArr[] = $str;
-//            $oneDCharStrArr[] = $this->twoD2oneDArrayCol($charPixed);
-        }
-
-        $this->resultContainer->setOneDCharStrArr($oneDCharStrArr);
-
-        //异常处理
+        //空字典处理
         if (!count($this->dictionary)) {
             $this->resultContainer->setResultStr(null);
             return $this->resultContainer;
         }
+
+        //将 数组 转为 字符串
+        foreach ($this->charPixedCollection as $charPixed) {
+            $oneDCharStrArr[] = $this->twoD2oneDArrayCol($charPixed);
+        }
+
+        $this->resultContainer->setOneDCharStrArr($oneDCharStrArr);
 
         //在 字典中 寻找 相似度 最高的 样本
         $result = '';
         foreach($oneDCharStrArr as $oneDChar){
             //是否记录识别详情
             if ($this->conf['noteDetailJudgeProcess']) {
-                $result .= $this->identifyRepository->getHighestSimilarityResultLevenshtein( $oneDChar , $this->dictionary , $this->resultContainer );
+                $result .= $this->identifyRepository->getHighestSimilarityResultNoteDetail( $oneDChar , $this->dictionary , $this->resultContainer );
             } else {
                 $result .= $this->identifyRepository->getHighestSimilarityResult( $oneDChar , $this->dictionary );
             }
@@ -72,6 +66,4 @@ class IdentifyZhengFangColLevenshtein extends Restriction
 
         return $this->resultContainer;
     }
-
-
 }

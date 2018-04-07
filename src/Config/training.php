@@ -18,12 +18,12 @@ return [
     */
 
     'studyGroup' => [
-        'zhengfang' => [
+        'qinguo' => [
             [
                 \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class,
-                \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class,
-                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class,
-                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuoShrink::class,
+                \CAPTCHAReader\src\App\Cutting\CuttingQinGuoShrink::class,
+                \CAPTCHAReader\src\App\Identify\IdentifyQinGuoLevenshtein::class,
             ],
         ],
     ],
@@ -84,6 +84,6 @@ return [
     | 自动训练到达触发的测试成功率线
     */
 
-    'testSuccessRateLine' => 85 ,
+    'testSuccessRateLine' => 95 ,
 
 ];
