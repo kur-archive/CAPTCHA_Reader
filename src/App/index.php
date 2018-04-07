@@ -21,4 +21,4 @@ $c = $a->entrance(__DIR__ . '/../../sample/StudySamples/unmark/qinGuo/20003.png'
 dump($c);
 
 $end_time = microtime(true);//计时停止
-echo '执行时间为：' . ($end_time - $start_time) . ' s' . '<br/>';
+echo '执行时间为：' . ($end_time - $start_time) . ' s' . "<br/>\n";
