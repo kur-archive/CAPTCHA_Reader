@@ -2,10 +2,11 @@
 .idea
 sample/StudySamples/*
 sample/TestSamples/*
-sample/TmpSamples/*
 sample/*.png
 composer.lock
 vendor/
 src/App/test.php
 script
 *.png *.jpg *.gif
+!sample/StudySamples/*/.gitkeep
+!sample/TestSamples/*/.gitkeep
