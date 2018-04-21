@@ -45,7 +45,7 @@
 
 `待添加`
 
-## Get Started
+## Get started now
 
 **Online 在线**
 
