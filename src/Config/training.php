@@ -18,12 +18,12 @@ return [
     */
 
     'studyGroup' => [
-        'qinguo' => [
+        'neea.edu.cn' => [
             [
                 \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class,
-                \CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuoShrink::class,
-                \CAPTCHAReader\src\App\Cutting\CuttingQinGuoShrink::class,
-                \CAPTCHAReader\src\App\Identify\IdentifyQinGuoLevenshtein::class,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentNeea::class,
+                \CAPTCHAReader\src\App\Cutting\CuttingNeeaFixed::class,
+                \CAPTCHAReader\src\App\Identify\IdentifyNeeaLevenshtein::class,
             ],
         ],
     ],
@@ -38,6 +38,9 @@ return [
     */
 
     'studySampleGroup' => [
+        'neea.edu.cnA' => __DIR__ . '/../../sample/StudySamples/neea.edu.cn/a/',
+        'neea.edu.cnB' => __DIR__ . '/../../sample/StudySamples/neea.edu.cn/b/',
+        'neea.edu.cnC' => __DIR__ . '/../../sample/StudySamples/neea.edu.cn/c/',
         'neea.edu.cn' => __DIR__ . '/../../sample/StudySamples/neea.edu.cn/',
         'qinguo'      => __DIR__ . '/../../sample/StudySamples/QinGuo/',
         'tianyi'      => __DIR__ . '/../../sample/StudySamples/TianYi/',
@@ -54,6 +57,9 @@ return [
     */
     'testSampleGroup'  => [
         'neea.edu.cn' => __DIR__ . '/../../sample/TestSamples/neea.edu.cn/',
+        'neea.edu.cnA' => __DIR__ . '/../../sample/TestSamples/neea.edu.cn/',
+        'neea.edu.cnB' => __DIR__ . '/../../sample/TestSamples/neea.edu.cn/',
+        'neea.edu.cnC' => __DIR__ . '/../../sample/TestSamples/neea.edu.cn/',
         'qinguo'      => __DIR__ . '/../../sample/TestSamples/QinGuo/',
         'tianyi'      => __DIR__ . '/../../sample/TestSamples/TianYi/',
         'zhengfang'   => __DIR__ . '/../../sample/TestSamples/ZhengFang/',

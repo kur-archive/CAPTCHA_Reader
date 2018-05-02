@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'useGroup' => 'QinGuoNormal' ,
+    'useGroup' => 'TianYiNormal',
 
     /*
     |--------------------------------------------------------------------------
@@ -32,41 +32,41 @@ return [
     'componentGroup' => [
         'ZhengFangNormal' => [
             'components' => [
-                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
-                \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class ,
-                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
-                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class ,
-            ] ,
-            'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json' ,
-        ] ,
-        'QinGuoNormal' => [
+                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentZhengFang::class,
+                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class,
+                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class,
+            ],
+            'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json',
+        ],
+        'QinGuoNormal'    => [
             'components' => [
                 \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class,
                 \CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuoShrink::class,
                 \CAPTCHAReader\src\App\Cutting\CuttingQinGuoShrink::class,
                 \CAPTCHAReader\src\App\Identify\IdentifyQinGuoLevenshtein::class,
-            ] ,
-            'dictionary' => 'GetImageInfo-PretreatmentQinGuoShrink-CuttingQinGuoShrink-IdentifyQinGuoLevenshtein.json' ,
-        ] ,
-        'TianYiNormal' => [
+            ],
+            'dictionary' => 'GetImageInfo-PretreatmentQinGuoShrink-CuttingQinGuoShrink-IdentifyQinGuoLevenshtein.json',
+        ],
+        'TianYiNormal'    => [
             'components' => [
-                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
-                \CAPTCHAReader\src\App\Pretreatment\PretreatmentTianYi::class ,
-                \CAPTCHAReader\src\App\Cutting\CuttingZhengFangFixed::class ,
-                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class ,
-            ] ,
-            'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json' ,
-        ] ,
-        'NeeaNormal' => [
+                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentTianYShrink::class,
+                \CAPTCHAReader\src\App\Cutting\CuttingTianYiShrink::class,
+                \CAPTCHAReader\src\App\Identify\IdentifyTianYiLevenshtein::class,
+            ],
+            'dictionary' => 'GetImageInfo-PretreatmentTianYShrink-CuttingTianYiShrink-IdentifyTianYiLevenshtein.json',
+        ],
+        'NeeaNormal'      => [
             'components' => [
-                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class ,
-                \CAPTCHAReader\src\App\Pretreatment\PretreatmentNeea::class ,
-                \CAPTCHAReader\src\App\Cutting\CuttingNeea::class ,
-                \CAPTCHAReader\src\App\Identify\IdentifyZhengFangColLevenshtein::class ,
-            ] ,
-            'dictionary' => 'GetImageInfo-PretreatmentZhengFang-CuttingZhengFangFixed-IdentifyZhengFangColLevenshtein.json' ,
-        ] ,
-    ] ,
+                \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentNeea::class,
+                \CAPTCHAReader\src\App\Cutting\CuttingNeeaFixed::class,
+                \CAPTCHAReader\src\App\Identify\IdentifyNeeaLevenshtein::class,
+            ],
+            'dictionary' => 'GetImageInfo-PretreatmentNeea-CuttingNeeaFixed-IdentifyNeeaLevenshtein.json',
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -77,6 +77,6 @@ return [
     |
     */
 
-    'noteDetailJudgeProcess' => true ,
+    'noteDetailJudgeProcess' => true,
 
 ];
