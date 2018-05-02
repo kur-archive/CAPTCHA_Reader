@@ -20,3 +20,4 @@ sample/TestSamples/unmark/*
 sample/TestSamples/ZhengFang/*
 
 !.gitkeep
+tmp/
