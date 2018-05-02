@@ -13,6 +13,13 @@
 > 如果需要最开始的 php 脚本的版本，已经移动到 `script/tooOldVersion` 下，自行获取
 
 
+#### Install use Composer 
+
+```shell
+    composer require kurisu/captcha_reader dev-oop
+```
+
+
 ## 对各种验证码的支持
 
 * **正方教务系统验证码**  验证码字典样本数为`500条` ，不加上网络延时的耗时在`0.14s - 0.2s`之间
@@ -58,11 +65,7 @@
 
 ## Get started now
 
-#### Install use Composer (使用 Composer 安装)
 
-```shell
-    composer require kurisu/captcha_reader dev-oop
-```
 
 
 #### Online 在线
@@ -117,10 +120,10 @@
 
 **已标记 学习样本集**
 
-* 正方 [link]()
-* 青果 [link]()
-* neea [link]()
-* 天翼 [link]()
+* 正方 [link](https://github.com/Kuri-su/CAPTCHA_Reader/blob/master/sample/StudySamples/ZhengFang/ZhengFang.zip)
+* 青果 [link](https://github.com/Kuri-su/CAPTCHA_Reader/blob/master/sample/StudySamples/QinGuo/QinGuo.zip)
+* neea [link](https://github.com/Kuri-su/CAPTCHA_Reader/blob/master/sample/StudySamples/neea.edu.cn/neea.edu.cn.zip)
+* 天翼 [link](https://github.com/Kuri-su/CAPTCHA_Reader/blob/master/sample/StudySamples/TianYi/TianYi.zip)
 
 **已标记 测试样本集**
 * 正方&青果&neea&天翼 已打包 [link](https://github.com/Kuri-su/CAPTCHA_Reader/blob/master/sample/TestSamples/TestSamples.zip)
