@@ -106,10 +106,15 @@ trait CommonTrait
         foreach ($fileList as $key => $fileName) {
             if (is_dir($dirPath . $fileName)) {
                 unset($fileList[$key]);
-                $fileListTmp_ = $this->getDirAllFile($dirPath . $fileName);
+                $fileListTmp_ = $this->getDirAllFile($dirPath . $fileName.'/');
                 $fileListTmp = array_merge($fileListTmp, $fileListTmp_);
             } else {
-                $fileList[$key] = $dirPath . $fileName;
+                if (preg_match('/(jpeg|jpg|png|gif)/',$fileName)) {
+                    $fileList[$key] = $dirPath . $fileName;
+//                    $fileList[$key] =  $fileName;//tmp
+                }else{
+                    unset($fileList[$key]);
+                }
             }
         }
         $fileList = array_merge($fileList, $fileListTmp);
