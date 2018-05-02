@@ -19,7 +19,11 @@
       "training/"
     ],
     "psr-4": {
-      "App\\": "app/"
-    }
+      "App\\": "src/"
+    },
+    "files":[
+      "helpers.php"
+    ]
+
   }
 }
