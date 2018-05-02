@@ -12,7 +12,6 @@
 
 > 如果需要最开始的 php 脚本的版本，已经移动到 `script/tooOldVersion` 下，自行获取
 
----
 
 ## 对各种验证码的支持
 
@@ -116,7 +115,15 @@
 
 ## 样本集 & 测试集
 
-`待上传`
+**已标记 学习样本集**
+
+* 正方 [link]()
+* 青果 [link]()
+* neea [link]()
+* 天翼 [link]()
+
+**已标记 测试样本集**
+* 正方&青果&neea&天翼 已打包 [link](https://github.com/Kuri-su/CAPTCHA_Reader/blob/master/sample/TestSamples/TestSamples.zip)
 
 ## 目录结构
 
