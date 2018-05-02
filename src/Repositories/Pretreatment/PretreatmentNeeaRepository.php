@@ -9,8 +9,8 @@
 namespace CAPTCHAReader\src\Repository\Pretreatment;
 
 
+use CAPTCHAReader\src\App\Pretreatment\PretreatmentNeea;
 use CAPTCHAReader\src\Traits\CommonTrait;
-use function PHPSTORM_META\type;
 
 class PretreatmentNeeaRepository
 {
@@ -19,34 +19,46 @@ class PretreatmentNeeaRepository
     /**
      * @param $image
      * @return string
-     * A 是 带网格的
-     * B 是 不带网格的
      */
     public function checkCAPTCHAType($image)
     {
-        $deviation = 5;
-        $checkPointArr = [
-            ['point'  => [6, 0],
-             'target' => ['red' => 255, 'green' => 0, 'blue' => 0,]],
-            ['point'  => [0, 6],
-             'target' => ['red' => 0, 'green' => 0, 'blue' => 255,]],
-            ['point'  => [6, 6],
-             'target' => ['red' => 255, 'green' => 0, 'blue' => 0,]],
-        ];
-
-        $count = 0;
-        foreach ($checkPointArr as $checkPoint) {
-            $x = $checkPoint['point'][0];
-            $y = $checkPoint['point'][1];
-            $pixelRGB = $this->getPixelRGB($image, $x, $y);
-            $flag = 0;
-            foreach ($checkPoint['target'] as $key => $colorValue) {
-                $pixelRGB[$key] <= $colorValue + $deviation && $pixelRGB[$key] >= $colorValue - $deviation ?: ++$flag;
+        //红色框　20*20
+        for ($y = 0; $y <= 20; ++$y) {
+            for ($x = 0; $x <= 20; ++$x) {
+                $pixelRGB = $this->getPixelRGB($image, $x, $y);
+                if ($pixelRGB['red'] == 255 && $pixelRGB['green'] == 0 && $pixelRGB['blue'] == 0) {
+                    $red = true;
+                }
+                if ($pixelRGB['red'] == 0 && $pixelRGB['green'] == 0 && $pixelRGB['blue'] == 255) {
+                    $blue = true;
+                }
             }
-            $flag == 0 ?: ++$count;
+        }
+        if (($red ?? false) && ($blue ?? false)) {
+            return PretreatmentNeea::A;
         }
 
-        return $count <= 1 ? 'A' : 'B';
+        //有阴影
+        $shadow = 0;
+        for ($y = 40; $y <= 80; ++$y) {
+            for ($x = 30; $x <= 170; ++$x) {
+                $pixelRGB = $this->getPixelRGB($image, $x, $y);
+                $color = $pixelRGB['red'];
+                if ($pixelRGB['red'] == $color && $pixelRGB['green'] == $color && $pixelRGB['blue'] == $color) {
+                    if ($color > 25 && $color < 120) {
+                        ++$shadow;
+                    }
+                }
+            }
+        }
+//        dump($shadow);
+        if ($shadow > 750 && ($otherColor ?? false) == false) {
+            return PretreatmentNeea::B;
+        }
+
+        //普通版
+        return PretreatmentNeea::C;
+
     }
 
     /**
@@ -147,6 +159,12 @@ class PretreatmentNeeaRepository
                 $rgbArray = $this->getPixelRGB($image, $x, $y);
                 if ($rgbArray['red'] > 130 && $rgbArray['green'] > 130 && $rgbArray['blue'] > 130) {
                     $imageArr[$y][$x] = '0';
+                } elseif ($rgbArray['red'] == $rgbArray['green'] && $rgbArray['green'] == $rgbArray['blue']) {
+                    if (($rgbArray['red'] >= 0 && $rgbArray['red'] <= 55) || ($rgbArray['red'] >= 110 && $rgbArray['red'] <= 155)) {
+                        $imageArr[$y][$x] = '1';
+                    } else {
+                        $imageArr[$y][$x] = '0';
+                    }
                 } else {
                     $imageArr[$y][$x] = '1';
                 }
@@ -157,6 +175,67 @@ class PretreatmentNeeaRepository
         }
         return $imageArr;
     }
+
+    public function binarizationB($width, $height, $image)
+    {
+        $imageArr = [];
+        for ($y = 0; $y < $height; ++$y) {
+            for ($x = 0; $x < $width; ++$x) {
+                if ($x < 6 && $y < 6) {
+                    $imageArr[$y][$x] = '0';
+                    continue;
+                }
+                $rgbArray = $this->getPixelRGB($image, $x, $y);
+                if ($rgbArray['red'] > 130 && $rgbArray['green'] > 130 && $rgbArray['blue'] > 130) {
+                    $imageArr[$y][$x] = '0';
+                } elseif ($rgbArray['red'] == $rgbArray['green'] && $rgbArray['green'] == $rgbArray['blue']) {
+                    if (($rgbArray['red'] >= 0 && $rgbArray['red'] <= 55) || ($rgbArray['red'] >= 110 && $rgbArray['red'] <= 155)) {
+                        $imageArr[$y][$x] = '1';
+                    } else {
+                        $imageArr[$y][$x] = '0';
+                    }
+                }else {
+                    $imageArr[$y][$x] = '1';
+                }
+                if ($x == 0 || $y == 0 || $x == $width - 1 || $y == $height - 1) {
+                    $imageArr[$y][$x] = '0';
+                }
+            }
+        }
+        return $imageArr;
+    }
+
+    /**
+     * @param $width
+     * @param $height
+     * @param $image
+     * @return array
+     * 二值化
+     */
+    public function binarizationC($width, $height, $image)
+    {
+        $imageArr = [];
+        for ($y = 0; $y < $height; ++$y) {
+            for ($x = 0; $x < $width; ++$x) {
+                if ($x * $y < 180) {
+                    $imageArr[$y][$x] = '0';
+                    continue;
+                }
+                $rgbArray = $this->getPixelRGB($image, $x, $y);
+                if ($rgbArray['red'] > 138 && $rgbArray['green'] > 138 && $rgbArray['blue'] > 138) {
+                    $imageArr[$y][$x] = '0';
+                } else {
+                    $imageArr[$y][$x] = '1';
+                }
+                if ($x == 0 || $y == 0 || $x == $width - 1 || $y == $height - 1) {
+                    $imageArr[$y][$x] = '0';
+                }
+            }
+        }
+        return $imageArr;
+    }
+
+
 
     /**
      * @param $width
@@ -290,46 +369,39 @@ class PretreatmentNeeaRepository
      * @param $height
      * @return array
      */
-    public function erosion($arr, $width, $height, $threshold=9)
+    public function erosion9($arr, $width, $height, $threshold = 9)
     {
         $result = [];
         foreach ($arr as $indexY => $row) {
             foreach ($row as $indexX => $rowX) {
-                $top = $indexY != 0;
-//                $top2 = $indexY - 1 != 0;
-                $leftmost = $indexX != 0;
-//                $leftmost2 = $indexX - 1 != 0;
-                $rightmost = $indexX != $width - 1;
-//                $rightmost2 = $indexX + 1 != $width - 1;
-                $bottom = $indexY != $height - 1;
-//                $bottom2 = $indexY + 1 != $height - 1;
+//                $top = $indexY != 0;
+////                $top2 = $indexY - 1 != 0;
+//                $leftmost = $indexX != 0;
+////                $leftmost2 = $indexX - 1 != 0;
+//                $rightmost = $indexX != $width - 1;
+////                $rightmost2 = $indexX + 1 != $width - 1;
+//                $bottom = $indexY != $height - 1;
+////                $bottom2 = $indexY + 1 != $height - 1;
 
                 $sum = 0;
                 $sum += $arr[$indexY][$indexX];
-                if ($top) {
-                    //正上
-                    $sum += $arr[$indexY - 1][$indexX];
-                }
-                if ($leftmost) {
-                    //左上
-                    $sum += $top ? $arr[$indexY - 1][$indexX - 1] : 0;
-                    //左
-                    $sum += $arr[$indexY][$indexX - 1];
-                    //左下
-                    $sum += $bottom ? $arr[$indexY + 1][$indexX - 1] : 0;
-                }
-                if ($bottom) {
-                    //正下
-                    $sum += $arr[$indexY + 1][$indexX];
-                }
-                if ($rightmost) {
-                    //右上
-                    $sum += $bottom ? $arr[$indexY + 1][$indexX + 1] : 0;
-                    //右
-                    $sum += $arr[$indexY][$indexX + 1];
-                    //右下
-                    $sum += $top ? $arr[$indexY - 1][$indexX + 1] : 0;
-            }
+
+                //正上
+                $sum += $arr[$indexY - 1][$indexX] ?? 0;
+                //左上
+                $sum += $arr[$indexY - 1][$indexX - 1] ?? 0;
+                //左
+                $sum += $arr[$indexY][$indexX - 1] ?? 0;
+                //左下
+                $sum += $arr[$indexY + 1][$indexX - 1] ?? 0;
+                //正下
+                $sum += $arr[$indexY + 1][$indexX] ?? 0;
+                //右上
+                $sum += $arr[$indexY - 1][$indexX + 1] ?? 0;
+                //右
+                $sum += $arr[$indexY][$indexX + 1] ?? 0;
+                //右下
+                $sum += $arr[$indexY + 1][$indexX + 1] ?? 0;
 
                 if ($sum < $threshold) {
                     $result[$indexY][$indexX] = 0;
@@ -348,7 +420,122 @@ class PretreatmentNeeaRepository
      * @param $height
      * @return array
      */
-    public function expansion($arr, $width, $height,$threshold=0)
+    public function erosion16($arr, $width, $height, $threshold = 16)
+    {
+        $result = [];
+        foreach ($arr as $indexY => $row) {
+            foreach ($row as $indexX => $rowX) {
+
+                $sum = 0;
+                $sum += $arr[$indexY][$indexX];
+                /**
+                 * x x x x
+                 * x V x x
+                 * x x x x
+                 * x x x x
+                 */
+                //正上
+                $sum += $arr[$indexY - 1][$indexX] ?? 0;
+                //正下
+                $sum += $arr[$indexY + 1][$indexX] ?? 0;
+                $sum += $arr[$indexY + 2][$indexX] ?? 0;
+
+                //左上
+                $sum += $arr[$indexY - 1][$indexX - 1] ?? 0;
+                //左
+                $sum += $arr[$indexY][$indexX - 1] ?? 0;
+                //左下
+                $sum += $arr[$indexY + 1][$indexX - 1] ?? 0;
+                $sum += $arr[$indexY + 2][$indexX - 1] ?? 0;
+
+                //右上
+                $sum += $arr[$indexY - 1][$indexX + 1] ?? 0;
+                $sum += $arr[$indexY - 1][$indexX + 2] ?? 0;
+                //右
+                $sum += $arr[$indexY][$indexX + 1] ?? 0;
+                $sum += $arr[$indexY][$indexX + 2] ?? 0;
+                //右下
+                $sum += $arr[$indexY + 1][$indexX + 1] ?? 0;
+                $sum += $arr[$indexY + 2][$indexX + 1] ?? 0;
+                $sum += $arr[$indexY + 1][$indexX + 2] ?? 0;
+                $sum += $arr[$indexY + 2][$indexX + 2] ?? 0;
+
+                if ($sum < $threshold) {
+                    $result[$indexY][$indexX] = 0;
+                } else {
+                    $result[$indexY][$indexX] = 1;
+                }
+
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * @param $arr
+     * @param $width
+     * @param $height
+     * @return array
+     */
+    public function erosion4($arr, $width, $height, $threshold = 4)
+    {
+        $result = [];
+        foreach ($arr as $indexY => $row) {
+            foreach ($row as $indexX => $rowX) {
+                $top = $indexY != 0;
+//                $top2 = $indexY - 1 != 0;
+                $leftmost = $indexX != 0;
+//                $leftmost2 = $indexX - 1 != 0;
+                $rightmost = $indexX != $width - 1;
+//                $rightmost2 = $indexX + 1 != $width - 1;
+                $bottom = $indexY != $height - 1;
+//                $bottom2 = $indexY + 1 != $height - 1;
+
+                $sum = 0;
+                $sum += $arr[$indexY][$indexX];
+//                if ($top) {
+//                    //正上
+//                    $sum += $arr[$indexY - 1][$indexX];
+//                }
+                if ($leftmost) {
+//                    //左上
+//                    $sum += $top ? $arr[$indexY - 1][$indexX - 1] : 0;
+                    //左
+                    $sum += $arr[$indexY][$indexX - 1];
+//                    //左下
+//                    $sum += $bottom ? $arr[$indexY + 1][$indexX - 1] : 0;
+                }
+                if ($bottom) {
+                    //正下
+                    $sum += $arr[$indexY + 1][$indexX];
+                }
+                if ($rightmost) {
+//                    //右上
+//                    $sum += $bottom ? $arr[$indexY + 1][$indexX + 1] : 0;
+                    //右
+                    $sum += $arr[$indexY][$indexX + 1];
+                    //右下
+                    $sum += $top ? $arr[$indexY - 1][$indexX + 1] : 0;
+                }
+
+                if ($sum < $threshold) {
+                    $result[$indexY][$indexX] = 0;
+                } else {
+                    $result[$indexY][$indexX] = 1;
+                }
+
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * @param $arr
+     * @param $width
+     * @param $height
+     * @return array
+     */
+    public function expansion($arr, $width, $height, $threshold = 0)
     {
         $result = [];
         foreach ($arr as $indexY => $row) {
@@ -411,29 +598,73 @@ class PretreatmentNeeaRepository
 
         $result = [];
 
-        for ($h = 0; $h < $height; $h += 2) {
-            for ($w = 0; $w < $weight; $w += 2) {
+        for ($h = 0; $h < $height; $h += 4) {
+            for ($w = 0; $w < $weight; $w += 3) {
                 $sum = 0;
                 if ($arr[$h][$w] ?? 0) {
                     ++$sum;
                 }
-                if ($arr[$h + 1][$w] ?? 0) {
+                if ($arr[$h][$w + 1] ?? 0) {
                     ++$sum;
                 }
+                if ($arr[$h][$w + 2] ?? 0) {
+                    ++$sum;
+                }
+
                 if ($arr[$h + 1][$w] ?? 0) {
                     ++$sum;
                 }
                 if ($arr[$h + 1][$w + 1] ?? 0) {
                     ++$sum;
                 }
+                if ($arr[$h + 1][$w + 2] ?? 0) {
+                    ++$sum;
+                }
+
+                if ($arr[$h + 2][$w] ?? 0) {
+                    ++$sum;
+                }
+                if ($arr[$h + 2][$w + 1] ?? 0) {
+                    ++$sum;
+                }
+                if ($arr[$h + 2][$w + 2] ?? 0) {
+                    ++$sum;
+                }
+
+                if ($arr[$h + 3][$w] ?? 0) {
+                    ++$sum;
+                }
+                if ($arr[$h + 3][$w + 1] ?? 0) {
+                    ++$sum;
+                }
+                if ($arr[$h + 3][$w + 2] ?? 0) {
+                    ++$sum;
+                }
+
                 if ($sum) {
-                    $result[$h / 2][$w / 2] = 1;
+                    $result[$h / 4][$w / 3] = 1;
                 } else {
-                    $result[$h / 2][$w / 2] = 0;
+                    $result[$h / 4][$w / 3] = 0;
                 }
             }
         }
         return $result;
+    }
+
+
+    public function fixCircleExpansion()
+    {
+        //中心是90,48的位置
+
+    }
+
+
+    public function cutMiddle($imageArr)
+    {
+        foreach ($imageArr as $key => $value) {
+            array_splice($imageArr[$key], 88, 5);
+        }
+        return $imageArr;
     }
 
 

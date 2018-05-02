@@ -11,6 +11,7 @@ namespace CAPTCHAReader\src\App\Pretreatment;
 use CAPTCHAReader\src\App\Abstracts\Load;
 use CAPTCHAReader\src\App\Abstracts\Restriction;
 use CAPTCHAReader\src\App\ResultContainer;
+use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentNeeaRepository;
 use CAPTCHAReader\src\Traits\PretreatmentTrait;
 
 class PretreatmentNeea extends Load
@@ -20,6 +21,10 @@ class PretreatmentNeea extends Load
     private $conf;
     private $resultContainer;
     private $pretreatmentRepository;
+
+    const A = 'redBox'; //网格
+    const B = 'shadow'; //带阴影扭曲
+    const C = 'normal'; //普通
 
     /**
      * PretreatmentZhengFang constructor.
@@ -43,36 +48,60 @@ class PretreatmentNeea extends Load
         $imageInfo = $this->resultContainer->getImageInfo();
         $image = $this->resultContainer->getImage();
 
+        //首先对图片分类
+        $type = $this->pretreatmentRepository->checkCAPTCHAType($image);
+        $imageInfo['imageType'] = $type;
+        $this->resultContainer->setImageInfo($imageInfo);
 
-        //首先确定类型，
-//        $CAPTCHAType = $this->pretreatmentRepository->checkCAPTCHAType($image);
-//
-//
-//        如果这里是A类型，就需要先去网格
-//        if ($CAPTCHAType == 'A') {
-//            统计各种颜色的点位的量
-//            $colorAggs = $this->pretreatmentRepository->colorAggregation($image, $imageInfo['width'], $imageInfo['height']);
-//            self::dd($colorAggs);
-//        }
 
-        //二值化
-        $imageBinaryArr = $this->pretreatmentRepository->binarization($imageInfo['width'], $imageInfo['height'], $image);
+        if ($type == self::A) {//红框
+            //二值化
+            $imageBinaryArr = $this->pretreatmentRepository->binarization($imageInfo['width'], $imageInfo['height'], $image);
+            $noiseCancelArr = $imageBinaryArr;
+
+            $noiseCancelArr = $this->pretreatmentRepository->cutMiddle($noiseCancelArr);
+            $imageInfo['height'] = count($noiseCancelArr);
+            $imageInfo['width'] = count($noiseCancelArr[0]);
+            $noiseCancelArr = $this->pretreatmentRepository->erosion9($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+            $noiseCancelArr = $this->pretreatmentRepository->erosion4($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+
+        } elseif ($type == self::B) {//带阴影扭曲
+            //二值化
+            $imageBinaryArr = $this->pretreatmentRepository->binarizationB($imageInfo['width'], $imageInfo['height'], $image);
+            $noiseCancelArr = $imageBinaryArr;
+
+            $noiseCancelArr = $this->pretreatmentRepository->erosion9($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+            $noiseCancelArr = $this->pretreatmentRepository->erosion4($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+            $noiseCancelArr = $this->pretreatmentRepository->erosion4($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+            $noiseCancelArr = $this->pretreatmentRepository->noiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
+
+        } elseif ($type == self::C) {//普通
+            //二值化
+            $imageBinaryArr = $this->pretreatmentRepository->binarizationC($imageInfo['width'], $imageInfo['height'], $image);
+            $noiseCancelArr = $imageBinaryArr;
+            $noiseCancelArr = $this->pretreatmentRepository->erosion9($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+            $noiseCancelArr = $this->pretreatmentRepository->erosion4($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+            $noiseCancelArr = $this->pretreatmentRepository->erosion4($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+            $noiseCancelArr = $this->pretreatmentRepository->noiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
+        }
 
         //去掉散点
-        $noiseCancelArr = $imageBinaryArr;
-
-        $noiseCancelArr = $this->pretreatmentRepository->expansion($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
-        $noiseCancelArr = $this->pretreatmentRepository->erosion($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
-        $noiseCancelArr = $this->pretreatmentRepository->erosion($noiseCancelArr, $imageInfo['width'], $imageInfo['height'],8);
-        $noiseCancelArr = $this->pretreatmentRepository->erosion($noiseCancelArr, $imageInfo['width'], $imageInfo['height'],8);
-//        $noiseCancelArr = $this->pretreatmentRepository->erosion($noiseCancelArr, $imageInfo['width'], $imageInfo['height'],8);
-        $noiseCancelArr = $this->pretreatmentRepository->noiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
-        $noiseCancelArr = $this->pretreatmentRepository->noiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
+//        $noiseCancelArr = $this->pretreatmentRepository->expansion($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+//
+//        $this->showResArr($noiseCancelArr);
+//        self::dd(1);
+//        $noiseCancelArr = $this->pretreatmentRepository->erosion2($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+//        $noiseCancelArr = $this->pretreatmentRepository->noiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
 //        $noiseCancelArr = $this->pretreatmentRepository->simpleNoiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
+
         $noiseCancelArr = $this->pretreatmentRepository->shrink($noiseCancelArr);
 
-        $this->showResArrAndAggs($noiseCancelArr);
-        self::dd(1);
+        $imageInfo['height'] = count($noiseCancelArr);
+        $imageInfo['width'] = count($noiseCancelArr[0]);
+        $this->resultContainer->setImageInfo($imageInfo);
+
+//        $this->showResArr($noiseCancelArr);
+//        self::dd(1);
 
         $this->resultContainer->unsetImage();
         $this->resultContainer->setImageBinaryArr($imageBinaryArr);

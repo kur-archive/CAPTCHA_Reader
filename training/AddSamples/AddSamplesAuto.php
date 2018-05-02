@@ -81,7 +81,7 @@ class AddSamplesAuto
                 $this->indexController->setConf($appConf);
 
                 foreach ($sampleList as $samplePath) {
-
+//                    dump($samplePath);
                     //识别sample 得到resultContainer
                     $resultContainer = $this->indexController->entrance($samplePath, 'local', true);
 
@@ -89,7 +89,9 @@ class AddSamplesAuto
                     $correctAnswer = $matches[0];
                     $answer = $resultContainer->getResultStr();
                     dump($correctAnswer, $answer);
-
+                    if ($answer == '*****') {
+                        continue;
+                    }
                     if ($correctAnswer == $answer) {
                         continue;
                     }
@@ -104,7 +106,7 @@ class AddSamplesAuto
                             dump($correctAnswer[$i] . ' --------- ' . $answer[$i] .' --------- ' . 'error');
                             dump($this->getDictionarySampleCount($this->indexController));
                             $this->addSampleToDictionary($correctAnswer[$i], $oneDCharStr[$i], $this->indexController);
-                            if (!($this->getDictionarySampleCount($this->indexController) % 100)) {
+                            if (!($this->getDictionarySampleCount($this->indexController) % 250)) {
                                 // 如果批量测试 正确率大于既定值，则结束训练
                                 //TODO 结束的时候需要全部测试集测试
 

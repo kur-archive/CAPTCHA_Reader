@@ -31,7 +31,7 @@ trait CommonTrait
     /**
      * 调试用，show处理好的数组
      */
-    public function showResArr($imageArr)
+    public function showResArr($imageArr,$arr = [], $flag = '●')
     {
         echo '  ';
 //        for($i = 0; $i < 72; ++$i){
@@ -47,11 +47,11 @@ trait CommonTrait
 //                echo ' ';
 //            }
             foreach ($resY as $key2 => $resX) {
-                if (in_array($key2, [30, 51, 68])) {
-                    echo '●';
+                if (in_array($key2, empty($arr) ? [17, 29, 42] : $arr)) {
+                    echo $flag;
                     continue;
                 }
-                $resX ? $output = 'l' : $output = '_';
+                $output = $resX ? '1' : '_';
                 echo $output;
             }
             echo "\n";
@@ -60,54 +60,47 @@ trait CommonTrait
         echo "\n";
     }
 
-    public function showResArrAndAggs($imageArr)
+    public function showResArrAndAggs($imageArr, $arr = [], $flag = '●')
     {
-        $height = count($imageArr);
-        $width = count($imageArr[0]);
-
         foreach ($imageArr as $key => $resY) {
-
             foreach ($resY as $key2 => $resX) {
-                if (in_array($key2, [18, 32, 46])) {
-                    echo '●';
+                if (in_array($key2, empty($arr) ? [17, 29, 42] : $arr)) {
+                    echo $flag;
                     continue;
                 }
-                $resX ? $output = 'l' : $output = '_';
+                $output = $resX ? '1' : '_';
+
                 echo $output;
             }
             echo "\n";
-
         }
         echo "\n";
 
-        $aggs = [];
         //获取每一列的像素数量
-//        for ($i = 0; $i < $width; ++$i) {
-//            for ($j = 0; $j < $height; ++$j) {
-//                $aggs[$i] = ($aggs[$i] ?? 0) + $imageArr[$j][$i];
+//        $aggs = $this->getHeightProjection($imageArr);
+
+        //获取每一行的投影
+//        $aggs = $this->getDifferenceHeightProjection($imageArr);
+//
+//        $floor = 0;
+//        while (true) {
+//            $flag = 0;
+//            for ($i = 0; $i < count($aggs); ++$i) {
+//                if ($aggs[$i] > $floor) {
+//                    echo '●';
+//                    $flag = 1;
+//                } else {
+//                    echo ' ';
+//                }
+//            }
+//            echo "\n";
+//            $floor++;
+//            if ($flag == 0) {
+//                break;
 //            }
 //        }
 
-        //获取每一行的投影
-        for ($i = 0; $i < $width; ++$i) {
-            $start = 0;
-            $startFlag = 0;
-            $end = 0;
-            for ($j = 0; $j < $height; ++$j) {
-                if ($imageArr[$j][$i]) {
-                    if (!$startFlag) {
-                        $start = $j;
-                        $startFlag = 1;
-                    }
-                }
-                if ($imageArr[$j][$i]) {
-                    $end = $j + 1;
-                }
-                if ($j == $height - 1) {
-                    $aggs[$i] = $end - $start;
-                }
-            }
-        }
+        $aggs = $this->getHeightProjection($imageArr);
 
         $floor = 0;
         while (true) {
@@ -164,5 +157,53 @@ trait CommonTrait
             echo "\n";
 
         }
+    }
+
+
+    /**
+     * @param $noiseArr
+     * @return array
+     * 计算高度投影
+     */
+    public function getHeightProjection($noiseArr)
+    {
+        $result = [];
+        $height = count($noiseArr);
+        $width = count($noiseArr[0]);
+
+        for ($x = 0; $x < $width; ++$x) {
+            $result[$x] = 0;
+            for ($y = 0; $y < $height; ++$y) {
+                $result[$x] += $noiseArr[$y][$x];
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param $noiseArr
+     * @return array
+     * 计算上下差投影
+     */
+    public function getDifferenceHeightProjection($noiseArr)
+    {
+        $result = [];
+        $height = count($noiseArr);
+        $width = count($noiseArr[0]);
+
+        for ($x = 0; $x < $width; ++$x) {
+            $min = 0;
+            $max = 0;
+            for ($y = 0; $y < $height; ++$y) {
+                $value = $noiseArr[$y][$x];
+                if ($value) {
+                    $max == 0 && $min == 0 ? $min = $y : $max = $y + 1;
+                }
+            }
+            !($max == 0 && $min != 0) ?: $max = $min + 1;
+            $result[$x] = $max - $min;
+        }
+        return $result;
     }
 }

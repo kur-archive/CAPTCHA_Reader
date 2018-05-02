@@ -9,8 +9,13 @@
 namespace CAPTCHAReader\src\Traits;
 
 
+use CAPTCHAReader\src\App\Identify\IdentifyNeea;
+use CAPTCHAReader\src\Repository\Identify\IdentifyNeeaColLevenshteinRepository;
+use CAPTCHAReader\src\Repository\Identify\IdentifyNeeaColRepository;
 use CAPTCHAReader\src\Repository\Identify\IdentifyQinGuoColLevenshteinRepository;
 use CAPTCHAReader\src\Repository\Identify\IdentifyQinGuoColRepository;
+use CAPTCHAReader\src\Repository\Identify\IdentifyTianYiColLevenshteinRepository;
+use CAPTCHAReader\src\Repository\Identify\IdentifyTianYiColRepository;
 use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangColLevenshteinRepository;
 use CAPTCHAReader\src\Repository\Identify\IdentifyZhengFangColRepository;
 
@@ -22,7 +27,7 @@ trait IdentifyTrait
 
     /**
      * @param $label
-     * @return IdentifyQinGuoColLevenshteinRepository|IdentifyQinGuoColRepository|IdentifyZhengFangColLevenshteinRepository|IdentifyZhengFangColRepository
+     * @return IdentifyNeeaColLevenshteinRepository|IdentifyNeeaColRepository|IdentifyQinGuoColLevenshteinRepository|IdentifyQinGuoColRepository|IdentifyTianYiColLevenshteinRepository|IdentifyTianYiColRepository|IdentifyZhengFangColLevenshteinRepository|IdentifyZhengFangColRepository
      */
     public function getRepository($label)
     {
@@ -35,6 +40,14 @@ trait IdentifyTrait
                 return new IdentifyQinGuoColRepository();
             case 'QinGuoLevenshtein':
                 return new IdentifyQinGuoColLevenshteinRepository();
+            case 'Neea':
+                return new IdentifyNeeaColRepository();
+            case 'NeeaLevenshtein':
+                return new IdentifyNeeaColLevenshteinRepository();
+            case 'TianYi':
+                return new IdentifyTianYiColRepository();
+            case 'TianYiLevenshtein':
+                return new IdentifyTianYiColLevenshteinRepository();
         }
     }
 

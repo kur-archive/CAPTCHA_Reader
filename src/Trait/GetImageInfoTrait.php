@@ -11,7 +11,7 @@ namespace CAPTCHAReader\src\Traits;
 
 trait  GetImageInfoTrait
 {
-    use CommonTrait;
+//    use CommonTrait;
 
     /**
      * @param $path
@@ -29,6 +29,7 @@ trait  GetImageInfoTrait
      * @return mixed
      */
     public function getTmpSampleSavePath(){
+
         $sampleConfig = $this->getConfig( 'sample' );
         return $sampleConfig['tmpSampleSavePath'];
     }

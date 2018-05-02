@@ -8,72 +8,15 @@
 
 namespace CAPTCHAReader\src\Repository\Cutting;
 
-
-use CAPTCHAReader\src\Traits\CommonTrait;
+use CAPTCHAReader\src\App\Pretreatment\PretreatmentNeea;
 use CAPTCHAReader\src\Traits\CuttingTrait;
 
-class CuttingNeeaRepository
+class CuttingNeeaFixedRepository
 {
     use CuttingTrait;
 
-    public function findValley($projectionArr)
-    {
-        $leftGap = [];
-        $rightGap = [];
-        $count = count($projectionArr);
-        $max = 0;
-
-        foreach ($projectionArr as $number => $value) {
-            if ($value > $max) {
-                $max = $value;
-            }
-            if ($number == 0) {
-                $leftGap[$number] = null;
-            } else {
-                $leftGap[$number] = $projectionArr[$number - 1] - $projectionArr[$number];
-            }
-
-            if ($number == $count - 1) {
-                $rightGap[$number] = null;
-            } else {
-                $rightGap[$number] = $projectionArr[$number + 1] - $projectionArr[$number];
-            }
-        }
-
-        $valleys = [];
-        for ($i = 0; $i < $count; ++$i) {
-            if ($leftGap[$i] >= 0 && $rightGap[$i] >= 0 && $projectionArr[$i] < ($max * 0.3)) {
-                $valleys[] = $i;
-            }
-        }
-
-        return $valleys;
-    }
-
-    /**
-     * @param $valleys
-     * @return array
-     */
-    public function findTrueValley($valleys)
-    {
-        $trueValleys = [];
-        $count = count($valleys);
-        //循环备选山谷
-        for ($i = 0; $i < $count; ++$i) {
-            $flag = $i;
-            //去除连续的山谷
-            while ($valleys[$i] + 1 == ($valleys[$i + 1] ?? -100)) {
-                ++$i;
-            }
-            $valleyNumber = floor(($flag + $i) / 2);
-
-            //TODO 加上距离判断
-            if ($valleys[$valleyNumber] - ($trueValleys[count($trueValleys) - 1] ?? 0) > 5) {
-                $trueValleys[] = $valleys[(int)$valleyNumber];
-            }
-        }
-        return $trueValleys;
-    }
+    protected $beforeLine;
+    protected $afterLine;
 
     /**
      * @param $width
@@ -81,14 +24,21 @@ class CuttingNeeaRepository
      * @param $noiseCancelArr
      * @return array
      */
-    public function getXCoordinate($width, $height, $noiseCancelArr, $trueValleys)
+    public function getXCoordinate($width, $height, $noiseCancelArr, $type = null)
     {
-        //假定这里传入的都是有五个元素的数组
-        $beforeLine = [$trueValleys[0], $trueValleys[1], $trueValleys[2], $trueValleys[3]];
-        $afterLine = [$trueValleys[1], $trueValleys[2], $trueValleys[3], $trueValleys[4] == $width ?$trueValleys[4] - 1: $trueValleys[4]];
+        if ($type == PretreatmentNeea::A) {
+            $this->beforeLine = [0, 17, 30, 42];
+            $this->afterLine = [16, 29, 41, 58];
+        } elseif ($type == PretreatmentNeea::C) {
+            $this->beforeLine = [0, 18, 32, 45];
+            $this->afterLine = [17, 31, 44, 58];
+        } elseif ($type == PretreatmentNeea::B) {
+            $this->beforeLine = [0, 17, 30, 42];
+            $this->afterLine = [16, 29, 41, 58];
+        }
 
-        $xArr = $this->getCutBeforeCol($noiseCancelArr, $width, $height, $beforeLine);
-        $x_Arr = $this->getCutAfterCol($noiseCancelArr, $width, $height, $afterLine);
+        $xArr = $this->getCutBeforeCol($noiseCancelArr, $width, $height, $this->beforeLine);
+        $x_Arr = $this->getCutAfterCol($noiseCancelArr, $width, $height, $this->afterLine);
 
         //合并xArr和x_Arr
         $xAllArr = [];
@@ -172,8 +122,11 @@ class CuttingNeeaRepository
      */
     public function getCutBeforeCol($noiseCancelArr, $width, $height, $beforeLine)
     {
+        $bLines = [];
         $xArr = [];
-        foreach ($beforeLine as $bLine) {
+        foreach ($beforeLine as $key => $bLine) {
+            $bLine = $this->estimate($noiseCancelArr, $bLine);
+            $bLines[] = $bLine;
             for ($x = $bLine; $x < $width; ++$x) {
                 $sum = 0;
                 for ($y = 0; $y < $height; ++$y) {
@@ -185,6 +138,9 @@ class CuttingNeeaRepository
                 }
             }
         }
+
+//        $this->showResArrAndAggs($noiseCancelArr, $bLines, 'v');
+//        dump($bLines);
         return $xArr;
     }
 
@@ -199,7 +155,8 @@ class CuttingNeeaRepository
     {
         $x_Arr = [];
         foreach ($afterLine as $aLine) {
-            for ($x = $aLine; $x < $width; --$x) {
+            $aLine = $this->estimate($noiseCancelArr, $aLine);
+            for ($x = $aLine; $x >= 0; --$x) {
                 $sum = 0;
                 for ($y = 0; $y < $height; ++$y) {
                     $sum += (int)$noiseCancelArr[$y][$x];
@@ -224,7 +181,7 @@ class CuttingNeeaRepository
     {
         $yArr = [];
         for ($i = 0; $i < 4; ++$i) {
-            for ($y = 0; $y < $height; ++$y) {
+            for ($y = 6; $y < $height; ++$y) {
                 $sum = 0;
                 for ($x = $xAllArr[$i * 2]; $x <= $xAllArr[$i * 2 + 1]; ++$x) {
                     $sum += (int)$noiseCancelArr[$y][$x];
@@ -248,7 +205,7 @@ class CuttingNeeaRepository
     {
         $y_Arr = [];
         for ($i = 0; $i < 4; ++$i) {
-            for ($y = $height - 1; $y > 0; --$y) {
+            for ($y = $height - 3; $y > 0; --$y) {
                 $sum = 0;
                 for ($x = $xAllArr[$i * 2]; $x <= $xAllArr[$i * 2 + 1]; ++$x) {
                     $sum += (int)$noiseCancelArr[$y][$x];
@@ -275,4 +232,64 @@ class CuttingNeeaRepository
 
         return compact('x', 'x_', 'y', 'y_');
     }
+
+    function estimate($imageArray, $nowX)
+    {
+        $height = count($imageArray);
+        $weight = count($imageArray[0]);
+
+        $leftX = -1;
+        $rightX = -1;
+
+        //watch left
+        for ($x = $nowX; $x > $nowX - 7; --$x) {
+            $num = 0;
+            for ($y = 0; $y < $height; ++$y) {
+                $num += $imageArray[$y][$x];
+            }
+            if ($num < 2) {
+                $leftX = $x;
+                break;
+            }
+            if ($x == 0) {
+                break;
+            }
+        }
+
+        //watch right
+        for ($x = $nowX; $x < $nowX + 6; ++$x) {
+            $num = 0;
+            for ($y = 0; $y < $height; ++$y) {
+                $num += $imageArray[$y][$x];
+            }
+            if ($num < 2) {
+                $rightX = $x;
+                break;
+            }
+            if ($x == $weight - 1) {
+                break;
+            }
+        }
+
+        if ($leftX == $rightX && $rightX == -1) {
+            return $nowX;
+        }
+
+        if ($leftX == -1 && $rightX != -1) {
+            return $rightX;
+        }
+
+        if ($rightX == -1 && $leftX != -1) {
+            return $leftX;
+        }
+
+        $left = $nowX - $leftX;
+        $right = $rightX - $nowX;
+        if ($left > $right) {
+            return $leftX;
+        } else {
+            return $rightX;
+        }
+    }
+
 }

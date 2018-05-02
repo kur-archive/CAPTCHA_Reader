@@ -9,9 +9,12 @@
 namespace CAPTCHAReader\src\Traits;
 
 
+use CAPTCHAReader\src\Repository\Cutting\CuttingNeeaFixedRepository;
 use CAPTCHAReader\src\Repository\Cutting\CuttingNeeaRepository;
 use CAPTCHAReader\src\Repository\Cutting\CuttingQinGuoShrinkRepository;
 use CAPTCHAReader\src\Repository\Cutting\CuttingQinGuoUnShrinkRepository;
+use CAPTCHAReader\src\Repository\Cutting\CuttingTianYiRepository;
+use CAPTCHAReader\src\Repository\Cutting\CuttingTianYiShrinkRepository;
 use CAPTCHAReader\src\Repository\Cutting\CuttingZhengFangFixedRepository;
 use CAPTCHAReader\src\Repository\Cutting\CuttingZhengFangMoveRepository;
 
@@ -21,7 +24,7 @@ trait CuttingTrait
 
     /**
      * @param string $label
-     * @return CuttingNeeaRepository|CuttingQinGuoShrinkRepository|CuttingQinGuoUnShrinkRepository|CuttingZhengFangFixedRepository|CuttingZhengFangMoveRepository
+     * @return CuttingNeeaFixedRepository|CuttingNeeaRepository|CuttingQinGuoShrinkRepository|CuttingQinGuoUnShrinkRepository|CuttingTianYiRepository|CuttingTianYiShrinkRepository|CuttingZhengFangFixedRepository|CuttingZhengFangMoveRepository
      */
     public function getRepository(string $label)
     {
@@ -36,6 +39,12 @@ trait CuttingTrait
                 return new CuttingQinGuoUnShrinkRepository();
             case "Neea":
                 return new CuttingNeeaRepository();
+            case "NeeaFixed":
+                return new CuttingNeeaFixedRepository();
+            case "TianYi":
+                return new CuttingTianYiRepository();
+            case "TianYiShrink":
+                return new CuttingTianYiShrinkRepository();
         }
     }
 
@@ -102,7 +111,6 @@ trait CuttingTrait
         }
         echo '</div>';
     }
-
 
 
 }

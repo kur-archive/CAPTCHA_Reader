@@ -9,11 +9,8 @@
 namespace CAPTCHAReader\src\Traits;
 
 
-use CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuoSimple;
 use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentNeeaRepository;
 use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentQinGuoRepository;
-use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentQinGuoUnShrinkRepository;
-use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentQinGuoSimpleRepository;
 use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentTianYiRepository;
 use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentZhengFangRepository;
 
