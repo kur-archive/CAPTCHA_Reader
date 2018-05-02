@@ -16,7 +16,7 @@
 #### Install use Composer 
 
 ```shell
-    composer require kurisu/captcha_reader dev-oop
+    composer require kurisu/captcha_reader v1.0
 ```
 
 
