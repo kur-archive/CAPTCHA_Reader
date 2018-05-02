@@ -8,11 +8,13 @@ src/App/test.php
 script
 *.png *.jpg *.jpeg *.gif *.7z *.zip *.rar
 
-sample/StudySamples/QinGuo/*
-sample/StudySamples/neea.edu.cn/*
-sample/StudySamples/TianYi/*
+sample/StudySamples/QinGuo/*.png
+sample/StudySamples/neea.edu.cn/a/*.png
+sample/StudySamples/neea.edu.cn/b/*.png
+sample/StudySamples/neea.edu.cn/c/*.png
+sample/StudySamples/TianYi/*.png
 sample/StudySamples/unmark/*
-sample/StudySamples/ZhengFang/*
+sample/StudySamples/ZhengFang/*.png
 sample/TestSamples/QinGuo/*
 sample/TestSamples/neea.edu.cn/*
 sample/TestSamples/TianYi/*

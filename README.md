@@ -4,21 +4,19 @@
 ![](https://img.shields.io/badge/php-~7.0.0-green.svg?longCache=true&style=flat-square)
 ![](https://img.shields.io/badge/Composer-MUST！-red.svg?longCache=true&style=flat-square)
 
-验证码识别与训练 脚手架
+**验证码识别与训练 脚手架**
 
 这个项目对验证码识别中常用的 `四个步骤`（~~三个~~）（**获取文件 => 降噪 => 切割 => 识别**）进行了简单的封装，减少开发的复杂程度。并提供了一些现成的解决方案。
 
-> 如果需要最开始的 php 脚本的版本，点这个链接 [master branch](https://github.com/Kuri-su/CAPTCHA_Reader/tree/master)
+**欢迎就使用中遇到的问题提出 `issue` 进行讨论。**
 
-## 目录结构
-
-![](docs/img/directory.png)
+> 如果需要最开始的 php 脚本的版本，已经移动到 `script/tooOldVersion` 下，自行获取
 
 ---
 
 ## 对各种验证码的支持
 
-* **正方教务系统验证码** 验证码字典样本数为`500条` ，不加上网络延时的耗时在`0.14s - 0.2s`之间
+* **正方教务系统验证码**  验证码字典样本数为`500条` ，不加上网络延时的耗时在`0.14s - 0.2s`之间
 &nbsp;
 
   > 测试集测试的结果
@@ -57,7 +55,7 @@
 
 ## Examples
 
-`待添加`
+`在线测试效果待添加，可以尝试根据下面的 GetStartedNow 测试效果`
 
 ## Get started now
 
@@ -90,6 +88,8 @@
 
 > 需要复制可以跳转到 [link](explore.md)
 
+---
+
 ## How To Use
 
 ### 识别部分
@@ -100,15 +100,29 @@
 
 ![](docs/img/config.png)
 
-`待补充`
+#### 切换识别方案中使用的类
+
+继承 `CAPTCHAReader\src\App\Abstracts\Load` 抽象类，实现相应的方法，完成装饰器的构建，然后替换配置文件中的组件类即可。
+
+#### 替换字典
+
+修改配置文件中相应方案的`dictionary`的值即可
 
 ### 训练部分
 
-`待补充`
+![](docs/img/training.png)
+
+配置文件中的 `studyGroup` 下的 键名 对应使用的 `学习样本组` 和 `测试样本组`,然后下面的四个类是使用的组件类。
 
 ## 样本集 & 测试集
 
 `待上传`
+
+## 目录结构
+
+![](docs/img/directory.png)
+
+---
 
 ## Update plan
 
