@@ -76,11 +76,15 @@ class PretreatmentQinGuoShrink extends Load
         $noiseCancelArr = $this->pretreatmentRepository->erosion($imageBinaryArr, $imageInfo['width'], $imageInfo['height']);
         $noiseCancelArr = $this->pretreatmentRepository->noiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
         $noiseCancelArr = $this->pretreatmentRepository->simpleNoiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
+//        $this->showResArr($noiseCancelArr);
+
         $noiseCancelArr = $this->pretreatmentRepository->shrink($noiseCancelArr);
         $conf = $this->resultContainer->getImageInfo();
         $conf['height'] = count($noiseCancelArr);
         $conf['width'] = count($noiseCancelArr[0]);
         $this->resultContainer->setImageInfo($conf);
+//        $this->showResArr($noiseCancelArr);
+//        self::dd(1);
 
         $this->resultContainer->unsetImage();
         $this->resultContainer->setImageBinaryArr($imageBinaryArr);
