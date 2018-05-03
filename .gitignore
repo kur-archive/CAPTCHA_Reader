@@ -13,13 +13,19 @@ sample/StudySamples/neea.edu.cn/a/*.png
 sample/StudySamples/neea.edu.cn/b/*.png
 sample/StudySamples/neea.edu.cn/c/*.png
 sample/StudySamples/TianYi/*.png
-sample/StudySamples/unmark/*
+
+sample/StudySamples/unmark/neea/*
+sample/StudySamples/unmark/qinGuo/*
+sample/StudySamples/unmark/tianyi/*
+sample/StudySamples/unmark/qinGuo*
+
 sample/StudySamples/ZhengFang/*.png
 sample/TestSamples/QinGuo/*
 sample/TestSamples/neea.edu.cn/*
 sample/TestSamples/TianYi/*
 sample/TestSamples/unmark/*
 sample/TestSamples/ZhengFang/*
+
 
 !.gitkeep
 tmp/
