@@ -119,14 +119,15 @@
 ## 样本集 & 测试集
 
 **已标记 学习样本集**
-
-* 正方 [link](https://github.com/Kuri-su/CAPTCHA_Reader/blob/master/sample/StudySamples/ZhengFang/ZhengFang.zip)
-* 青果 [link](https://github.com/Kuri-su/CAPTCHA_Reader/blob/master/sample/StudySamples/QinGuo/QinGuo.zip)
-* neea [link](https://github.com/Kuri-su/CAPTCHA_Reader/blob/master/sample/StudySamples/neea.edu.cn/neea.edu.cn.zip)
-* 天翼 [link](https://github.com/Kuri-su/CAPTCHA_Reader/blob/master/sample/StudySamples/TianYi/TianYi.zip)
+* 正方 [link](https://github.com/Kurisu-A/CAPTCHA_Reader_samples/blob/master/sample/StudySamples/ZhengFang/ZhengFang.zip)
+* 青果 [link](https://github.com/Kurisu-A/CAPTCHA_Reader_samples/blob/master/sample/StudySamples/QinGuo/QinGuo.zip)
+* neea [link](https://github.com/Kurisu-A/CAPTCHA_Reader_samples/blob/master/sample/StudySamples/neea.edu.cn/neea.edu.cn.zip)
+* 天翼 [link](https://github.com/Kurisu-A/CAPTCHA_Reader_samples/blob/master/sample/StudySamples/TianYi/TianYi.zip)
 
 **已标记 测试样本集**
-* 正方&青果&neea&天翼 已打包 [link](https://github.com/Kuri-su/CAPTCHA_Reader/blob/master/sample/TestSamples/TestSamples.zip)
+* 正方&青果&neea&天翼 已打包 [link](https://github.com/Kurisu-A/CAPTCHA_Reader_samples/blob/master/sample/TestSamples/TestSamples.zip)
+
+
 
 ## 目录结构
 
