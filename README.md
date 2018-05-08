@@ -11,6 +11,8 @@
 **欢迎就使用中遇到的问题提出 `issue` 进行讨论。**
 
 > 如果需要最开始的 php 脚本的版本，已经移动到 `script/tooOldVersion` 下，自行获取
+>
+> 如果有需要，可以考虑加群 [link](https://jq.qq.com/?_wv=1027&k=5nVNcvj) 讨论
 
 
 #### Install use Composer 
