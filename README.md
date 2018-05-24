@@ -153,4 +153,4 @@
 
 ## LICENSE
 
-**MIT**
+**WTFPL**
