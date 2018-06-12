@@ -9,10 +9,12 @@
 /**
  * @param array ...$vars
  */
-function dd(...$vars)
-{
-    foreach ($vars as $var) {
-        dump($var);
+if(!function_exists('dd')){
+    function dd(...$vars)
+    {
+        foreach ($vars as $var) {
+            dump($var);
+        }
+        exit();
     }
-    exit();
 }
