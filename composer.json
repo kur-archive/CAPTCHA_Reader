@@ -11,7 +11,7 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "symfony/var-dumper": "^3.4"
+    "symfony/var-dumper": "*"
   },
   "autoload": {
     "classmap": [
