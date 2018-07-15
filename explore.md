@@ -39,5 +39,5 @@
   dump($res);
 
   $end_time = microtime(true);//计时停止
-  echo '执行时间为：' . ($end_time - $start_time) . ' s' . "<br/>\n
+  echo '执行时间为：' . ($end_time - $start_time) . ' s' . "<br/>\n";
 ```
