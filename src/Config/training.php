@@ -18,12 +18,12 @@ return [
     */
 
     'studyGroup' => [
-        'neea.edu.cn' => [
+        'qinguo' => [
             [
                 \CAPTCHAReader\src\App\GetImageInfo\GetImageInfo::class,
-                \CAPTCHAReader\src\App\Pretreatment\PretreatmentNeea::class,
-                \CAPTCHAReader\src\App\Cutting\CuttingNeeaFixed::class,
-                \CAPTCHAReader\src\App\Identify\IdentifyNeeaLevenshtein::class,
+                \CAPTCHAReader\src\App\Pretreatment\PretreatmentQinGuoShrink::class,
+                \CAPTCHAReader\src\App\Cutting\CuttingQinGuoShrink::class,
+                \CAPTCHAReader\src\App\Identify\IdentifyQinGuoLevenshtein::class,
             ],
         ],
     ],

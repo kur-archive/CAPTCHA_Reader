@@ -54,8 +54,8 @@ class IdentifyQinGuoLevenshtein extends Restriction
                 return $this->resultContainer;
             }
             $oneDCharStrArr[] = $str;
-//            $oneDCharStrArr[] = $this->twoD2oneDArrayCol($charPixed);
         }
+
 
         $this->resultContainer->setOneDCharStrArr($oneDCharStrArr);
 

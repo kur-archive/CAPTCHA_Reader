@@ -48,6 +48,9 @@ trait CommonTrait
 //            }
             foreach ($resY as $key2 => $resX) {
                 if (in_array($key2, empty($arr) ? [17, 29, 42] : $arr)) {
+                    if (empty($arr)) {
+                        continue;
+                    }
                     echo $flag;
                     continue;
                 }
@@ -60,6 +63,11 @@ trait CommonTrait
         echo "\n";
     }
 
+    /**
+     * @param $imageArr
+     * @param array $arr
+     * @param string $flag
+     */
     public function showResArrAndAggs($imageArr, $arr = [], $flag = '●')
     {
         foreach ($imageArr as $key => $resY) {

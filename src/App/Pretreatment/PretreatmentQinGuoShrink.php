@@ -70,10 +70,10 @@ class PretreatmentQinGuoShrink extends Load
 
         //二值化
         $imageBinaryArr = $this->pretreatmentRepository->binarization($imageInfo['width'], $imageInfo['height'], $image, $colorTop4 ?? '');
+        $noiseCancelArr = $imageBinaryArr;
 
         //去掉散点
-        $noiseCancelArr = $imageBinaryArr;
-        $noiseCancelArr = $this->pretreatmentRepository->erosion($imageBinaryArr, $imageInfo['width'], $imageInfo['height']);
+        $noiseCancelArr = $this->pretreatmentRepository->erosion($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
         $noiseCancelArr = $this->pretreatmentRepository->noiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
         $noiseCancelArr = $this->pretreatmentRepository->simpleNoiseCancel($imageInfo['width'], $imageInfo['height'], $noiseCancelArr);
 //        $this->showResArr($noiseCancelArr);

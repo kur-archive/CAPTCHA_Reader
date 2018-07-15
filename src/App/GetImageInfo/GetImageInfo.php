@@ -32,6 +32,9 @@ class GetImageInfo extends Load
             $imagePath = $this->downLoadOnlineImage( $imagePath );
         }
         $imageAndInfo = $this->getImageAndInfo( $imagePath );
+        if ($mode == 'online' && $this->conf['unlinkImg']) {
+            unlink($imagePath);
+        }
 
         //将结果存入容器
         $this->resultContainer->setImageInfo( $imageAndInfo['info'] );

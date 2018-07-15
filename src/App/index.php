@@ -20,6 +20,7 @@ $a = new IndexController();
 $c=$a->entrance(__DIR__.'/../../sample/StudySamples/neea.edu.cn/c/8x6p.png','local');
 //$c = $a->entrance(__DIR__ . '/../../sample/StudySamples/unmark/tianyi/46654.png', 'local');
 //$c = $a->entrance(__DIR__ . '/../../sample/StudySamples/TianYi/cap4.png', 'local');
+//$c = $a->entrance('https://raw.githubusercontent.com/Kuri-su/CAPTCHA_Reader/master/docs/sample/qinguo.png', 'online','QinGuoNormal');
 
 dump($c);
 

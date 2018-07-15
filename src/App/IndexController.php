@@ -30,9 +30,12 @@ class IndexController
      * @return string
      *
      */
-    public function entrance($imagePath, $mode, $test = false)
+    public function entrance($imagePath, $mode, string $useGroup = null, bool $unlinkImg = null, bool $test = false)
     {
         try {
+            $useGroup === null ?: $this->changeUseGroup($useGroup);
+            $unlinkImg === null ?: $this->changeUnlinkImg($unlinkImg);
+
             //获取 装饰器
             $decorator = $this->getDecorator($this->conf);
             //设置 结果容器
@@ -59,7 +62,7 @@ class IndexController
      */
     public function getDecorator($conf)
     {
-        $useGroup = $conf['useGroup'];
+        $useGroup   = $conf['useGroup'];
         $components = $conf['componentGroup'][$useGroup];
 
         $decorator = $this->instantiationDecorator($components['components']);
@@ -73,7 +76,7 @@ class IndexController
     public function instantiationDecorator($components)
     {
         $components = array_reverse($components);
-        $decorator = null;
+        $decorator  = null;
 
         foreach ($components as $component) {
             if (empty($decorator)) {
@@ -84,6 +87,23 @@ class IndexController
         }
 
         return $decorator;
+    }
+
+    /**
+     * @param $bool
+     */
+    public function changeUseGroup($useGroup)
+    {
+        $this->conf['useGroup'] = $useGroup;
+    }
+
+    /**
+     * @param $bool
+     */
+    public function changeUnlinkImg($bool)
+    {
+        $this->conf['unlinkImg'] = $bool;
+
     }
 
     /**
