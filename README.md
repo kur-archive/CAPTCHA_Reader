@@ -124,7 +124,7 @@
 * 天翼 [link](https://github.com/Kurisu-A/CAPTCHA_Reader_samples/blob/master/sample/StudySamples/TianYi/TianYi.zip)
 
 **已标记 测试样本集**
-* 正方 & 青果 & neea & 天翼 已打包 [link](https://github.com/Kurisu-A/CAPTCHA_Reader_samples/blob/master/sample/TestSamples/TestSamples.zip)
+* **正方** & **青果** & **neea** & **天翼** 已打包 [link](https://github.com/Kurisu-A/CAPTCHA_Reader_samples/blob/master/sample/TestSamples/TestSamples.zip)
 
 
 
