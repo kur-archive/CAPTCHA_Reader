@@ -1,4 +1,6 @@
 # CAPTCHA_Reader
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FKuri-su%2FCAPTCHA_Reader.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FKuri-su%2FCAPTCHA_Reader?ref=badge_shield)
+
 
 ![](https://img.shields.io/badge/license-WTFPL-blue.svg?longCache=true&style=flat-square)
 ![](https://img.shields.io/badge/php-~7.0.0-green.svg?longCache=true&style=flat-square)
@@ -151,3 +153,6 @@
 ## LICENSE
 
 **WTFPL**
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FKuri-su%2FCAPTCHA_Reader.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FKuri-su%2FCAPTCHA_Reader?ref=badge_large)
