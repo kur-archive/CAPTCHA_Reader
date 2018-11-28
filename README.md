@@ -72,7 +72,7 @@ composer require kurisu/captcha_reader
 
 ![](docs/img/onlineCode.png)
 
-> 需要复制可以跳转到 [link](explore.md)
+需要复制可以跳转到 [link](explore.md)
 
 * 运行结果  
 ![](docs/runRes.png)
@@ -83,7 +83,7 @@ composer require kurisu/captcha_reader
 
 ![](docs/img/localCode.png)
 
-> 需要复制可以跳转到 [link](explore.md)
+需要复制可以跳转到 [link](explore.md)
 
 ---
 
@@ -109,7 +109,7 @@ composer require kurisu/captcha_reader
 
 ![](docs/img/training.png)
 
-配置文件中的 `studyGroup` 下的 键名 对应使用的 `学习样本组` 和 `测试样本组`,然后下面的四个类是使用的组件类。
+配置文件中的 `studyGroup` 下的 键名 对应使用的 `学习样本组` 和 `测试样本组` ，然后下面的四个类是使用的组件类。
 
 ## 样本集 & 测试集
 
