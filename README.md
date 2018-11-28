@@ -8,14 +8,14 @@
 
 这个项目对验证码识别中常用的 `四个步骤`（~~三个~~）（**获取文件 => 降噪 => 切割 => 识别**）进行了简单的封装，减少开发的复杂程度。并提供了一些现成的解决方案。
 
-**欢迎就使用中遇到的问题提出 `issue` 进行讨论。**
+**欢迎就使用中遇到的问题提出 Issue 进行讨论。**
 
-> 如果需要最开始的 php 脚本的版本，已经移动到 `script/tooOldVersion` 下，自行获取
+> 如果需要最开始的 PHP 脚本的版本，已经移动到 `script/tooOldVersion` ，可自行获取
 
 #### Install use Composer 
 
-```shell
-    composer require kurisu/captcha_reader
+```bash
+composer require kurisu/captcha_reader
 ```
 
 
@@ -48,7 +48,6 @@
   >
   > ![](docs/sample/neeaA.png)![](docs/sample/neeaB.png)![](docs/sample/neeaC.png)
 
-
 * **天翼校园网认证验证码** 验证码字典样本数为 `2800条左右`，不加上网络延时的耗时在 `0.45s - 0.5s`之间
 &nbsp;
 
@@ -60,28 +59,25 @@
 
 ## Examples
 
-`在线测试效果待添加，可以尝试根据下面的 GetStartedNow 测试效果`
+在线测试效果待添加，可以尝试根据下面的 `Get Started Now` 测试效果
 
-## Get started now
-
-
+## Get Started Now
 
 
-#### Online 在线
+### Online 在线
 
 * 运行指令 `git clone https://github.com/Kuri-su/CAPTCHA_Reader.git`
-* 在根目录下执行`composer update`
+* 在根目录下执行 `composer update`
 * 不用管 `sample`,`training`,`vendor`文件夹, 直接进入 `src/App/index.php` 下，仿照该文件的调用方式即可，例示代码段如下：
 
 ![](docs/img/onlineCode.png)
 
 > 需要复制可以跳转到 [link](explore.md)
 
-
 * 运行结果  
 ![](docs/runRes.png)
 
-#### Local 本地
+### Local 本地
 
 在识别本地的验证码的模式，代码与上面Online模式相似，只需要调用 `entrance`方法的时候第二个参数传 `local` 即可，例示代码段如下：
 
@@ -125,8 +121,6 @@
 
 **已标记 测试样本集**
 * **正方** & **青果** & **neea** & **天翼** 已打包 [link](https://github.com/Kurisu-A/CAPTCHA_Reader_samples/blob/master/sample/TestSamples/TestSamples.zip)
-
-
 
 ## 目录结构
 
