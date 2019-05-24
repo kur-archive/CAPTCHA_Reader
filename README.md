@@ -119,7 +119,7 @@ composer require kurisu/captcha_reader
 * :heavy_check_mark: 增加对 `neea` 的支持
 * :heavy_check_mark: 增加对 `天翼校园网认证验证码` 的支持
 * :heavy_check_mark: 打包为`composer`包，方便其他项目引用
-* :soon: **补全文档**
+* :soon: ~~补全文档~~
 * :clock1230: ~~以`PHP`拓展的方式重写核心函数，降低核心函数的时间复杂度~~
 * :clock1230: ~~使用 `pthreads` 多线程识别~~
 * ~~做完上面几种验证码的就结束支持，挨个支持各个验证码太累了，影响效率的是标记各个验证码，每种最少要标记将近1000个,如果有相关需求的请关注其他神经网络方案(资源消耗并不会多出多少)。~~
