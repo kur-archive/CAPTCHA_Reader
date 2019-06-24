@@ -8,16 +8,11 @@
 
 这个项目对验证码识别中常用的 `四个步骤`（~~三个~~）（**获取文件 => 降噪 => 切割 => 识别**）进行了简单的封装，减少开发的复杂程度。并提供了一些现成的解决方案。
 
-**欢迎就使用中遇到的问题提出 Issue 进行讨论。**
-
-> 如果需要最开始的 PHP 脚本的版本，已经移动到 `script/tooOldVersion` ，可自行获取
-
 #### Install use Composer 
 
 ```bash
 composer require kurisu/captcha_reader
 ```
-
 
 ## 对各种验证码的支持
 
