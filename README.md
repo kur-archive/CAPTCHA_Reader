@@ -12,6 +12,10 @@
 
 ```bash
 composer require kurisu/captcha_reader
+
+#该库依赖 php-gb 扩展
+# 如果是 linux 版本, php 可能未安装 php-gb
+sudo apt install php-gb -y #自行选择合适的安装方式
 ```
 
 ## 对各种验证码的支持
