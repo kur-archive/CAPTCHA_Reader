@@ -12,7 +12,9 @@ namespace CAPTCHAReader\src\App\Abstracts;
 abstract class Load extends Restriction
 {
     protected $nextStep;
-    public function __construct(Restriction $nextStep){
+
+    public function __construct(Restriction $nextStep)
+    {
         $this->nextStep = $nextStep;
     }
 

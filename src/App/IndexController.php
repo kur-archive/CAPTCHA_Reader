@@ -8,7 +8,6 @@
 
 namespace CAPTCHAReader\src\App;
 
-use CAPTCHAReader\src\App\Abstracts\Load;
 use CAPTCHAReader\src\App\Abstracts\Restriction;
 use CAPTCHAReader\src\Traits\CommonTrait;
 
@@ -26,9 +25,11 @@ class IndexController
 
     /**
      * @param $imagePath
-     * @param $mode string  local|online
-     * @return string
-     *
+     * @param $mode
+     * @param string|null $useGroup
+     * @param bool|null $unlinkImg
+     * @param bool $test
+     * @return ResultContainer|string
      */
     public function entrance($imagePath, $mode, string $useGroup = null, bool $unlinkImg = null, bool $test = false)
     {
@@ -90,7 +91,7 @@ class IndexController
     }
 
     /**
-     * @param $bool
+     * @param $useGroup
      */
     public function changeUseGroup($useGroup)
     {

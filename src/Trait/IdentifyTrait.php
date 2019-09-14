@@ -9,7 +9,6 @@
 namespace CAPTCHAReader\src\Traits;
 
 
-use CAPTCHAReader\src\App\Identify\IdentifyNeea;
 use CAPTCHAReader\src\Repository\Identify\IdentifyNeeaColLevenshteinRepository;
 use CAPTCHAReader\src\Repository\Identify\IdentifyNeeaColRepository;
 use CAPTCHAReader\src\Repository\Identify\IdentifyQinGuoColLevenshteinRepository;
@@ -85,7 +84,7 @@ trait IdentifyTrait
      */
     public function twoD2oneDArrayCol(array $twoDArray)
     {
-        $str = '';
+        $str       = '';
         $rowNumber = count($twoDArray);
         $colNumber = count($twoDArray[0]);
 

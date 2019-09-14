@@ -11,7 +11,6 @@ namespace CAPTCHAReader\src\App\Pretreatment;
 use CAPTCHAReader\src\App\Abstracts\Load;
 use CAPTCHAReader\src\App\Abstracts\Restriction;
 use CAPTCHAReader\src\App\ResultContainer;
-use CAPTCHAReader\src\Repository\Pretreatment\PretreatmentNeeaRepository;
 use CAPTCHAReader\src\Traits\PretreatmentTrait;
 
 class PretreatmentNeea extends Load
@@ -43,13 +42,13 @@ class PretreatmentNeea extends Load
     function run(ResultContainer $resultContainer)
     {
         $this->resultContainer = $resultContainer;
-        $this->conf = $this->resultContainer->getConf();
+        $this->conf            = $this->resultContainer->getConf();
 
         $imageInfo = $this->resultContainer->getImageInfo();
-        $image = $this->resultContainer->getImage();
+        $image     = $this->resultContainer->getImage();
 
         //首先对图片分类
-        $type = $this->pretreatmentRepository->checkCAPTCHAType($image);
+        $type                   = $this->pretreatmentRepository->checkCAPTCHAType($image);
         $imageInfo['imageType'] = $type;
         $this->resultContainer->setImageInfo($imageInfo);
 
@@ -59,11 +58,11 @@ class PretreatmentNeea extends Load
             $imageBinaryArr = $this->pretreatmentRepository->binarization($imageInfo['width'], $imageInfo['height'], $image);
             $noiseCancelArr = $imageBinaryArr;
 
-            $noiseCancelArr = $this->pretreatmentRepository->cutMiddle($noiseCancelArr);
+            $noiseCancelArr      = $this->pretreatmentRepository->cutMiddle($noiseCancelArr);
             $imageInfo['height'] = count($noiseCancelArr);
-            $imageInfo['width'] = count($noiseCancelArr[0]);
-            $noiseCancelArr = $this->pretreatmentRepository->erosion9($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
-            $noiseCancelArr = $this->pretreatmentRepository->erosion4($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+            $imageInfo['width']  = count($noiseCancelArr[0]);
+            $noiseCancelArr      = $this->pretreatmentRepository->erosion9($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
+            $noiseCancelArr      = $this->pretreatmentRepository->erosion4($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
 
         } elseif ($type == self::B) {//带阴影扭曲
             //二值化
@@ -97,7 +96,7 @@ class PretreatmentNeea extends Load
         $noiseCancelArr = $this->pretreatmentRepository->shrink($noiseCancelArr);
 
         $imageInfo['height'] = count($noiseCancelArr);
-        $imageInfo['width'] = count($noiseCancelArr[0]);
+        $imageInfo['width']  = count($noiseCancelArr[0]);
         $this->resultContainer->setImageInfo($imageInfo);
 
 //        $this->showResArr($noiseCancelArr);

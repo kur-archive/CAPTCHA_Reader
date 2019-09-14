@@ -41,10 +41,10 @@ return [
         'neea.edu.cnA' => __DIR__ . '/../../sample/StudySamples/neea.edu.cn/a/',
         'neea.edu.cnB' => __DIR__ . '/../../sample/StudySamples/neea.edu.cn/b/',
         'neea.edu.cnC' => __DIR__ . '/../../sample/StudySamples/neea.edu.cn/c/',
-        'neea.edu.cn' => __DIR__ . '/../../sample/StudySamples/neea.edu.cn/',
-        'qinguo'      => __DIR__ . '/../../sample/StudySamples/QinGuo/',
-        'tianyi'      => __DIR__ . '/../../sample/StudySamples/TianYi/',
-        'zhengfang'   => __DIR__ . '/../../sample/StudySamples/ZhengFang/',
+        'neea.edu.cn'  => __DIR__ . '/../../sample/StudySamples/neea.edu.cn/',
+        'qinguo'       => __DIR__ . '/../../sample/StudySamples/QinGuo/',
+        'tianyi'       => __DIR__ . '/../../sample/StudySamples/TianYi/',
+        'zhengfang'    => __DIR__ . '/../../sample/StudySamples/ZhengFang/',
     ],
 
     /*
@@ -56,13 +56,13 @@ return [
     |
     */
     'testSampleGroup'  => [
-        'neea.edu.cn' => __DIR__ . '/../../sample/TestSamples/neea.edu.cn/',
+        'neea.edu.cn'  => __DIR__ . '/../../sample/TestSamples/neea.edu.cn/',
         'neea.edu.cnA' => __DIR__ . '/../../sample/TestSamples/neea.edu.cn/',
         'neea.edu.cnB' => __DIR__ . '/../../sample/TestSamples/neea.edu.cn/',
         'neea.edu.cnC' => __DIR__ . '/../../sample/TestSamples/neea.edu.cn/',
-        'qinguo'      => __DIR__ . '/../../sample/TestSamples/QinGuo/',
-        'tianyi'      => __DIR__ . '/../../sample/TestSamples/TianYi/',
-        'zhengfang'   => __DIR__ . '/../../sample/TestSamples/ZhengFang/',
+        'qinguo'       => __DIR__ . '/../../sample/TestSamples/QinGuo/',
+        'tianyi'       => __DIR__ . '/../../sample/TestSamples/TianYi/',
+        'zhengfang'    => __DIR__ . '/../../sample/TestSamples/ZhengFang/',
     ],
 
     /*
@@ -72,7 +72,7 @@ return [
     | 日志位置
     */
 
-    'LogPath' => __DIR__.'/../Log/' ,
+    'LogPath' => __DIR__ . '/../Log/',
 
     /*
     |--------------------------------------------------------------------------
@@ -81,7 +81,7 @@ return [
     | 自动训练的字典数量上限
     */
 
-    'dictionarySampleLimit' => 4000 ,
+    'dictionarySampleLimit' => 4000,
 
     /*
     |--------------------------------------------------------------------------
@@ -90,6 +90,6 @@ return [
     | 自动训练到达触发的测试成功率线
     */
 
-    'testSuccessRateLine' => 95 ,
+    'testSuccessRateLine' => 95,
 
 ];

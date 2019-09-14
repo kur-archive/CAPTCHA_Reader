@@ -43,7 +43,7 @@ class PretreatmentNeeaRepository
         for ($y = 40; $y <= 80; ++$y) {
             for ($x = 30; $x <= 170; ++$x) {
                 $pixelRGB = $this->getPixelRGB($image, $x, $y);
-                $color = $pixelRGB['red'];
+                $color    = $pixelRGB['red'];
                 if ($pixelRGB['red'] == $color && $pixelRGB['green'] == $color && $pixelRGB['blue'] == $color) {
                     if ($color > 25 && $color < 120) {
                         ++$shadow;
@@ -71,7 +71,7 @@ class PretreatmentNeeaRepository
     public function colorAggregation($image, $width, $height)
     {
         $deviation = 30;
-        $aggArr = [];
+        $aggArr    = [];
 //        //生成网格点位列表
 //        $gridPointArr = [];
 //        for ($y = 0; $y < $height; ++$y) {
@@ -194,7 +194,7 @@ class PretreatmentNeeaRepository
                     } else {
                         $imageArr[$y][$x] = '0';
                     }
-                }else {
+                } else {
                     $imageArr[$y][$x] = '1';
                 }
                 if ($x == 0 || $y == 0 || $x == $width - 1 || $y == $height - 1) {
@@ -234,7 +234,6 @@ class PretreatmentNeeaRepository
         }
         return $imageArr;
     }
-
 
 
     /**
@@ -540,10 +539,10 @@ class PretreatmentNeeaRepository
         $result = [];
         foreach ($arr as $indexY => $row) {
             foreach ($row as $indexX => $rowX) {
-                $top = $indexY != 0;
-                $leftmost = $indexX != 0;
+                $top       = $indexY != 0;
+                $leftmost  = $indexX != 0;
                 $rightmost = $indexX != $width - 1;
-                $bottom = $indexY != $height - 1;
+                $bottom    = $indexY != $height - 1;
 
                 $sum = 0;
                 $sum += $arr[$indexY][$indexX];

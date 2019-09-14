@@ -39,9 +39,9 @@ class PretreatmentQinGuoUnShrink extends Load
     function run(ResultContainer $resultContainer)
     {
         $this->resultContainer = $resultContainer;
-        $this->conf = $this->resultContainer->getConf();
-        $imageInfo = $this->resultContainer->getImageInfo();
-        $image = $this->resultContainer->getImage();
+        $this->conf            = $this->resultContainer->getConf();
+        $imageInfo             = $this->resultContainer->getImageInfo();
+        $image                 = $this->resultContainer->getImage();
         imagefilter($image, IMG_FILTER_GRAYSCALE);
 //        imagejpeg($image, 'test.jpg');
 //        imagefilter($image, IMG_FILTER_CONTRAST,-20);

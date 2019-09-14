@@ -34,173 +34,198 @@ class ResultContainer
     /**
      * @return mixed
      */
-    public function getConf(){
+    public function getConf()
+    {
         return $this->conf;
     }
 
     /**
-     * @param mixed $config
+     * @param $conf
      */
-    public function setConf( $conf ){
+    public function setConf($conf)
+    {
         $this->conf = $conf;
     }
 
     /**
      * @return mixed
      */
-    public function getImagePath(){
+    public function getImagePath()
+    {
         return $this->imagePath;
     }
 
     /**
      * @param mixed $imagePath
      */
-    public function setImagePath( $imagePath ){
+    public function setImagePath($imagePath)
+    {
         $this->imagePath = $imagePath;
     }
 
     /**
      * @return mixed
      */
-    public function getMode(){
+    public function getMode()
+    {
         return $this->mode;
     }
 
     /**
      * @param mixed $mode
      */
-    public function setMode( $mode ){
+    public function setMode($mode)
+    {
         $this->mode = $mode;
     }
 
     /**
      * @return mixed
      */
-    public function getImageInfo(){
+    public function getImageInfo()
+    {
         return $this->imageInfo;
     }
 
     /**
      * @param mixed $imageInfo
      */
-    public function setImageInfo( $imageInfo ){
+    public function setImageInfo($imageInfo)
+    {
         $this->imageInfo = $imageInfo;
     }
 
     /**
      * @return mixed
      */
-    public function getImage(){
+    public function getImage()
+    {
         return $this->image;
     }
 
     /**
      * @param mixed $image
      */
-    public function setImage( $image ){
+    public function setImage($image)
+    {
         $this->image = $image;
     }
 
-    public function unsetImage(){
-        imagedestroy( $this->image );
-        unset( $this->image );
+    public function unsetImage()
+    {
+        imagedestroy($this->image);
+        unset($this->image);
     }
 
     /**
      * @return mixed
      */
-    public function getImageBinaryArr(){
+    public function getImageBinaryArr()
+    {
         return $this->imageBinaryArr;
     }
 
     /**
      * @param mixed $imageBinaryArr
      */
-    public function setImageBinaryArr( $imageBinaryArr ){
+    public function setImageBinaryArr($imageBinaryArr)
+    {
         $this->imageBinaryArr = $imageBinaryArr;
     }
 
     /**
      * @return mixed
      */
-    public function getNoiseCancelArr(){
+    public function getNoiseCancelArr()
+    {
         return $this->noiseCancelArr;
     }
 
     /**
      * @param mixed $noiseCancelArr
      */
-    public function setNoiseCancelArr( $noiseCancelArr ){
+    public function setNoiseCancelArr($noiseCancelArr)
+    {
         $this->noiseCancelArr = $noiseCancelArr;
     }
 
     /**
      * @return mixed
      */
-    public function getCoordinate(){
+    public function getCoordinate()
+    {
         return $this->coordinate;
     }
 
     /**
      * @param mixed $coordinate
      */
-    public function setCoordinate( $coordinate ){
+    public function setCoordinate($coordinate)
+    {
         $this->coordinate = $coordinate;
     }
 
     /**
      * @return mixed
      */
-    public function getCharPixedCollection(){
+    public function getCharPixedCollection()
+    {
         return $this->charPixedCollection;
     }
 
     /**
      * @param mixed $charPixedCollection
      */
-    public function setCharPixedCollection( $charPixedCollection ){
+    public function setCharPixedCollection($charPixedCollection)
+    {
         $this->charPixedCollection = $charPixedCollection;
     }
 
     /**
      * @return mixed
      */
-    public function getOneDCharStrArr(){
+    public function getOneDCharStrArr()
+    {
         return $this->oneDCharStrArr;
     }
 
     /**
      * @param mixed $oneDCharStrArr
      */
-    public function setOneDCharStrArr( $oneDCharStrArr ){
+    public function setOneDCharStrArr($oneDCharStrArr)
+    {
         $this->oneDCharStrArr = $oneDCharStrArr;
     }
 
     /**
      * @return mixed
      */
-    public function getJudgeDetails(){
+    public function getJudgeDetails()
+    {
         return $this->judgeDetails;
     }
 
     /**
      * @param mixed $judgeDetails
      */
-    public function setJudgeDetails( $key,$judgeDetails ){
+    public function setJudgeDetails($key, $judgeDetails)
+    {
         $this->judgeDetails[$key] = $judgeDetails;
     }
 
     /**
      * @return mixed
      */
-    public function getResultArr(){
+    public function getResultArr()
+    {
         return $this->resultArr;
     }
 
     /**
      * @param mixed $resultArr
      */
-    public function setResultArr( $resultStrArr ){
+    public function setResultArr($resultStrArr)
+    {
         $this->resultArr[] = $resultStrArr;
     }
 
@@ -208,14 +233,16 @@ class ResultContainer
     /**
      * @return mixed
      */
-    public function getResultStr(){
+    public function getResultStr()
+    {
         return $this->resultStr;
     }
 
     /**
      * @param mixed $resultStr
      */
-    public function setResultStr( $resultStr ){
+    public function setResultStr($resultStr)
+    {
         $this->resultStr = $resultStr;
     }
 

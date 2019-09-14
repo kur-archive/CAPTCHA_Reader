@@ -32,8 +32,8 @@ class IdentifyTianYi extends Restriction
 
     function run(ResultContainer $resultContainer)
     {
-        $this->resultContainer = $resultContainer;
-        $this->conf = $this->resultContainer->getConf();
+        $this->resultContainer     = $resultContainer;
+        $this->conf                = $this->resultContainer->getConf();
         $this->charPixedCollection = $this->resultContainer->getCharPixedCollection();
 
         $this->dictionary = $this->getDictionary($this->conf['componentGroup'][$this->conf['useGroup']]['dictionary']);
@@ -53,12 +53,12 @@ class IdentifyTianYi extends Restriction
 
         //在 字典中 寻找 相似度 最高的 样本
         $result = '';
-        foreach($oneDCharStrArr as $oneDChar){
+        foreach ($oneDCharStrArr as $oneDChar) {
             //是否记录识别详情
             if ($this->conf['noteDetailJudgeProcess']) {
-                $result .= $this->identifyRepository->getHighestSimilarityResultNoteDetail( $oneDChar , $this->dictionary , $this->resultContainer );
+                $result .= $this->identifyRepository->getHighestSimilarityResultNoteDetail($oneDChar, $this->dictionary, $this->resultContainer);
             } else {
-                $result .= $this->identifyRepository->getHighestSimilarityResult( $oneDChar , $this->dictionary );
+                $result .= $this->identifyRepository->getHighestSimilarityResult($oneDChar, $this->dictionary);
             }
         }
 

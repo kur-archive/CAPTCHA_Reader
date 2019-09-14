@@ -28,16 +28,16 @@ class CuttingNeeaFixedRepository
     {
         if ($type == PretreatmentNeea::A) {
             $this->beforeLine = [0, 17, 30, 42];
-            $this->afterLine = [16, 29, 41, 58];
+            $this->afterLine  = [16, 29, 41, 58];
         } elseif ($type == PretreatmentNeea::C) {
             $this->beforeLine = [0, 18, 32, 45];
-            $this->afterLine = [17, 31, 44, 58];
+            $this->afterLine  = [17, 31, 44, 58];
         } elseif ($type == PretreatmentNeea::B) {
             $this->beforeLine = [0, 17, 30, 42];
-            $this->afterLine = [16, 29, 41, 58];
+            $this->afterLine  = [16, 29, 41, 58];
         }
 
-        $xArr = $this->getCutBeforeCol($noiseCancelArr, $width, $height, $this->beforeLine);
+        $xArr  = $this->getCutBeforeCol($noiseCancelArr, $width, $height, $this->beforeLine);
         $x_Arr = $this->getCutAfterCol($noiseCancelArr, $width, $height, $this->afterLine);
 
         //合并xArr和x_Arr
@@ -58,7 +58,7 @@ class CuttingNeeaFixedRepository
      */
     public function getYCoordinate($xAllArr, $height, $noiseCancelArr)
     {
-        $yArr = $this->getCutBeforeRow($xAllArr, $height, $noiseCancelArr);
+        $yArr  = $this->getCutBeforeRow($xAllArr, $height, $noiseCancelArr);
         $y_Arr = $this->getCutAfterRow($xAllArr, $height, $noiseCancelArr);
 
         //合并 $yArr 和 $y_Arr
@@ -103,7 +103,7 @@ class CuttingNeeaFixedRepository
                 for ($i = 0; $i < 4; ++$i) {
                     $charCOORD = $this->getCharAllXY($charPixelCollection["char$i"]);
                     if ($this->isInArea($x, $y, $charCOORD['x'], $charCOORD['x_'], $charCOORD['y'], $charCOORD['y_'])) {
-                        $position = $this->getPointPositionInArea($x, $y, $charCOORD['x'], $charCOORD['y']);
+                        $position                                                               = $this->getPointPositionInArea($x, $y, $charCOORD['x'], $charCOORD['y']);
                         $charPixelCollection["char$i"]['pixel'][$position['y']][$position['x']] = $noiseCancelArr[$y][$x];
                     }
                 }
@@ -123,9 +123,9 @@ class CuttingNeeaFixedRepository
     public function getCutBeforeCol($noiseCancelArr, $width, $height, $beforeLine)
     {
         $bLines = [];
-        $xArr = [];
+        $xArr   = [];
         foreach ($beforeLine as $key => $bLine) {
-            $bLine = $this->estimate($noiseCancelArr, $bLine);
+            $bLine    = $this->estimate($noiseCancelArr, $bLine);
             $bLines[] = $bLine;
             for ($x = $bLine; $x < $width; ++$x) {
                 $sum = 0;
@@ -225,9 +225,9 @@ class CuttingNeeaFixedRepository
      */
     public function getCharAllXY($char)
     {
-        $x = $char['x'][0];
+        $x  = $char['x'][0];
         $x_ = $char['x'][1];
-        $y = $char['y'][0];
+        $y  = $char['y'][0];
         $y_ = $char['y'][1];
 
         return compact('x', 'x_', 'y', 'y_');
@@ -238,7 +238,7 @@ class CuttingNeeaFixedRepository
         $height = count($imageArray);
         $weight = count($imageArray[0]);
 
-        $leftX = -1;
+        $leftX  = -1;
         $rightX = -1;
 
         //watch left
@@ -283,7 +283,7 @@ class CuttingNeeaFixedRepository
             return $leftX;
         }
 
-        $left = $nowX - $leftX;
+        $left  = $nowX - $leftX;
         $right = $rightX - $nowX;
         if ($left > $right) {
             return $leftX;

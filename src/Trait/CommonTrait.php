@@ -29,9 +29,13 @@ trait CommonTrait
     }
 
     /**
+     * @param $imageArr
+     * @param array $arr
+     * @param string $flag
+     *
      * 调试用，show处理好的数组
      */
-    public function showResArr($imageArr,$arr = [], $flag = '●')
+    public function showResArr($imageArr, $arr = [], $flag = '●')
     {
         echo '  ';
 //        for($i = 0; $i < 72; ++$i){
@@ -177,7 +181,7 @@ trait CommonTrait
     {
         $result = [];
         $height = count($noiseArr);
-        $width = count($noiseArr[0]);
+        $width  = count($noiseArr[0]);
 
         for ($x = 0; $x < $width; ++$x) {
             $result[$x] = 0;
@@ -198,7 +202,7 @@ trait CommonTrait
     {
         $result = [];
         $height = count($noiseArr);
-        $width = count($noiseArr[0]);
+        $width  = count($noiseArr[0]);
 
         for ($x = 0; $x < $width; ++$x) {
             $min = 0;

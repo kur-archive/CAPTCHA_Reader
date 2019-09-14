@@ -9,7 +9,6 @@
 namespace CAPTCHAReader\src\Repository\Cutting;
 
 
-use CAPTCHAReader\src\Traits\CommonTrait;
 use CAPTCHAReader\src\Traits\CuttingTrait;
 
 class CuttingNeeaRepository
@@ -18,10 +17,10 @@ class CuttingNeeaRepository
 
     public function findValley($projectionArr)
     {
-        $leftGap = [];
+        $leftGap  = [];
         $rightGap = [];
-        $count = count($projectionArr);
-        $max = 0;
+        $count    = count($projectionArr);
+        $max      = 0;
 
         foreach ($projectionArr as $number => $value) {
             if ($value > $max) {
@@ -57,7 +56,7 @@ class CuttingNeeaRepository
     public function findTrueValley($valleys)
     {
         $trueValleys = [];
-        $count = count($valleys);
+        $count       = count($valleys);
         //循环备选山谷
         for ($i = 0; $i < $count; ++$i) {
             $flag = $i;
@@ -85,9 +84,9 @@ class CuttingNeeaRepository
     {
         //假定这里传入的都是有五个元素的数组
         $beforeLine = [$trueValleys[0], $trueValleys[1], $trueValleys[2], $trueValleys[3]];
-        $afterLine = [$trueValleys[1], $trueValleys[2], $trueValleys[3], $trueValleys[4] == $width ?$trueValleys[4] - 1: $trueValleys[4]];
+        $afterLine  = [$trueValleys[1], $trueValleys[2], $trueValleys[3], $trueValleys[4] == $width ? $trueValleys[4] - 1 : $trueValleys[4]];
 
-        $xArr = $this->getCutBeforeCol($noiseCancelArr, $width, $height, $beforeLine);
+        $xArr  = $this->getCutBeforeCol($noiseCancelArr, $width, $height, $beforeLine);
         $x_Arr = $this->getCutAfterCol($noiseCancelArr, $width, $height, $afterLine);
 
         //合并xArr和x_Arr
@@ -108,7 +107,7 @@ class CuttingNeeaRepository
      */
     public function getYCoordinate($xAllArr, $height, $noiseCancelArr)
     {
-        $yArr = $this->getCutBeforeRow($xAllArr, $height, $noiseCancelArr);
+        $yArr  = $this->getCutBeforeRow($xAllArr, $height, $noiseCancelArr);
         $y_Arr = $this->getCutAfterRow($xAllArr, $height, $noiseCancelArr);
 
         //合并 $yArr 和 $y_Arr
@@ -153,7 +152,7 @@ class CuttingNeeaRepository
                 for ($i = 0; $i < 4; ++$i) {
                     $charCOORD = $this->getCharAllXY($charPixelCollection["char$i"]);
                     if ($this->isInArea($x, $y, $charCOORD['x'], $charCOORD['x_'], $charCOORD['y'], $charCOORD['y_'])) {
-                        $position = $this->getPointPositionInArea($x, $y, $charCOORD['x'], $charCOORD['y']);
+                        $position                                                               = $this->getPointPositionInArea($x, $y, $charCOORD['x'], $charCOORD['y']);
                         $charPixelCollection["char$i"]['pixel'][$position['y']][$position['x']] = $noiseCancelArr[$y][$x];
                     }
                 }
@@ -268,9 +267,9 @@ class CuttingNeeaRepository
      */
     public function getCharAllXY($char)
     {
-        $x = $char['x'][0];
+        $x  = $char['x'][0];
         $x_ = $char['x'][1];
-        $y = $char['y'][0];
+        $y  = $char['y'][0];
         $y_ = $char['y'][1];
 
         return compact('x', 'x_', 'y', 'y_');

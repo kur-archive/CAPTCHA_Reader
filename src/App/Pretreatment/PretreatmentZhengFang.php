@@ -26,16 +26,18 @@ class PretreatmentZhengFang extends Load
      * PretreatmentZhengFang constructor.
      * @param Restriction $nextStep
      */
-    public function __construct( Restriction $nextStep ){
-        parent::__construct( $nextStep );
-        $this->pretreatmentRepository = $this->getRepository( 'ZhengFang' );
+    public function __construct(Restriction $nextStep)
+    {
+        parent::__construct($nextStep);
+        $this->pretreatmentRepository = $this->getRepository('ZhengFang');
     }
 
     /**
      * @param ResultContainer $resultContainer
      * @return mixed
      */
-    function run( ResultContainer $resultContainer ){
+    function run(ResultContainer $resultContainer)
+    {
         $this->resultContainer = $resultContainer;
         $this->conf            = $this->resultContainer->getConf();
 
@@ -43,16 +45,16 @@ class PretreatmentZhengFang extends Load
         $image     = $this->resultContainer->getImage();
 
         //二值化
-        $imageBinaryArr = $this->pretreatmentRepository->binarization( $imageInfo['width'] , $imageInfo['height'] , $image );
+        $imageBinaryArr = $this->pretreatmentRepository->binarization($imageInfo['width'], $imageInfo['height'], $image);
 
         //去掉散点
-        $noiseCancelArr = $this->pretreatmentRepository->SimpleNoiseCancel( $imageInfo['width'] , $imageInfo['height'] , $imageBinaryArr );
+        $noiseCancelArr = $this->pretreatmentRepository->SimpleNoiseCancel($imageInfo['width'], $imageInfo['height'], $imageBinaryArr);
 
         $this->resultContainer->unsetImage();
-        $this->resultContainer->setImageBinaryArr( $imageBinaryArr );
-        $this->resultContainer->setNoiseCancelArr( $noiseCancelArr );
+        $this->resultContainer->setImageBinaryArr($imageBinaryArr);
+        $this->resultContainer->setNoiseCancelArr($noiseCancelArr);
         //------------------------------------------------------------------
-        $this->resultContainer=$this->nextStep->run($this->resultContainer);
+        $this->resultContainer = $this->nextStep->run($this->resultContainer);
         //------------------------------------------------------------------
         return $this->resultContainer;
     }

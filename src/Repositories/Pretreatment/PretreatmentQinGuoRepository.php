@@ -44,9 +44,9 @@ class PretreatmentQinGuoRepository
 
     public function inArea($colorTop4, $rgbArray)
     {
-        $deviation = 42;
+        $deviation    = 42;
         $deviationPow = pow($deviation, 2);
-        $flag = 0;
+        $flag         = 0;
         foreach ($colorTop4 as $value) {
             if ((pow($value['red'] - $rgbArray['red'], 2)
                     + pow($value['green'] - $rgbArray['green'], 2)
@@ -197,10 +197,10 @@ class PretreatmentQinGuoRepository
         $result = [];
         foreach ($arr as $indexY => $row) {
             foreach ($row as $indexX => $rowX) {
-                $top = $indexY != 0;
-                $leftmost = $indexX != 0;
+                $top       = $indexY != 0;
+                $leftmost  = $indexX != 0;
                 $rightmost = $indexX != $width - 1;
-                $bottom = $indexY != $height - 1;
+                $bottom    = $indexY != $height - 1;
 
                 $sum = 0;
                 $sum += $arr[$indexY][$indexX];
@@ -251,7 +251,7 @@ class PretreatmentQinGuoRepository
     public function colorAggregation($image, $width, $height)
     {
         $deviation = 30;
-        $aggArr = [];
+        $aggArr    = [];
 
         for ($y = 1; $y < $height - 1; $y += 1) {
             for ($x = 1; $x < $width - 1; $x += 1) {

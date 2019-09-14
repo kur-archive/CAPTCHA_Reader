@@ -38,10 +38,10 @@ class PretreatmentTianYShrink extends Load
     function run(ResultContainer $resultContainer)
     {
         $this->resultContainer = $resultContainer;
-        $this->conf = $this->resultContainer->getConf();
+        $this->conf            = $this->resultContainer->getConf();
 
         $imageInfo = $this->resultContainer->getImageInfo();
-        $image = $this->resultContainer->getImage();
+        $image     = $this->resultContainer->getImage();
 
         //二值化
         $imageBinaryArr = $this->pretreatmentRepository->binarization($imageInfo['width'], $imageInfo['height'], $image);
@@ -59,10 +59,8 @@ class PretreatmentTianYShrink extends Load
 //        self::dd(1);
 
 
-
         $noiseCancelArr = $this->pretreatmentRepository->erosion2($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
-                $noiseCancelArr = $this->pretreatmentRepository->expansion($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
-
+        $noiseCancelArr = $this->pretreatmentRepository->expansion($noiseCancelArr, $imageInfo['width'], $imageInfo['height']);
 
 
 //        $this->showResArr($noiseCancelArr);
@@ -81,9 +79,9 @@ class PretreatmentTianYShrink extends Load
 //        $this->showResArrAndAggs($noiseCancelArr);
 //        self::dd(1);
 
-        $conf = $this->resultContainer->getImageInfo();
+        $conf           = $this->resultContainer->getImageInfo();
         $conf['height'] = count($noiseCancelArr);
-        $conf['width'] = count($noiseCancelArr[0]);
+        $conf['width']  = count($noiseCancelArr[0]);
         $this->resultContainer->setImageInfo($conf);
 
         $this->resultContainer->unsetImage();

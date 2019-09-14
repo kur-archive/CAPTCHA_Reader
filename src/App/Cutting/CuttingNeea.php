@@ -34,9 +34,9 @@ class CuttingNeea extends Load
     function run(ResultContainer $resultContainer)
     {
         $this->resultContainer = $resultContainer;
-        $this->conf = $this->resultContainer->getConf();
-        $this->imageInfo = $this->resultContainer->getImageInfo();
-        $this->noiseCancelArr = $this->resultContainer->getNoiseCancelArr();
+        $this->conf            = $this->resultContainer->getConf();
+        $this->imageInfo       = $this->resultContainer->getImageInfo();
+        $this->noiseCancelArr  = $this->resultContainer->getNoiseCancelArr();
 
         /**
          * 水滴切割
@@ -59,11 +59,11 @@ class CuttingNeea extends Load
 
 
         $projectionArr = $this->getDifferenceHeightProjection($this->noiseCancelArr);
-        $valleys = $this->cuttingRepository->findValley($projectionArr);
-        $trueValleys = $this->cuttingRepository->findTrueValley($valleys);
+        $valleys       = $this->cuttingRepository->findValley($projectionArr);
+        $trueValleys   = $this->cuttingRepository->findTrueValley($valleys);
 //        dump($trueValleys);
         if (count($trueValleys) != 5) {//考虑这里如果不等于5就抛弃
-            $trueValleys = [0, 17, 30, 45, count($this->noiseCancelArr[0])-1];
+            $trueValleys = [0, 17, 30, 45, count($this->noiseCancelArr[0]) - 1];
         }
 //        self::dd($trueValleys);
 
@@ -72,7 +72,7 @@ class CuttingNeea extends Load
 //        dump($valleys);
 //        self::dd($trueValleys);
 //        self::dd(1);
-        $width = count($this->noiseCancelArr[0]);
+        $width  = count($this->noiseCancelArr[0]);
         $height = count($this->noiseCancelArr);
 
         //获取坐标
@@ -81,7 +81,7 @@ class CuttingNeea extends Load
 
 
         //切割
-        $pixelCollection = $this->cuttingRepository->cut($this->noiseCancelArr, compact('xAllArr', 'yAllArr'));
+        $pixelCollection     = $this->cuttingRepository->cut($this->noiseCancelArr, compact('xAllArr', 'yAllArr'));
         $charPixedCollection = [];
         foreach ($pixelCollection as $charPixel) {
             $charPixedCollection[] = $charPixel['pixel'];

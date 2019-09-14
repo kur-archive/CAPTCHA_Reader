@@ -23,9 +23,9 @@ class CuttingTianYiShrinkRepository
     public function getXCoordinate($width, $height, $noiseCancelArr)
     {
         $beforeLine = [0, 15, 27, 39];
-        $afterLine = [14, 26, 38, 51];
+        $afterLine  = [14, 26, 38, 51];
 
-        $xArr = $this->getCutBeforeCol($noiseCancelArr, $width, $height, $beforeLine);
+        $xArr  = $this->getCutBeforeCol($noiseCancelArr, $width, $height, $beforeLine);
         $x_Arr = $this->getCutAfterCol($noiseCancelArr, $width, $height, $afterLine);
 
         //合并xArr和x_Arr
@@ -46,7 +46,7 @@ class CuttingTianYiShrinkRepository
      */
     public function getYCoordinate($xAllArr, $height, $noiseCancelArr)
     {
-        $yArr = $this->getCutBeforeRow($xAllArr, $height, $noiseCancelArr);
+        $yArr  = $this->getCutBeforeRow($xAllArr, $height, $noiseCancelArr);
         $y_Arr = $this->getCutAfterRow($xAllArr, $height, $noiseCancelArr);
 
         //合并 $yArr 和 $y_Arr
@@ -91,7 +91,7 @@ class CuttingTianYiShrinkRepository
                 for ($i = 0; $i < 4; ++$i) {
                     $charCOORD = $this->getCharAllXY($charPixelCollection["char$i"]);
                     if ($this->isInArea($x, $y, $charCOORD['x'], $charCOORD['x_'], $charCOORD['y'], $charCOORD['y_'])) {
-                        $position = $this->getPointPositionInArea($x, $y, $charCOORD['x'], $charCOORD['y']);
+                        $position                                                               = $this->getPointPositionInArea($x, $y, $charCOORD['x'], $charCOORD['y']);
                         $charPixelCollection["char$i"]['pixel'][$position['y']][$position['x']] = $noiseCancelArr[$y][$x];
                     }
                 }
@@ -206,9 +206,9 @@ class CuttingTianYiShrinkRepository
      */
     public function getCharAllXY($char)
     {
-        $x = $char['x'][0];
+        $x  = $char['x'][0];
         $x_ = $char['x'][1];
-        $y = $char['y'][0];
+        $y  = $char['y'][0];
         $y_ = $char['y'][1];
 
         return compact('x', 'x_', 'y', 'y_');

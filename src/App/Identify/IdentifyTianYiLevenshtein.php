@@ -32,8 +32,8 @@ class IdentifyTianYiLevenshtein extends Restriction
 
     function run(ResultContainer $resultContainer)
     {
-        $this->resultContainer = $resultContainer;
-        $this->conf = $this->resultContainer->getConf();
+        $this->resultContainer     = $resultContainer;
+        $this->conf                = $this->resultContainer->getConf();
         $this->charPixedCollection = $this->resultContainer->getCharPixedCollection();
 
 //        $this->showChar( $this->charPixedCollection);

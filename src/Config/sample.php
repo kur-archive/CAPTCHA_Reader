@@ -15,7 +15,7 @@ return [
     | 临时样本保存地址
     |
     */
-    'tmpSampleSavePath' => __DIR__ . '/../../sample/StudySamples/unmark/tmpSamples/' ,
+    'tmpSampleSavePath' => __DIR__ . '/../../sample/StudySamples/unmark/tmpSamples/',
 
 
 ];

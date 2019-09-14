@@ -39,9 +39,9 @@ class PretreatmentQinGuoShrink extends Load
     function run(ResultContainer $resultContainer)
     {
         $this->resultContainer = $resultContainer;
-        $this->conf = $this->resultContainer->getConf();
-        $imageInfo = $this->resultContainer->getImageInfo();
-        $image = $this->resultContainer->getImage();
+        $this->conf            = $this->resultContainer->getConf();
+        $imageInfo             = $this->resultContainer->getImageInfo();
+        $image                 = $this->resultContainer->getImage();
         imagefilter($image, IMG_FILTER_GRAYSCALE);
 //        imagejpeg($image, 'test.jpg');
 //        imagefilter($image, IMG_FILTER_CONTRAST,-20);
@@ -79,9 +79,9 @@ class PretreatmentQinGuoShrink extends Load
 //        $this->showResArr($noiseCancelArr);
 
         $noiseCancelArr = $this->pretreatmentRepository->shrink($noiseCancelArr);
-        $conf = $this->resultContainer->getImageInfo();
+        $conf           = $this->resultContainer->getImageInfo();
         $conf['height'] = count($noiseCancelArr);
-        $conf['width'] = count($noiseCancelArr[0]);
+        $conf['width']  = count($noiseCancelArr[0]);
         $this->resultContainer->setImageInfo($conf);
 //        $this->showResArr($noiseCancelArr);
 //        self::dd(1);

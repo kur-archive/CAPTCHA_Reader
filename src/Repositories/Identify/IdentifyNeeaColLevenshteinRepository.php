@@ -27,11 +27,11 @@ class IdentifyNeeaColLevenshteinRepository
         ];
         foreach ($dictionary as $key => $sample) {
             $percent = levenshtein($oneDChar, $sample['rowStr']);
-            $flag = 0;
+            $flag    = 0;
             if ($percent < $nowBest['score']) {
                 $nowBest['score'] = $percent;
-                $nowBest['char'] = $sample['char'];
-                $flag = 1;
+                $nowBest['char']  = $sample['char'];
+                $flag             = 1;
             }
             $judge = [
                 'percent'      => $percent,
@@ -66,7 +66,7 @@ class IdentifyNeeaColLevenshteinRepository
             $percent = levenshtein($oneDChar, $sample['rowStr']);
             if ($percent < $nowBest['score']) {
                 $nowBest['score'] = $percent;
-                $nowBest['char'] = $sample['char'];
+                $nowBest['char']  = $sample['char'];
             }
 
             if ($nowBest['score'] < 2) {

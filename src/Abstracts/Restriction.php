@@ -12,5 +12,5 @@ use CAPTCHAReader\src\App\ResultContainer;
 
 abstract class Restriction
 {
-    abstract function run( ResultContainer $resultContainer );
+    abstract function run(ResultContainer $resultContainer);
 }

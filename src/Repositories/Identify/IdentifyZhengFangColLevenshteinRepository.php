@@ -24,7 +24,7 @@ class IdentifyZhengFangColLevenshteinRepository
 
             if ($percent < $nowBest['score']) {
                 $nowBest['score'] = $percent;
-                $nowBest['char'] = $sample['char'];
+                $nowBest['char']  = $sample['char'];
             }
 
             if ($nowBest['score'] < 2) {

@@ -34,9 +34,9 @@ class CuttingQinGuoUnShrink extends Load
     function run(ResultContainer $resultContainer)
     {
         $this->resultContainer = $resultContainer;
-        $this->conf = $this->resultContainer->getConf();
-        $this->imageInfo = $this->resultContainer->getImageInfo();
-        $this->noiseCancelArr = $this->resultContainer->getNoiseCancelArr();
+        $this->conf            = $this->resultContainer->getConf();
+        $this->imageInfo       = $this->resultContainer->getImageInfo();
+        $this->noiseCancelArr  = $this->resultContainer->getNoiseCancelArr();
 
 //        $this->showResArrAndAggs($this->noiseCancelArr);
 
@@ -47,7 +47,7 @@ class CuttingQinGuoUnShrink extends Load
         $yAllArr = $this->cuttingRepository->getYCoordinate($xAllArr, $height, $this->noiseCancelArr);
 
         //切割
-        $pixelCollection = $this->cuttingRepository->cut($this->noiseCancelArr, compact('xAllArr', 'yAllArr'));
+        $pixelCollection     = $this->cuttingRepository->cut($this->noiseCancelArr, compact('xAllArr', 'yAllArr'));
         $charPixedCollection = [];
         foreach ($pixelCollection as $charPixel) {
             $charPixedCollection[] = $charPixel['pixel'];

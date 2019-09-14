@@ -38,10 +38,10 @@ class PretreatmentTianYi extends Load
     function run(ResultContainer $resultContainer)
     {
         $this->resultContainer = $resultContainer;
-        $this->conf = $this->resultContainer->getConf();
+        $this->conf            = $this->resultContainer->getConf();
 
         $imageInfo = $this->resultContainer->getImageInfo();
-        $image = $this->resultContainer->getImage();
+        $image     = $this->resultContainer->getImage();
 
         //二值化
         $imageBinaryArr = $this->pretreatmentRepository->binarization($imageInfo['width'], $imageInfo['height'], $image);

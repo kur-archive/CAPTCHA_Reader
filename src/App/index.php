@@ -17,10 +17,11 @@ $a = new IndexController();
 //$c=$a->entrance(__DIR__.'/../../sample/TmpSamples/0736425001517150928.gif','local');
 //$c = $a->entrance(__DIR__ . '/../../sample/StudySamples/QinGuo/8aed.png', 'local');
 //$c = $a->entrance(__DIR__ . '/../../sample/StudySamples/unmark/qinGuo/17033.png', 'local');
-$c=$a->entrance(__DIR__.'/../../sample/StudySamples/neea.edu.cn/c/8x6p.png','local');
+//$c = $a->entrance(__DIR__ . '/../../sample/StudySamples/neea.edu.cn/c/8x6p.png', 'local');
 //$c = $a->entrance(__DIR__ . '/../../sample/StudySamples/unmark/tianyi/46654.png', 'local');
 //$c = $a->entrance(__DIR__ . '/../../sample/StudySamples/TianYi/cap4.png', 'local');
 //$c = $a->entrance('https://raw.githubusercontent.com/Kuri-su/CAPTCHA_Reader/master/docs/sample/qinguo.png', 'online','QinGuoNormal');
+$c = $a->entrance('http://61.142.33.204/CheckCode.aspx','online', "ZhengFangNormal");
 
 dump($c);
 

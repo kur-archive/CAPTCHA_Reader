@@ -6,7 +6,7 @@
 
 **验证码识别与训练 脚手架**
 
-这个项目对验证码识别中常用的 `四个步骤`（~~三个~~）（**获取文件 => 降噪 => 切割 => 识别**）进行了简单的封装，减少开发的复杂程度。并提供了一些现成的解决方案。
+这个项目对验证码识别中常用的 `四个步骤`（**获取文件 => 降噪 => 切割 => 识别**）进行了简单的封装，减少开发的复杂程度。并提供了一些现成的解决方案。
 
 #### Install use Composer 
 
@@ -71,13 +71,22 @@ composer require kurisu/captcha_reader
 
 #### 切换识别方案
 
-修改 `src/Config/app.php` 中的 `useGroup`
+在调用时, 传递的第三个参数指定你需要使用的方案组即可, 可用的方案组参考 `/src/Config/app.php` 文件的 componentGroup 数组的键
 
-![](docs/img/config.png)
+```php
+<?php
+// ZhengFangNormal
+// QinGuoNormal
+// TianYiNormal
+// NeeaNormal
+$c = $a->entrance('https://raw.githubusercontent.com/Kuri-su/CAPTCHA_Reader/master/docs/sample/qinguo.png', 'online','QinGuoNormal');
+```
 
 #### 切换识别方案中使用的类
 
 继承 `CAPTCHAReader\src\App\Abstracts\Load` 抽象类，实现相应的方法，完成装饰器的构建，然后替换配置文件中的组件类即可。
+
+![](docs/img/config.png)
 
 #### 替换字典
 

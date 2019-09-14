@@ -27,7 +27,7 @@ class PretreatmentTianYiRepository
         $imageArr = [];
         for ($y = 0; $y < $height; ++$y) {
             for ($x = 0; $x < $width; ++$x) {
-                $rgb = imagecolorat($image, $x, $y);
+                $rgb      = imagecolorat($image, $x, $y);
                 $rgbArray = imagecolorsforindex($image, $rgb);
                 if ($rgbArray['red'] < 155 && $rgbArray['green'] < 155 && $rgbArray['blue'] < 155) {
                     $imageArr[$y][$x] = '1';
