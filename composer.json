@@ -2,7 +2,7 @@
   "name": "kurisu/captcha_reader",
   "description": "kurisu/captcha_reader",
   "type": "project",
-  "license": "MIT",
+  "license": "WTFPL",
   "authors": [
     {
       "name": "kurisu",
