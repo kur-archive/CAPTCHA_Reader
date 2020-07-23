@@ -10,7 +10,7 @@
 
 ### Donate :)
 
-digitalCoin: ![](https://newbie.zeromesh.net/donate.7.6.svg)
+[digitalCoin: ![](https://newbie.zeromesh.net/donate.7.6.svg)](https://donate.cafe/kurisu) 来个甜筒 🍦 吧~www
 
 #### Install use Composer 
 
