@@ -8,10 +8,9 @@
 
 这个项目对验证码识别中常用的 `四个步骤`（**获取文件 => 降噪 => 切割 => 识别**）进行了简单的封装，减少开发的复杂程度。并提供了一些现成的解决方案。
 
-Donate :)
+### Donate :)
 
-digitalCoin: 
-![](https://newbie.zeromesh.net/donate.7.6.svg)
+digitalCoin: ![](https://newbie.zeromesh.net/donate.7.6.svg)
 
 #### Install use Composer 
 
