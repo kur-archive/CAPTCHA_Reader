@@ -1,20 +1,18 @@
-# CAPTCHA_Reader
+# CAPTCHA_Reader 验证码识别与训练 脚手架
 
 ![](https://img.shields.io/badge/license-WTFPL-blue.svg?longCache=true&style=flat-square)
 ![](https://img.shields.io/badge/php-~7.0.0-green.svg?longCache=true&style=flat-square)
 ![](https://img.shields.io/badge/Composer-MUST！-red.svg?longCache=true&style=flat-square)
 
-**验证码识别与训练 脚手架**
+
+
 
 这个项目对验证码识别中常用的 `四个步骤`（**获取文件 => 降噪 => 切割 => 识别**）进行了简单的封装，减少开发的复杂程度。并提供了一些现成的解决方案。
 
-### Donate :)
+[![digitalCoin](https://newbie.zeromesh.net/donate.7.6.svg)](https://donate.cafe/kurisu) 来个甜筒 🍦 吧~www ;)
 
-[digitalCoin: 来个甜筒 🍦 吧~www
 
-![](https://newbie.zeromesh.net/donate.7.6.svg)](https://donate.cafe/kurisu)
-
-#### Install use Composer 
+### Install use Composer 
 
 ```bash
 $ composer require kurisu/captcha_reader
