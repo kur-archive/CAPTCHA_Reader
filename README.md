@@ -44,10 +44,6 @@ $ sudo apt install php-gb -y #自行选择合适的安装方式
   * `200`个测试样本 中 整体识别正确率 `48.5%`，单个字母识别正确率到 `82.875%`
   * ![](docs/sample/tianyi.png)
 
-## Examples
-
-在线测试效果待添加，可以尝试根据下面的 `Get Started Now` 测试效果
-
 ## Get Started Now
 
 ### Online 在线
